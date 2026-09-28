@@ -35,7 +35,7 @@ agent:
   anomaly:
     enabled: true
   upload_to_s3:
-    enabled: false
+    enabled: true
   visualize_chart:
     enabled: true
     auto_emit: true
