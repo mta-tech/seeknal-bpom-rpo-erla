@@ -1,0 +1,14 @@
+name: REG_03_AMDK_PENGECUALIAN
+scenario_id: REG-03-AMDK-PENGECUALIAN
+verification_date: '2026-09-15'
+description: 'REG-03 — AMDK dikecualikan dari kewajiban ING (Pasal 3). Definisional.'
+turns:
+- prompt: 'Air kemasan kayak air mineral itu wajib ada ING-nya nggak sih?'
+  assert_contains:
+  - 'tidak wajib|dikecualikan|tidak diwajibkan'
+  assert_any_of:
+  - - 'Pasal 3'
+  - - 'air mineral'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 02-kewajiban-pengecualian.md Pasal 3 ayat (1) — AMDK termasuk daftar pengecualian. Ayat (2): AMDK meliputi air mineral, air demineral, air mineral alami, air minum embun, air minum pH tinggi. Karena dikecualikan dari ING, AMDK juga tidak relevan nutri-level/profil gizi. Definisional, tanpa SQL/chart/export.'

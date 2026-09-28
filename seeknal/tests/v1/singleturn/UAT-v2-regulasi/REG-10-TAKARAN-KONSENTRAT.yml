@@ -1,0 +1,15 @@
+name: REG_10_TAKARAN_KONSENTRAT
+scenario_id: REG-10-TAKARAN-KONSENTRAT
+verification_date: '2026-09-15'
+description: 'REG-10 — Takaran saji minuman konsentrat (Lampiran II kode 14.1.4.3). Definisional.'
+turns:
+- prompt: 'Minuman konsentrat kayak sirup, takaran sajinya berapa?'
+  assert_contains:
+  - '10'
+  - '30'
+  assert_any_of:
+  - - '14.1.4.3'
+  - - 'Lampiran II'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 04e-takaran-saji-minuman.md (Lampiran II, kode 14.1.4.3) — konsentrat cair 10-30 ml; bubuk/padat 10-50 g; bubuk/padat berbasis gula, BTP, ekstrak, zat gizi/non-gizi 6-10 g. Produk bubuk dan konsentrat direkonstitusi dengan air 100-250 ml (Lampiran IV/V). Jawaban sah bila menyebut beberapa rentang sekaligus selama rentang cair 10-30 ml tercantum. Definisional, tanpa SQL/chart/export.'

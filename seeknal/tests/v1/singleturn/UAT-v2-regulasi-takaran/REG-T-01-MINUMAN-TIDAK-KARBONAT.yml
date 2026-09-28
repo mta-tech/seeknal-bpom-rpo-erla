@@ -1,0 +1,15 @@
+name: REG_T_01_MINUMAN_TIDAK_KARBONAT
+scenario_id: REG-T-01-MINUMAN-TIDAK-KARBONAT
+verification_date: '2026-09-15'
+description: 'REG-T-01 — Takaran saji minuman tidak berkarbonat (Lampiran II 14.1.4.2). Definisional.'
+turns:
+- prompt: 'Minuman berperisa tapi nggak bersoda, takaran sajinya berapa?'
+  assert_contains:
+  - '100'
+  - '250'
+  assert_any_of:
+  - - '14.1.4.2'
+  - - 'Lampiran II'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 04e-takaran-saji-minuman.md (Lampiran II, kode 14.1.4.2) — Minuman Berbasis Air Berperisa Tidak Berkarbonat (termasuk punches dan ades) = 100-250 ml. Definisional, tanpa SQL/chart/export.'

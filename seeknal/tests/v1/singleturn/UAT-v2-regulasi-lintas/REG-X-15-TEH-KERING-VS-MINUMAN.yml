@@ -1,0 +1,14 @@
+name: REG_X_15_TEH_KERING_VS_MINUMAN
+scenario_id: REG-X-15-TEH-KERING-VS-MINUMAN
+verification_date: '2026-09-15'
+description: 'REG-X-15 — Nuansa: teh kering dikecualikan, minuman teh kemasan tidak. Definisional.'
+turns:
+- prompt: 'Teh kering kan nggak wajib ING, berarti minuman teh kemasan juga nggak ya?'
+  assert_contains:
+  - 'teh kering'
+  assert_any_of:
+  - - 'minuman'
+  - - 'wajib'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 02-kewajiban-pengecualian.md Pasal 3 — pengecualian menyebut teh KERING (bentuk bahan), bukan minuman teh siap konsumsi. Minuman teh kemasan adalah Pangan Olahan minuman yang wajib ING (dan wajib nutri-level, Pasal 27). Ujian nuansa bentuk produk. Definisional, tanpa SQL/chart/export.'

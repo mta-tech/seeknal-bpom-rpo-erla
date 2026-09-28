@@ -1,0 +1,14 @@
+name: REG_06_ALKOHOL_LARANGAN
+scenario_id: REG-06-ALKOHOL-LARANGAN
+verification_date: '2026-09-15'
+description: 'REG-06 — Larangan ING pada minuman beralkohol (Pasal 4). Definisional.'
+turns:
+- prompt: 'Minuman beralkohol boleh nggak ya dicantumin informasi nilai gizi?'
+  assert_contains:
+  - 'dilarang'
+  assert_any_of:
+  - - 'Pasal 4'
+  - - 'alkohol'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 02-kewajiban-pengecualian.md Pasal 4 — ING DILARANG dicantumkan pada Label minuman beralkohol. Definisional, tanpa SQL/chart/export. Catatan data (bukan bagian jawaban wajib): kelas Minuman Beralkohol hanya terisi di ERLA (klasifikasi_id 304), tidak di ERBA.'

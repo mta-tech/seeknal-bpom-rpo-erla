@@ -1,0 +1,15 @@
+name: REG_N_08_ESKRIM_PROFIL
+scenario_id: REG-N-08-ESKRIM-PROFIL
+verification_date: '2026-09-15'
+description: 'REG-N-08 — Batas gula dan lemak profil es krim untuk logo sehat (Lampiran IV). Definisional.'
+turns:
+- prompt: 'Es krim mau pakai logo pilihan lebih sehat, batas gula sama lemaknya berapa?'
+  assert_contains:
+  - '17'
+  - '10'
+  assert_any_of:
+  - - '100 g'
+  - - 'Lampiran IV'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 06-pilihan-lebih-sehat.md (Lampiran IV, kategori 8 Es Krim 01.7) — batas maksimum gula 17,0 g per 100 g dan lemak total 10,0 g per 100 g. Kategori 01.7 mencakup Es Krim Susu (Dairy Ice Cream), Es Krim, dan Es Susu. Produk tanpa susu di luar definisi ini. Definisional, tanpa SQL/chart/export.'

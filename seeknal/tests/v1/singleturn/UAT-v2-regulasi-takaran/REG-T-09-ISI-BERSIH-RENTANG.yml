@@ -1,0 +1,14 @@
+name: REG_T_09_ISI_BERSIH_RENTANG
+scenario_id: REG-T-09-ISI-BERSIH-RENTANG
+verification_date: '2026-09-15'
+description: 'REG-T-09 — Bila isi bersih dalam rentang, isi bersih = takaran saji (Pasal 8 ayat 3). Definisional.'
+turns:
+- prompt: 'Kalau isi bersih produknya sudah masuk rentang takaran saji, pakai yang mana?'
+  assert_contains:
+  - 'isi bersih'
+  assert_any_of:
+  - - 'Pasal 8'
+  - - 'rentang'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 03-takaran-saji-aturan.md Pasal 8 ayat (3) — bila isi bersih/berat bersih masih berada dalam rentang nilai Takaran Saji kategorinya, isi bersih itulah yang ditetapkan sebagai Takaran Saji. Definicional, tanpa SQL/chart/export.'

@@ -1,0 +1,14 @@
+name: REG_X_04_LOGO_DEFINISI
+scenario_id: REG-X-04-LOGO-DEFINISI
+verification_date: '2026-09-15'
+description: 'REG-X-04 — Definisi Logo Pilihan Lebih Sehat (Pasal 1). Definisional.'
+turns:
+- prompt: 'Logo pilihan lebih sehat itu apa sih?'
+  assert_contains:
+  - 'pilihan lebih sehat'
+  assert_any_of:
+  - - 'profil gizi'
+  - - 'Lampiran IV'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 01-definisi.md Pasal 1 — Logo Pilihan Lebih Sehat = logo pada bagian depan kemasan untuk Pangan Olahan yang memenuhi profil gizi (Lampiran IV). Sifatnya opsional (Pasal 26 dapat), beda dari nutri-level yang wajib untuk minuman. Definisional, tanpa SQL/chart/export.'

@@ -1,0 +1,15 @@
+name: REG_T_05_PREMIKS_ESKRIM
+scenario_id: REG-T-05-PREMIKS-ESKRIM
+verification_date: '2026-09-15'
+description: 'REG-T-05 — Takaran saji premiks es krim (Lampiran II 01.7). Definisional.'
+turns:
+- prompt: 'Premiks es krim itu takaran sajinya berapa?'
+  assert_contains:
+  - '20'
+  - '50'
+  assert_any_of:
+  - - '01.7'
+  - - 'Premiks'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 04a-takaran-saji-susu-es.md (Lampiran II, kode 01.7) — Premiks Es Krim / Premiks Es Susu = 20-50 g, berbeda dari es krim siap makan (50-150 g/ml). Definisional, tanpa SQL/chart/export.'

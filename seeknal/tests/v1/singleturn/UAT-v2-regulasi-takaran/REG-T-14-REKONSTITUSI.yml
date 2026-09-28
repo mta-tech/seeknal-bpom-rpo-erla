@@ -1,0 +1,15 @@
+name: REG_T_14_REKONSTITUSI
+scenario_id: REG-T-14-REKONSTITUSI
+verification_date: '2026-09-15'
+description: 'REG-T-14 — Rekonstitusi bubuk/konsentrat dengan air 100-250 ml. Definisional.'
+turns:
+- prompt: 'Minuman bubuk itu nilai gizinya dihitung untuk berapa ml sih?'
+  assert_contains:
+  - '100'
+  - '250'
+  assert_any_of:
+  - - 'rekonstitusi'
+  - - 'Lampiran'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 04e-takaran-saji-minuman.md — aturan rekonstitusi (Lampiran IV/V): produk minuman bentuk bubuk dan konsentrat direkonstitusi dengan air 100-250 ml sesuai petunjuk penyajian; nilai gizi dinyatakan untuk produk siap konsumsi hasil rekonstitusi. Definisional, tanpa SQL/chart/export.'

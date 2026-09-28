@@ -1,0 +1,15 @@
+name: REG_N_07_WARNA_LEVEL
+scenario_id: REG-N-07-WARNA-LEVEL
+verification_date: '2026-09-15'
+description: 'REG-N-07 — Warna penanda level A-D (Pasal 29). Definisional.'
+turns:
+- prompt: 'Level A sampai D itu bedanya dari warnanya ya? Warnanya apa aja?'
+  assert_contains:
+  - 'hijau'
+  - 'merah'
+  assert_any_of:
+  - - 'Pasal 29'
+  - - 'kuning'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 05-nutri-level.md Pasal 29 — level A-D tampil sebagai kombinasi huruf dan warna: A hijau tua, B hijau muda, C kuning, D merah. Definisional, tanpa SQL/chart/export.'

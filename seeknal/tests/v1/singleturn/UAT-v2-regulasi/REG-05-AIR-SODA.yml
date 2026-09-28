@@ -1,0 +1,14 @@
+name: REG_05_AIR_SODA_VS_BERPERISA
+scenario_id: REG-05-AIR-SODA
+verification_date: '2026-09-15'
+description: 'REG-05 — Nuansa air soda vs minuman berperisa berkarbonat (Pasal 3 + 05). Definisional.'
+turns:
+- prompt: 'Minuman soda wajib cantumin ING nggak? Kalau yang berperisa gimana?'
+  assert_contains:
+  - 'air soda'
+  assert_any_of:
+  - - 'dikecualikan|tidak wajib'
+  - - 'berperisa'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 02-kewajiban-pengecualian.md Pasal 3 — air soda DIKECUALIKAN dari ING. Tetapi minuman berperisa berkarbonat (soda) TIDAK termasuk pengecualian: ia wajib ING dan bahkan wajib nutri-level (05-nutri-level.md). Ujian nuansa: jawaban harus membedakan air soda (dikecualikan) dari minuman berperisa berkarbonat (wajib). Definisional, tanpa SQL/chart/export.'

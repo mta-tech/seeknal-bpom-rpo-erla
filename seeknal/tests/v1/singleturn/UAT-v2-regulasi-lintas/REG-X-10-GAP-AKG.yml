@@ -1,0 +1,14 @@
+name: REG_X_10_GAP_AKG
+scenario_id: REG-X-10-GAP-AKG
+verification_date: '2026-09-15'
+description: 'REG-X-10 — Honest gap: %AKG/zat gizi wajib (Pasal 12-20) belum dipecah. Definisional.'
+turns:
+- prompt: 'Persentase AKG atau ALG di tabel ING itu dihitung gimana?'
+  assert_contains:
+  - 'belum'
+  assert_any_of:
+  - - 'tersedia'
+  - - 'dipecah'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'HONEST GAP. 00-peta.md menyatakan Pasal 12-20 (zat gizi, %AKG, ALG) BELUM dipecah. Jawaban benar: katakan chunk belum tersedia, jangan mengarang angka/persentase. Definisional, tanpa SQL/chart/export.'

@@ -1,0 +1,14 @@
+name: REG_X_16_BTP_PENGECUALIAN
+scenario_id: REG-X-16-BTP-PENGECUALIAN
+verification_date: '2026-09-15'
+description: 'REG-X-16 — Nuansa: BTP dikecualikan dari kewajiban ING. Definisional.'
+turns:
+- prompt: 'Kalau bahan tambahan pangan, wajib cantum ING nggak?'
+  assert_contains:
+  - 'BTP|bahan tambahan'
+  assert_any_of:
+  - - 'dikecualikan|tidak wajib'
+  - - 'Pasal 3'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 02-kewajiban-pengecualian.md Pasal 3 ayat (1) — Bahan Tambahan Pangan (BTP) termasuk daftar pengecualian kewajiban ING. Definisional, tanpa SQL/chart/export.'
