@@ -1,0 +1,14 @@
+name: REG_N_06_LEVEL_B_PEMANIS
+scenario_id: REG-N-06-LEVEL-B-PEMANIS
+verification_date: '2026-09-15'
+description: 'REG-N-06 — Level B hanya pemanis alami (Lampiran V bagian 2). Definisional.'
+turns:
+- prompt: 'Kalau levelnya B, pemanisnya boleh yang mana aja?'
+  assert_contains:
+  - 'alami'
+  assert_any_of:
+  - - 'Level B'
+  - - 'pemanis'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 05-nutri-level.md Lampiran V bagian 2 — Level B hanya boleh BTP pemanis alami. Pemanis buatan baru diizinkan pada Level C dan D. Definisional, tanpa SQL/chart/export.'

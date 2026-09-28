@@ -1,0 +1,14 @@
+name: REG_11_NUTRI_WAJIB_MINUMAN
+scenario_id: REG-11-NUTRI-WAJIB
+verification_date: '2026-09-15'
+description: 'REG-11 — Kewajiban nutri-level untuk minuman (Pasal 27). Definisional.'
+turns:
+- prompt: 'Minuman apa aja yang wajib pakai nutri-level di depan kemasan?'
+  assert_contains:
+  - 'minuman'
+  assert_any_of:
+  - - 'Pasal 27'
+  - - 'siap konsumsi'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 05-nutri-level.md Pasal 27 ayat (1) — minuman siap konsumsi, minuman bentuk bubuk, dan konsentrat bentuk cair dan padat WAJIB mencantumkan ING di bagian depan kemasan dalam bentuk nutri-level. Pasal 28: pencantuman depan kemasan wajib disertai tabel ING. Definisional, tanpa SQL/chart/export.'

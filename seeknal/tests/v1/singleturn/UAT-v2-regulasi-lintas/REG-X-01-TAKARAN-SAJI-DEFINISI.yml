@@ -1,0 +1,14 @@
+name: REG_X_01_TAKARAN_SAJI_DEFINISI
+scenario_id: REG-X-01-TAKARAN-SAJI-DEFINISI
+verification_date: '2026-09-15'
+description: 'REG-X-01 — Definisi Takaran Saji (Pasal 1). Definisional.'
+turns:
+- prompt: 'Takaran saji itu apa sih artinya?'
+  assert_contains:
+  - 'takaran saji'
+  assert_any_of:
+  - - 'Pasal 1'
+  - - 'satu kali'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 01-definisi.md Pasal 1 — Takaran Saji = jumlah pangan Olahan yang dikonsumsi dalam satu kali penyajian/makan, menjadi dasar pencantuman ING. Definisional, tanpa SQL/chart/export.'

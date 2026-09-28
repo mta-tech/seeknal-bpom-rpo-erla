@@ -1,0 +1,14 @@
+name: REG_T_15_SATU_KEMASAN
+scenario_id: REG-T-15-SATU-KEMASAN
+verification_date: '2026-09-15'
+description: 'REG-T-15 — Satu Takaran Saji dari satu kemasan (Pasal 8 ayat 2). Definisional.'
+turns:
+- prompt: 'Satu takaran saji itu harus berasal dari berapa kemasan?'
+  assert_contains:
+  - 'satu'
+  assert_any_of:
+  - - 'Pasal 8'
+  - - 'kemasan'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 03-takaran-saji-aturan.md Pasal 8 ayat (2) — satu Takaran Saji harus didapat dari satu kemasan; dan ayat (1) tabel ING dicantumkan per 1 (satu) Takaran Saji. Definisional, tanpa SQL/chart/export.'

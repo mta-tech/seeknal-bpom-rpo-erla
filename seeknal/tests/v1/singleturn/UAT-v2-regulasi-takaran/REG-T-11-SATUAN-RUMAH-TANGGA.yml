@@ -1,0 +1,14 @@
+name: REG_T_11_SATUAN_RUMAH_TANGGA
+scenario_id: REG-T-11-SATUAN-RUMAH-TANGGA
+verification_date: '2026-09-15'
+description: 'REG-T-11 — Satuan dan ukuran rumah tangga (Pasal 10). Definisional.'
+turns:
+- prompt: 'Takaran saji boleh ditulis pakai ukuran rumah tangga kayak sendok nggak?'
+  assert_contains:
+  - 'rumah tangga'
+  assert_any_of:
+  - - 'Pasal 10'
+  - - 'sendok'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 03-takaran-saji-aturan.md Pasal 10 — Takaran Saji dinyatakan dalam Satuan Metrik (gram/mg padat, ml cair, berat/isi semi padat), boleh ditambah ukuran rumah tangga (sendok teh/makan/takar, gelas, botol, kaleng, mangkuk, bungkus/saset, keping, buah, biji, butir, potong, iris, kotak). Definisional, tanpa SQL/chart/export.'

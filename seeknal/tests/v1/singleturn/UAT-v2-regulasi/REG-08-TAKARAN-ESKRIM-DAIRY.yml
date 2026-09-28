@@ -1,0 +1,15 @@
+name: REG_08_TAKARAN_ESKRIM_DAIRY
+scenario_id: REG-08-TAKARAN-ESKRIM-DAIRY
+verification_date: '2026-09-15'
+description: 'REG-08 — Takaran saji es krim susu (Lampiran II kode 01.7). Definisional.'
+turns:
+- prompt: 'Es krim yang pakai susu, takaran sajinya berapa?'
+  assert_contains:
+  - '50'
+  - '150'
+  assert_any_of:
+  - - '01.7'
+  - - 'Lampiran II'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 04a-takaran-saji-susu-es.md (Lampiran II, kode 01.7) — Makanan Pencuci Mulut Berbahan Dasar Susu; nama jenis Es Krim Susu (Dairy Ice Cream), Es Krim, Es Susu = 50-150 (g atau ml). Definisional, tanpa SQL/chart/export. DILARANG mencampur dengan rentang kategori lain.'

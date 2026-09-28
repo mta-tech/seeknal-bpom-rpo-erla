@@ -1,0 +1,14 @@
+name: REG_13_NUTRI_LEVEL_HITUNG
+scenario_id: REG-13-NUTRI-LEVEL-HITUNG
+verification_date: '2026-09-15'
+description: 'REG-13 — Hitung nutri-level dari ambang Lampiran V. Definisional.'
+turns:
+- prompt: 'Minuman bersoda gulanya 7 g per 100 ml, itu level berapa?'
+  assert_contains:
+  - 'Level C'
+  assert_any_of:
+  - - '12,5'
+  - - 'Lampiran V'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 05-nutri-level.md Lampiran V bagian 1 — gula lebih dari 6,0 sampai 12,5 g per 100 ml = Level C. Gula 7 g per 100 ml jatuh di rentang itu, jadi Level C. Level C dan D boleh memakai BTP pemanis alami dan/atau buatan. Gula = seluruh monosakarida dan disakarida, tidak termasuk laktosa. Definisional: perhitungan dari ambang regulasi, BUKAN data produk, jadi tanpa SQL/chart/export.'

@@ -1,0 +1,14 @@
+name: REG_N_13_DEFINISI_GULA
+scenario_id: REG-N-13-DEFINISI-GULA
+verification_date: '2026-09-15'
+description: 'REG-N-13 — Definisi gula untuk hitungan (Lampiran V). Definisional.'
+turns:
+- prompt: 'Yang dihitung sebagai gula itu apa aja sih?'
+  assert_contains:
+  - 'monosakarida'
+  assert_any_of:
+  - - 'disakarida'
+  - - 'laktosa'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 05-nutri-level.md Lampiran V bagian 2 — gula = seluruh monosakarida + disakarida, tidak termasuk laktosa. Definisional, tanpa SQL/chart/export.'

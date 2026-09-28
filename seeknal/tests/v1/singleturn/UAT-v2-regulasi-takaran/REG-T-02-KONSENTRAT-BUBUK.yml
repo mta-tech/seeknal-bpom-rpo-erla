@@ -1,0 +1,15 @@
+name: REG_T_02_KONSENTRAT_BUBUK
+scenario_id: REG-T-02-KONSENTRAT-BUBUK
+verification_date: '2026-09-15'
+description: 'REG-T-02 — Takaran saji konsentrat bubuk (Lampiran II 14.1.4.3). Definisional.'
+turns:
+- prompt: 'Minuman bubuk konsentrat, takaran sajinya berapa gram?'
+  assert_contains:
+  - '10'
+  - '50'
+  assert_any_of:
+  - - '14.1.4.3'
+  - - 'Lampiran II'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 04e-takaran-saji-minuman.md (Lampiran II, kode 14.1.4.3) — konsentrat bubuk/padat = 10-50 g. Rentang cair untuk kategori yang sama adalah 10-30 ml. Definisional, tanpa SQL/chart/export.'

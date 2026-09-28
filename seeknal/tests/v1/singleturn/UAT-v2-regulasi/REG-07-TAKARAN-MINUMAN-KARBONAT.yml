@@ -1,0 +1,15 @@
+name: REG_07_TAKARAN_MINUMAN_KARBONAT
+scenario_id: REG-07-TAKARAN-MINUMAN-KARBONAT
+verification_date: '2026-09-15'
+description: 'REG-07 — Takaran saji minuman berkarbonasi (Lampiran II kode 14.1.4.1). Definisional.'
+turns:
+- prompt: 'Minuman ringan bersoda itu takaran sajinya berapa?'
+  assert_contains:
+  - '100'
+  - '250'
+  assert_any_of:
+  - - '14.1.4.1'
+  - - 'Lampiran II'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 04e-takaran-saji-minuman.md (Lampiran II, kode 14.1.4.1) — Minuman Berbasis Air Berperisa yang Berkarbonat = 100-250 ml. Penerapan Pasal 8 ayat (3) (03-takaran-saji-aturan.md): bila isi bersih produk berada di dalam rentang itu, isi bersih itulah Takaran Saji. Angka ini nilai acuan REGULASI, bukan data produk. Definisional, tanpa SQL/chart/export.'

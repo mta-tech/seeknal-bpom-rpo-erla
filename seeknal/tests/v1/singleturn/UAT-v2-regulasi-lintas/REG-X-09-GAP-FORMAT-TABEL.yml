@@ -1,0 +1,14 @@
+name: REG_X_09_GAP_FORMAT_TABEL
+scenario_id: REG-X-09-GAP-FORMAT-TABEL
+verification_date: '2026-09-15'
+description: 'REG-X-09 — Honest gap: format tabel ING (Pasal 5-7) belum dipecah. Definisional (menolak mengarang).'
+turns:
+- prompt: 'Format tabel ING yang benar itu seperti apa sih?'
+  assert_contains:
+  - 'belum'
+  assert_any_of:
+  - - 'tersedia'
+  - - 'dipecah'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'HONEST GAP. 00-peta.md menyatakan Pasal 5-7 (format tabel ING) BELUM dipecah. Jawaban benar: katakan chunk untuk topik itu belum tersedia, JANGAN mengarang formatnya dari ingatan. Definisional, tanpa SQL/chart/export.'

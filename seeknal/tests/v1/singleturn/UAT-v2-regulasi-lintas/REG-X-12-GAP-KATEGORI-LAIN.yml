@@ -1,0 +1,14 @@
+name: REG_X_12_GAP_KATEGORI_LAIN
+scenario_id: REG-X-12-GAP-KATEGORI-LAIN
+verification_date: '2026-09-15'
+description: 'REG-X-12 — Honest gap: kategori Lampiran II lain (buah/konfeksi) belum dipecah. Definisional.'
+turns:
+- prompt: 'Takaran saji untuk kategori buah dan konfeksi itu berapa?'
+  assert_contains:
+  - 'belum'
+  assert_any_of:
+  - - 'tersedia'
+  - - 'dipecah'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'HONEST GAP. 00-peta.md menyatakan kelompok kategori Lampiran II lain (04-06 buah/konfeksi, 07-10 bakeri/daging/ikan/telur, 12-13 bumbu/dietetis, 15-16 snack) BELUM dipecah. Jawaban benar: katakan chunk belum tersedia, jangan menebak angka. Definisional, tanpa SQL/chart/export.'

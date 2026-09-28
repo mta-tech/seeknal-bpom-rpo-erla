@@ -1,0 +1,14 @@
+name: REG_N_02_LEVEL_D
+scenario_id: REG-N-02-LEVEL-D
+verification_date: '2026-09-15'
+description: 'REG-N-02 — Hitung nutri-level gula 14 g/100 ml -> Level D (Lampiran V). Definisional.'
+turns:
+- prompt: 'Kalau gulanya 14 g per 100 ml, levelnya jadi apa?'
+  assert_contains:
+  - 'Level D'
+  assert_any_of:
+  - - '12,5'
+  - - 'Lampiran V'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 05-nutri-level.md Lampiran V bagian 1 — gula lebih dari 12,5 g per 100 ml = Level D. Gula 14 g/100 ml jatuh di situ. Level C dan D boleh memakai BTP pemanis alami dan/atau buatan. Definisional, tanpa SQL/chart/export.'

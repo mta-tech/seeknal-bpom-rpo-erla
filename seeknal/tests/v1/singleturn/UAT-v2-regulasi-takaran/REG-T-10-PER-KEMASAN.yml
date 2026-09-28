@@ -1,0 +1,14 @@
+name: REG_T_10_PER_KEMASAN
+scenario_id: REG-T-10-PER-KEMASAN
+verification_date: '2026-09-15'
+description: 'REG-T-10 — Takaran saji per kemasan bila isi kurang dari satu saji (Pasal 9). Definisional.'
+turns:
+- prompt: 'Kapan takaran saji boleh dinyatakan per kemasan, bukan per saji?'
+  assert_contains:
+  - 'per kemasan'
+  assert_any_of:
+  - - 'Pasal 9'
+  - - 'setengah'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 03-takaran-saji-aturan.md Pasal 9 — bila isi bersih kurang dari 1 Takaran Saji, pencantuman boleh per kemasan, dan hanya bila isi minimal setengah dari Takaran Saji terkecil di Lampiran II. Definisional, tanpa SQL/chart/export.'

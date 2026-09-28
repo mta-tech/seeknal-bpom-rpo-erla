@@ -1,0 +1,14 @@
+name: REG_N_03_GARAM_LEVEL_C
+scenario_id: REG-N-03-GARAM-LEVEL-C
+verification_date: '2026-09-15'
+description: 'REG-N-03 — Hitung nutri-level natrium 300 mg/100 ml -> Level C. Definisional.'
+turns:
+- prompt: 'Minuman dengan natrium 300 mg per 100 ml, levelnya berapa ya?'
+  assert_contains:
+  - 'Level C'
+  assert_any_of:
+  - - '500'
+  - - '120'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 05-nutri-level.md Lampiran V bagian 1 — garam/natrium lebih dari 120,0 sampai 500,0 mg per 100 ml = Level C. Natrium 300 mg/100 ml berada di rentang itu. Nutri-level ditentukan dari tiga angka kandungan (gula, garam/natrium, lemak total), bukan penilaian bebas. Definisional, tanpa SQL/chart/export.'

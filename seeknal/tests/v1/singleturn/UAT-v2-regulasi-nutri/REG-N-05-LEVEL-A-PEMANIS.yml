@@ -1,0 +1,14 @@
+name: REG_N_05_LEVEL_A_PEMANIS
+scenario_id: REG-N-05-LEVEL-A-PEMANIS
+verification_date: '2026-09-15'
+description: 'REG-N-05 — Level A tidak boleh pakai BTP pemanis (Lampiran V bagian 2). Definisional.'
+turns:
+- prompt: 'Kalau mau dapat Level A, boleh nggak pakai pemanis?'
+  assert_contains:
+  - 'tidak boleh|dilarang'
+  assert_any_of:
+  - - 'pemanis'
+  - - 'Level A'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 05-nutri-level.md Lampiran V bagian 2 — Level A tidak boleh memakai BTP pemanis (alami maupun buatan), termasuk carry-over. Lawannya: Level B hanya pemanis alami; Level C dan D boleh alami dan/atau buatan. Definisional, tanpa SQL/chart/export.'

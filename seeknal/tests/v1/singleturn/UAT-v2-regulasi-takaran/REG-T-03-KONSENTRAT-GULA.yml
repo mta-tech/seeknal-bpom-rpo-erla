@@ -1,0 +1,15 @@
+name: REG_T_03_KONSENTRAT_GULA
+scenario_id: REG-T-03-KONSENTRAT-GULA
+verification_date: '2026-09-15'
+description: 'REG-T-03 — Takaran saji konsentrat bubuk berbasis gula (Lampiran II 14.1.4.3). Definisional.'
+turns:
+- prompt: 'Kalau bubuk minumannya berbasis gula, takaran sajinya beda nggak?'
+  assert_contains:
+  - '6'
+  - '10'
+  assert_any_of:
+  - - '14.1.4.3'
+  - - 'gula'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 04e-takaran-saji-minuman.md (Lampiran II, kode 14.1.4.3) — bubuk/padat berbasis gula, BTP, ekstrak, zat gizi/non-gizi = 6-10 g, lebih kecil dari bubuk biasa (10-50 g). Definisional, tanpa SQL/chart/export.'

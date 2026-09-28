@@ -1,0 +1,14 @@
+name: REG_X_06_MULAI_BERLAKU
+scenario_id: REG-X-06-MULAI-BERLAKU
+verification_date: '2026-09-15'
+description: 'REG-X-06 — Tanggal mulai berlaku (Pasal 34). Definisional.'
+turns:
+- prompt: 'PerBPOM 10/2026 itu mulai berlaku kapan?'
+  assert_contains:
+  - '9 juni'
+  assert_any_of:
+  - - 'diundangkan'
+  - - '2026'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 07-peralihan-pengkajian.md Pasal 34 — peraturan mulai berlaku pada tanggal diundangkan; ditetapkan di Jakarta, 9 Juni 2026. Definisional, tanpa SQL/chart/export.'

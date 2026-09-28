@@ -1,0 +1,14 @@
+name: REG_N_10_LAKTOSA
+scenario_id: REG-N-10-LAKTOSA
+verification_date: '2026-09-15'
+description: 'REG-N-10 — Laktosa tidak dihitung sebagai gula (Lampiran V bagian 2). Definisional.'
+turns:
+- prompt: 'Laktosa di susu itu dihitung sebagai gula nggak sih?'
+  assert_contains:
+  - 'laktosa'
+  assert_any_of:
+  - - 'tidak'
+  - - 'tidak termasuk'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 05-nutri-level.md Lampiran V bagian 2 — gula = seluruh monosakarida + disakarida, TIDAK termasuk laktosa. Karena itu laktosa tidak menaikkan hitungan level. Hal yang sama berlaku di profil gizi 06. Definisional, tanpa SQL/chart/export.'

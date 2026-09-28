@@ -1,0 +1,14 @@
+name: REG_01_ING_DEFINISI
+scenario_id: REG-01-ING-DEFINISI
+verification_date: '2026-09-15'
+description: 'REG-01 — Definisi ING (Pasal 1). Definisional: tanpa SQL/chart/export.'
+turns:
+- prompt: 'ING itu sebenarnya apa sih? Kok penting banget buat label?'
+  assert_contains:
+  - 'Informasi Nilai Gizi'
+  assert_any_of:
+  - - 'Pasal 1'
+  - - 'zat gizi'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 01-definisi.md (PerBPOM 10/2026 Pasal 1). ING = informasi kandungan zat gizi dan zat non-gizi pada Pangan Olahan yang dicantumkan pada Label. Kontrak jawaban (skill regulasi butir 1): pertanyaan regulasi murni dijawab definisional — TANPA SQL, chart, atau export. assert_no_sql=true menegakkan kontrak itu. WAJIB menyebut dasar (Pasal 1). DILARANG menjawab dari ingatan: muat skill regulasi lalu buka chunk 01-definisi.md.'

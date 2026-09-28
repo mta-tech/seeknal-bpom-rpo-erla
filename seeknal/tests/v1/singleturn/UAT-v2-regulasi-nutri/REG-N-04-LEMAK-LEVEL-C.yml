@@ -1,0 +1,14 @@
+name: REG_N_04_LEMAK_LEVEL_C
+scenario_id: REG-N-04-LEMAK-LEVEL-C
+verification_date: '2026-09-15'
+description: 'REG-N-04 — Hitung nutri-level lemak 4 g/100 ml -> Level C. Definisional.'
+turns:
+- prompt: 'Lemak totalnya 4 g per 100 ml, itu level C ya?'
+  assert_contains:
+  - 'Level C'
+  assert_any_of:
+  - - '17'
+  - - '3'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 05-nutri-level.md Lampiran V bagian 1 — lemak total lebih dari 3,0 sampai 17,0 g per 100 ml = Level C. Lemak 4 g/100 ml di rentang itu, jadi Level C. Definisional, tanpa SQL/chart/export.'

@@ -1,0 +1,14 @@
+name: REG_N_11_TABEL_ING
+scenario_id: REG-N-11-TABEL-ING
+verification_date: '2026-09-15'
+description: 'REG-N-11 — Nutri-level wajib disertai tabel ING (Pasal 28). Definisional.'
+turns:
+- prompt: 'Kalau minuman sudah pakai nutri-level, masih perlu tabel ING juga nggak?'
+  assert_contains:
+  - 'tabel ING'
+  assert_any_of:
+  - - 'Pasal 28'
+  - - 'wajib'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 05-nutri-level.md Pasal 28 — pencantuman ING di bagian depan kemasan (nutri-level) WAJIB disertai tabel ING (Pasal 5). Jadi keduanya, bukan salah satu. Definisional, tanpa SQL/chart/export.'

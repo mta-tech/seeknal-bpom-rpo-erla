@@ -1,0 +1,14 @@
+name: REG_N_09_YOGURT_PROFIL
+scenario_id: REG-N-09-YOGURT-PROFIL
+verification_date: '2026-09-15'
+description: 'REG-N-09 — Batas profil yogurt plain untuk logo sehat (Lampiran IV). Definisional.'
+turns:
+- prompt: 'Yogurt plain biar dapat logo pilihan lebih sehat, batas gulanya berapa?'
+  assert_contains:
+  - 'yogurt'
+  assert_any_of:
+  - - '3'
+  - - '6'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 06-pilihan-lebih-sehat.md (Lampiran IV, kategori 9 Yogurt Plain 01.2.1.1 dan 01.2.1.2) — batas maksimum gula 6,0 g per 100 g dan lemak total 3,0 g per 100 g, termasuk Yogurt Kultur Lain. Definisional, tanpa SQL/chart/export.'

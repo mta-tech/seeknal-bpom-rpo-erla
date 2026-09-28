@@ -1,0 +1,14 @@
+name: REG_X_07_PANGAN_OLAHAN
+scenario_id: REG-X-07-PANGAN-OLAHAN
+verification_date: '2026-09-15'
+description: 'REG-X-07 — Definisi Pangan Olahan (Pasal 1). Definisional.'
+turns:
+- prompt: 'Yang dimaksud pangan olahan itu apa dong?'
+  assert_contains:
+  - 'pangan'
+  assert_any_of:
+  - - 'diolah'
+  - - 'Pasal 1'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 01-definisi.md Pasal 1 — Pangan Olahan = pangan atau minuman yang dibuat/diolah dengan proses tertentu untuk konsumsi. Definisional, tanpa SQL/chart/export.'

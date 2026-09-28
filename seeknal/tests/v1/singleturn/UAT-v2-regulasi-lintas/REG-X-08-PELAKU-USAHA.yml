@@ -1,0 +1,14 @@
+name: REG_X_08_PELAKU_USAHA
+scenario_id: REG-X-08-PELAKU-USAHA
+verification_date: '2026-09-15'
+description: 'REG-X-08 — Definisi Pelaku Usaha (Pasal 1). Definisional.'
+turns:
+- prompt: 'Pelaku usaha yang dimaksud di aturan itu siapa aja?'
+  assert_contains:
+  - 'pelaku usaha'
+  assert_any_of:
+  - - 'memproduksi'
+  - - 'mengedarkan'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 01-definisi.md Pasal 1 — Pelaku Usaha = orang perseorangan atau korporasi yang memproduksi dan/atau mengedarkan Pangan Olahan. Mereka inilah yang dibebani kewajiban ING (Pasal 2). Definisional, tanpa SQL/chart/export.'

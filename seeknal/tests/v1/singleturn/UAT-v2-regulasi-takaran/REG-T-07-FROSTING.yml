@@ -1,0 +1,15 @@
+name: REG_T_07_FROSTING
+scenario_id: REG-T-07-FROSTING
+verification_date: '2026-09-15'
+description: 'REG-T-07 — Takaran saji frosting / non-dairy whipped cream (Lampiran II 01.7). Definisional.'
+turns:
+- prompt: 'Frosting atau whipped cream non-dairy takaran sajinya berapa?'
+  assert_contains:
+  - '15'
+  - '50'
+  assert_any_of:
+  - - '01.7'
+  - - 'Frosting'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 04a-takaran-saji-susu-es.md (Lampiran II, kode 01.7) — Frostings dan Non-Dairy Whipped Cream = 15-50 (g atau ml). Definisional, tanpa SQL/chart/export.'

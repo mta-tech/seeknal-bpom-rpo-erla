@@ -1,0 +1,16 @@
+name: REG_X_05_PENCABUTAN
+scenario_id: REG-X-05-PENCABUTAN
+verification_date: '2026-09-15'
+description: 'REG-X-05 — Peraturan yang dicabut (Pasal 33). Definisional.'
+turns:
+- prompt: 'Peraturan baru ini menggantikan peraturan yang mana aja?'
+  assert_contains:
+  - '2016'
+  - '2020'
+  - '2021'
+  assert_any_of:
+  - - 'dicabut'
+  - - 'Pasal 33'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 07-peralihan-pengkajian.md Pasal 33-34 — PerBPOM yang dicabut dan dinyatakan tidak berlaku: No. 9 Tahun 2016, No. 16 Tahun 2020, No. 26 Tahun 2021. Definisional, tanpa SQL/chart/export.'

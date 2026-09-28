@@ -1,0 +1,14 @@
+name: REG_T_13_FORMULA_BUKAN_PER_SAJI
+scenario_id: REG-T-13-FORMULA-BUKAN-PER-SAJI
+verification_date: '2026-09-15'
+description: 'REG-T-13 — Formula bayi/PKMK tidak per takaran saji (Pasal 9). Definisional.'
+turns:
+- prompt: 'Kalau formula bayi, tabel ING-nya tetap per takaran saji?'
+  assert_contains:
+  - '100'
+  assert_any_of:
+  - - 'kkal'
+  - - 'Pasal 9'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 03-takaran-saji-aturan.md Pasal 9 — tabel ING TIDAK per takaran saji untuk Formula Bayi, Formula Lanjutan, dan PKMK: dinyatakan per 100 g/100 ml DAN per 100 kkal. Pangan Olahan Antara/Fortifikasi per 100 g atau 100 ml. Definisional, tanpa SQL/chart/export.'
