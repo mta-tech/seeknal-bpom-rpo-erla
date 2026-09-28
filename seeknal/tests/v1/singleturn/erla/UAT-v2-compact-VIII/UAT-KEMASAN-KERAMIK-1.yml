@@ -1,0 +1,15 @@
+name: UAT_KEMASAN_KERAMIK_1
+scenario_id: UAT-KEMASAN-KERAMIK-1
+verification_date: '2026-09-22'
+description: 'UAT-KEMASAN-KERAMIK-1 — keramik: sub_kemasan_id absen di ERLA, kemasan_id 39 sbg batas atas. ERLA-only.'
+turns:
+- prompt: produk yang kemasannya keramik ada berapa, yang benar-benar keramik bukan kaca?
+  assert_contains:
+  - '246'
+  - keramik
+  assert_any_of:
+  - - batas atas
+    - Lain-Lain
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE kemasan_id=''39'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''. DB 2026-09-22: 246. Keramik = material SPESIFIK -> idealnya sub_kemasan_id (101 kaca / 102 keramik), tetapi sub_kemasan_id TIDAK ADA di ERLA (40-kemasan) -> pertanyaan material spesifik ERBA-only secara struktural. Di ERLA keramik jatuh ke kemasan_id=''39'' = "Lain-Lain (Drum, Keramik dan Lain-Lain)" (bucket residual) -> 246 adalah BATAS ATAS, bukan keramik murni; nyatakan itu, jangan mengklaim 39 sbg padanan keramik. ERLA-only.'

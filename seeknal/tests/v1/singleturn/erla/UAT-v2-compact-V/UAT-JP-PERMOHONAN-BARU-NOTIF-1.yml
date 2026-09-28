@@ -1,0 +1,14 @@
+name: UAT_JP_PERMOHONAN_BARU_NOTIF_1
+scenario_id: UAT-JP-PERMOHONAN-BARU-NOTIF-1
+verification_date: '2026-09-23'
+description: UAT-JP-PERMOHONAN-BARU-NOTIF-1 — permohonan baru notifikasi terbit 2025. ERLA-only.
+turns:
+- prompt: berapa permohonan baru notifikasi yang terbit tahun 2025?
+  assert_contains:
+  - '15'
+  assert_any_of:
+  - - notifikasi
+    - '15'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE jenis_permohonan=''305'' AND tanggal>=''15-01-01'' AND tanggal<''2026-01-01'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''. DB 2026-09-22: 15 NIE. ATURAN: prompt memuat ''terbit'' -> entity nomor + kolom tanggal (terbit) (80-waktu-periode.md; 00-menghitung.md §1); ''baru notifikasi'' = jenis_permohonan ''305'' saja, filter JP SAH karena pertanyaan menyebut jenis permohonannya. Angka ERLA sangat kecil (15) -> sebut apa adanya, jangan dilebur ke domain lain. Pembanding bacaan pengajuan (produk_id + tanggal_bayar) = 10. ERLA-only.'

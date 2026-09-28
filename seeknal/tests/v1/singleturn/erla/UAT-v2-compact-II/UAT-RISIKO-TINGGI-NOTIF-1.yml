@@ -1,0 +1,12 @@
+name: UAT_RISIKO_TINGGI_NOTIF_1
+scenario_id: UAT-RISIKO-TINGGI-NOTIF-1
+verification_date: '2026-09-22'
+description: 'UAT-RISIKO-TINGGI-NOTIF-1 — kategori Tinggi Notifikasi tidak ada di ERLA (tidak tersedia). ERLA-only.'
+turns:
+- prompt: berapa jumlah NIE produk dengan kategori risiko tinggi notifikasi?
+  assert_any_of:
+  - - 'Tinggi Notifikasi'
+    - 'tidak tersedia|tidak ada|tidak memiliki|tidak dapat dipetakan|belum tersedia'
+    - 'ERLA'
+  tolerance_pct: 5
+  note: 'SQL konteks ERLA: SELECT jenis_dokumen, COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>'''' GROUP BY 1 (Low 301=78.107, High 302=22.602, Medium 303=86.309, 000=9, 304=1.708). DB 2026-09-22: TIDAK TERSEDIA. ''Tinggi Notifikasi'' adalah kategori_dokumen ERBA (kode 304); ERLA tidak punya kelas itu di taksonomi jenis_dokumen (Low/Medium/High/000). Kode 304 muncul di data ERLA TANPA label dictionary, sehingga tidak sah dipetakan ke ''Tinggi Notifikasi'' ERBA. Ekspektasi: jawaban jujur menyebut kategori tidak ada, tanpa angka palsu. Pembanding ERBA (kategori_dokumen=''304'') = 3.992.'

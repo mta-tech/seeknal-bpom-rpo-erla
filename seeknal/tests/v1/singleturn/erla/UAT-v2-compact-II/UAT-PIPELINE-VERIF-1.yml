@@ -1,0 +1,13 @@
+name: UAT_PIPELINE_VERIF_1
+scenario_id: UAT-PIPELINE-VERIF-1
+verification_date: '2026-09-22'
+description: 'UAT-PIPELINE-VERIF-1 — antrian verifikasi; ERLA tidak punya status 04xx. ERLA-only.'
+turns:
+- prompt: ada berapa permohonan yang masih menunggu verifikasi di BPOM?
+  assert_contains:
+  - '0'
+  assert_any_of:
+  - - 'verifikasi'
+  - - ERLA
+  tolerance_pct: 10
+  note: 'SQL: SELECT COUNT(DISTINCT produk_id) FROM t_produk_3_rilis_erla WHERE status IN (''0402'',''0403'',''0405'',''0406'',''0407''); DB 2026-09-22: 0. Distribusi status ERLA tidak memuat status Verifikator 1 (04xx) - antrian verifikasi kosong di ERLA. Entity = produk_id; ''nol adalah jawaban''. Pembanding ERBA = 1.618.'

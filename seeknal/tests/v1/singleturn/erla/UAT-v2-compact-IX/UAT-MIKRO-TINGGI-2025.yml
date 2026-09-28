@@ -1,0 +1,16 @@
+name: UAT_MIKRO_TINGGI_2025
+scenario_id: UAT-MIKRO-TINGGI-2025
+verification_date: '2026-09-22'
+description: 'UAT-MIKRO-TINGGI-2025 — Mikro x Risiko Tinggi x 2025 x JP baru: NIHIL di ERLA. ERLA-only.'
+turns:
+- prompt: Buatkan rekomendasi area yang perlu menjadi perhatian, berdasarkan kombinasi Skala Mikro/IRTP dan Risiko Penilaian Tinggi, dalam periode 2025 dan Jenis Permohonan baru.
+  assert_contains:
+  - Mikro
+  - Tinggi
+  assert_any_of:
+  - - nihil
+    - tidak ada
+    - '0'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT LEFT(p.daerah_trader,2) prov, COUNT(DISTINCT p.nomor) FROM t_produk_3_rilis_erla p JOIN m_trader_rla t ON t.trader_id=p.trader_id WHERE t.skala_industri=''1'' AND p.jenis_dokumen=''302'' AND p.jenis_permohonan IN (''301'',''305'') AND p.tanggal_bayar>=''2025-01-01'' AND p.tanggal_bayar<''2026-01-01'' AND p.status IN (''0099'',''0999'',''0906'',''9999'') AND p.trader_id<>3384 AND p.nomor<>'''' GROUP BY 1. DB 2026-09-22: 0 baris -> NIHIL di ERLA untuk 2025. Risiko Tinggi ERLA = jenis_dokumen=''302'' (30-risiko-komitmen); skala Mikro = m_trader_rla.skala_industri=''1'' (LEFT JOIN); JP baru = 301(+305). ERLA hanya menyimpan keadaan final & aktivitasnya beku (max tanggal_bayar 2026-05-26); irisan all-time (tanpa batas tahun) = 92 NIE, terbesar 37=35 | 35=19 | 31=15. Jawaban jujur: NIHIL untuk 2025, tanpa angka palsu; sajikan all-time sbg konteks. ERLA-only.'

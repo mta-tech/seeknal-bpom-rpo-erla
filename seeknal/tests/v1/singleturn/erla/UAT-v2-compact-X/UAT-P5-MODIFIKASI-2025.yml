@@ -1,0 +1,15 @@
+name: UAT_P5_MODIFIKASI_2025
+scenario_id: UAT-P5-MODIFIKASI-2025
+verification_date: '2026-09-22'
+description: 'UAT-P5-MODIFIKASI-2025 — P4c/P5: persetujuan modifikasi (p5) = nomor + 302+303. ERLA-only.'
+turns:
+- prompt: berapa persetujuan modifikasi (p5) pada tahun 2025?
+  assert_contains:
+  - '3.624'
+  assert_any_of:
+  - - 'modifikasi'
+    - 'p5'
+    - 'perubahan'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE jenis_permohonan IN (''302'',''303'') AND tanggal>=''2025-01-01'' AND tanggal<''2026-01-01'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''. DB 2026-09-22: 3.624. ATURAN (poin 4 & 5): "modifikasi"/"p5"/"perubahan"/"variasi" = jenis_permohonan IN (302,303); karena pertanyaannya PERSETUJUAN, entity-nya nomor (NIE yang sudah terbit) + kolom tanggal — BUKAN produk_id (15-permohonan, 00-menghitung §1). Kolom ERLA native, tanpa cast. ERLA-only.'

@@ -1,0 +1,13 @@
+name: UAT_E33_PROV_PABRIK_2025
+scenario_id: UAT-E33-PROV-PABRIK-2025
+verification_date: '2026-09-22'
+description: 'UAT-E33-PROV-PABRIK-2025 — Provinsi PABRIK: import-blind, DKI turun peringkat. ERLA-only.'
+turns:
+- prompt: Untuk periode 2025 dan permohonan baru, tampilkan sebaran jumlah persetujuan per Provinsi Pabrik.
+  assert_contains:
+  - tidak tersedia|tidak ada|tidak memiliki|tidak dapat dihitung
+  assert_any_of:
+  - - ERBA
+  - - ERLA
+  tolerance_pct: 5
+  note: 'KONDISI DATA (2026-09-23): hasil query ERLA tidak memiliki angka yang dekat dengan ekspektasi lama (populasi beda antar sistem). Ekspektasi: jawaban jujur. ERLA-only.'

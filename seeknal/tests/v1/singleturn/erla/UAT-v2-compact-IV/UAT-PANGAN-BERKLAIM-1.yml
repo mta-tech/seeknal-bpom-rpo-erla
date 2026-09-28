@@ -1,0 +1,13 @@
+name: UAT_PANGAN_BERKLAIM_1
+scenario_id: UAT-PANGAN-BERKLAIM-1
+verification_date: '2026-09-22'
+description: 'UAT-PANGAN-BERKLAIM-1 — jumlah produk pangan berklaim berizin edar. ERLA-only.'
+turns:
+- prompt: berapa produk pangan berklaim yang sudah punya izin edar?
+  assert_contains:
+  - '8.691'
+  assert_any_of:
+  - - 'berklaim'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE klasifikasi_id=''305'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''. DB 2026-09-22: ERLA=8.691 NIE. ATURAN: binding tetap berklaim = klasifikasi_id ''305'' (35-klasifikasi-sifat), BUKAN kolom teks bebas `klaim` (decoy). Entity NIE = COUNT(DISTINCT nomor); kode klasifikasi 305 sama di kedua sistem. BEDA ERBA: pada filter sama ERBA ~256 (23Jul2026) — timpang karena mayoritas produk berklaim lama ada di sistem legacy (ERLA). ERLA-only.'

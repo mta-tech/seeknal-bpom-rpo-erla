@@ -1,0 +1,13 @@
+name: UAT_DQ_BELUM_KLASIFIKASI_1
+scenario_id: UAT-DQ-BELUM-KLASIFIKASI-1
+verification_date: '2026-09-22'
+description: 'UAT-DQ-BELUM-KLASIFIKASI-1 — kelengkapan jenis pangan; jawaban nol yang jujur. ERLA-only.'
+turns:
+- prompt: apakah ada produk pangan olahan yang belum dikategorikan jenis pangannya?
+  assert_contains:
+  - 'tidak ada|tidak ditemukan|nol|0'
+  assert_any_of:
+  - - 'jenis pangan'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT COUNT(DISTINCT produk_id) FROM t_produk_3_rilis_erla WHERE jenis_pangan IS NULL OR jenis_pangan=''''. DB 2026-09-22: ERLA=0 dari 412.644 baris — tidak satu pun baris ERLA punya jenis_pangan kosong. ATURAN: pertanyaan kualitas data menyapu SELURUH populasi (tanpa filter status/tier); entity produk_id. Jawaban nol SAH: nyatakan ''tidak ada'' dengan tegas + sebut cakupan yang diperiksa; jangan mengubah pertanyaan agar ada angka. BEDA ''belum di-kategorikan risiko'' (jenis_dokumen=''000'', lihat UAT-DQ-BELUM-RISIKO-1). ERLA-only.'

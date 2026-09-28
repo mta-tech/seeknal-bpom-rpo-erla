@@ -1,0 +1,17 @@
+name: UAT_E55_SINGLE_MD
+scenario_id: UAT-E55-SINGLE-MD
+verification_date: '2026-09-22'
+description: UAT-E55-SINGLE-MD — Single MD Induk(306) vs Anak(307). ERLA-only.
+turns:
+- prompt: Bandingkan jumlah izin edar Single MD Induk vs Single MD Anak.
+  assert_contains:
+  - Single MD Induk
+  - Single MD Anak
+  assert_any_of:
+  - - '6.979'
+    - '6.979'
+  - - '2.146'
+    - '2.146'
+  - - ERBA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT status_produk, COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE status_produk IN (''306'',''307'') AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>'''' GROUP BY 1. DB 2026-09-04: 306 Single MD Induk=6.979 | 307 Single MD Anak=2.146. status_produk 306/307. Entity NIE. ERLA-only.'

@@ -1,0 +1,20 @@
+name: UAT_E64_IMPOR_SHARE_PROV_2425
+scenario_id: UAT-E64-IMPOR-SHARE-PROV-2425
+verification_date: '2026-09-22'
+description: UAT-E64-IMPOR-SHARE-PROV-2425 — Proporsi pabrik luar negeri (impor) dan provinsi pabrik terbesar, 2024 vs 2025. ERLA-only.
+turns:
+- prompt: Dalam persetujuan Pendaftaran Baru, berapa proporsi produk dengan pabrik di luar negeri (impor) pada 2024 dan 2025, dan bagaimana perubahannya? Sebutkan juga provinsi pabrik dalam negeri terbesarnya.
+  assert_contains:
+  - impor
+  assert_any_of:
+  - - 31,6
+    - '31.6'
+    - 31,6%
+    - 31.6%
+  - - 19,1
+    - '19.1'
+    - 19,1%
+    - 19.1%
+  - - ERBA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT LEFT(daerah_pabrik,2) prov, COUNT(DISTINCT nomor) n FROM t_produk_3_rilis_erla WHERE jenis_permohonan=''301'' AND tanggal_bayar>=''2024-01-01'' AND tanggal_bayar<''2026-01-01'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>'''' GROUP BY 1. DB 2026-09-08: total 2024=28.533 -> 2025=43.500. IMPOR (daerah_pabrik sentinel ''NULL''/''9999'' = pabrik LUAR NEGERI): 2024=9.024 (31,6%) -> 2025=13.872 (31,9%), porsi stabil ~1/3; NYATAKAN angka hanya pabrik dalam negeri setelah impor dipisah. Provinsi terbesar: 2024 37 Jawa Barat 4.832 (16,9%) -> 2025 37 Jawa Barat 8.306 (19,1%, satu-satunya yang share-nya naik) | 38 Jawa Timur 3.858 (13,5%)->5.767 (13,3%) | 36 Banten 3.390 (11,9%)->4.971 (11,4%) | 33 Jawa Tengah 2.212->3.065 | 31 DKI 1.442->2.118 (share turun 5,1%->4,9%). Kode 37/38 tidak ada di kamus data_dictionary; nama provinsi dari pengetahuan terverifikasi (contoh alamat: 3704 Margaasih Kab. Bandung, 3878 Rungkut Surabaya). ERLA-only.'

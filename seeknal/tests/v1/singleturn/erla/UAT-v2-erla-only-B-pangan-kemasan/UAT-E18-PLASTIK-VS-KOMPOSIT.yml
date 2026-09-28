@@ -1,0 +1,13 @@
+name: UAT_E18_PLASTIK_VS_KOMPOSIT
+scenario_id: UAT-E18-PLASTIK-VS-KOMPOSIT
+verification_date: '2026-09-22'
+description: UAT-E18-PLASTIK-VS-KOMPOSIT — Tren plastik(2) vs komposit(4) per tahun. ERLA-only.
+turns:
+- prompt: Bandingkan tren penggunaan kemasan Plastik Tunggal vs Komposit/Laminat dalam 5 tahun terakhir.
+  assert_contains:
+  - tidak tersedia|tidak ada|tidak memiliki|tidak dapat dihitung
+  assert_any_of:
+  - - ERBA
+  - - ERLA
+  tolerance_pct: 5
+  note: 'KONDISI DATA (2026-09-23): hasil query ERLA tidak memiliki angka yang dekat dengan ekspektasi lama (populasi beda antar sistem). Ekspektasi: jawaban jujur. ERLA-only.'

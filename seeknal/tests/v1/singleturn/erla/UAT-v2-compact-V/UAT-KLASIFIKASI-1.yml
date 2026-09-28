@@ -1,0 +1,15 @@
+name: UAT_KLASIFIKASI_1
+scenario_id: UAT-KLASIFIKASI-1
+verification_date: '2026-09-22'
+description: 'UAT-KLASIFIKASI-1 — jumlah produk kategori makanan dan minuman. ERLA-only.'
+turns:
+- prompt: berapa produk yang masuk kategori makanan dan berapa yang minuman di BPOM?
+  assert_contains:
+  - '110.438'
+  - '43.810'
+  assert_any_of:
+  - - 'makanan'
+    - 'minuman'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT klasifikasi_id, COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE klasifikasi_id IN (''301'',''302'') AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>'''' GROUP BY 1. DB 2026-09-22: ERLA Makanan(301)=110.438 · Minuman(302)=43.810 NIE. ATURAN: ''kategori makanan/minuman'' = kelas berkode klasifikasi_id 301/302 (bukan teks bebas nama_kategori); entity NIE; kode 301/302 sama di kedua sistem. Makanan+Minuman TIDAK menghabiskan populasi (ada kelas lain + bucket ''3'' Deputi 3) — jangan disajikan sebagai pembagian dua yang lengkap. BEDA ERBA: pada filter sama ERBA Makanan=60.442 · Minuman=38.726 (27Jul2026). ERLA-only.'

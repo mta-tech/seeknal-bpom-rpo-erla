@@ -1,0 +1,13 @@
+name: UAT_PIPE_BAYAR_1
+scenario_id: UAT-PIPE-BAYAR-1
+verification_date: '2026-09-22'
+description: 'UAT-PIPE-BAYAR-1 — menunggu pembayaran; tahapan pipeline tidak ada di ERLA. ERLA-only.'
+turns:
+- prompt: ada berapa permohonan yang sudah diproses tapi masih menunggu pembayaran?
+  assert_contains:
+  - 'tidak tersedia|tidak ada|tidak menyimpan|tidak tersimpan'
+  assert_any_of:
+  - - 'pembayaran'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'KONDISI DATA (verifikasi 22Sep2026): kode Bayar (0903/0907) adalah status tahapan; t_produk_3_rilis_erla hanya memuat keadaan final {0000,0009,0099,0501,0906,0999,9999}. SQL: tidak ada query valid di ERLA. DB 2026-09-22: dimensi tahapan TIDAK TERSEDIA. ATURAN: jawab jujur tanpa angka palsu (20-status-pipeline). BEDA ERBA: antrian bayar hanya terekam di sisi ERBA. ERLA-only.'

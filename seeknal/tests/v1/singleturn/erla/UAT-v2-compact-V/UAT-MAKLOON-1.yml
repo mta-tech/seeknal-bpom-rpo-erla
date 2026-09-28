@@ -1,0 +1,13 @@
+name: UAT_MAKLOON_1
+scenario_id: UAT-MAKLOON-1
+verification_date: '2026-09-22'
+description: 'UAT-MAKLOON-1 — produk diproduksi makloon/berdasarkan kontrak (status_produk 304). ERLA-only.'
+turns:
+- prompt: berapa produk yang diproduksi secara makloon atau berdasarkan kontrak di BPOM?
+  assert_contains:
+  - '5.046'
+  assert_any_of:
+  - - 'makloon'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE status_produk=''304'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''. DB 2026-09-22: ERLA=5.046 NIE. ATURAN: makloon/kontrak = status_produk ''304'' (Berdasarkan Kontrak), BUKAN kolom `status` (alur kerja). Jangan tertukar: status_produk = jenis produksi (301 sendiri · 302 impor · 303 · 304 kontrak · 305 · 306 induk · 307 anak), status = tahap alur kerja. Entity NIE. BEDA ERBA: pada filter sama ERBA ~2.232 (27Jul2026); kode 304 sama di kedua sistem. ERLA-only.'

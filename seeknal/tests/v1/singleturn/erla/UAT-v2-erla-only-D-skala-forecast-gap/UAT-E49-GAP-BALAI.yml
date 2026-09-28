@@ -1,0 +1,19 @@
+name: UAT_E49_GAP_BALAI
+scenario_id: UAT-E49-GAP-BALAI
+verification_date: '2026-09-22'
+description: UAT-E49-GAP-BALAI — Honest-gap balai (tak ada), jawab sisanya. ERLA-only.
+turns:
+- prompt: Tampilkan produk risiko Tinggi di DKI Jakarta untuk permohonan baru 3 tahun terakhir, dikelompokkan per Balai pengawas.
+  assert_contains:
+  - Balai
+  - tidak
+  assert_any_of:
+  - - tidak tersedia
+    - tidak ada
+    - tidak tersambung
+  - - '32.981'
+    - '2.982'
+    - DKI
+    - Jakarta
+  tolerance_pct: 5
+  note: 'KONDISI DB 2026-09-07: TIDAK ADA kolom Balai/UPT/BBPOM/pengawasan di warehouse registrasi (0 kolom). JAWABAN SAH: nyatakan pengelompokan per BALAI tidak tersedia (data registrasi, bukan pengawasan), lalu jawab bagian yang BISA. AMBIGU ''di DKI'' -> DUA sisi sama sah, SEBUT sisi yang dipakai: PENDAFTAR (daerah_trader=31)=32.981 ATAU PABRIK (daerah_pabrik=31)=2.982 (risiko Tinggi kd IN 301,304, JP=301, 3 tahun terakhir). DILARANG mengarang balai. Entity NIE (COUNT DISTINCT nomor). ERLA-only.'

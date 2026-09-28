@@ -1,0 +1,17 @@
+name: UAT_E48_GAP_GINSENG
+scenario_id: UAT-E48-GAP-GINSENG
+verification_date: '2026-09-22'
+description: 'UAT-E48-GAP-GINSENG — Honest-gap: T_PRODUK_3_BAHAN tak ada; ILIKE nama berlabel. ERLA-only.'
+turns:
+- prompt: Tampilkan produk yang mengandung bahan baku akar ginseng.
+  assert_contains:
+  - bahan
+  - tidak
+  assert_any_of:
+  - - tidak tersedia
+    - tidak tersambung
+    - tidak ada
+  - - '400'
+    - nama produk
+  tolerance_pct: 5
+  note: 'KONDISI DB 2026-09-04: pencarian by NAMA -> nama ILIKE ''%ginseng%'' = 400 produk (merk ILIKE=31) -> DATANYA ADA, BUKAN nol. Yang NOL/tak tersedia adalah analisis KANDUNGAN BAHAN: tabel T_PRODUK_3_BAHAN (kolom NAMA_BAHAN) DIBUANG dari warehouse (hanya 8 tabel), jadi join bahan legacy tak bisa dijalankan. JAWABAN SAH: sajikan 400 produk hasil pencarian NAMA (WAJIB dilabeli ''pencarian nama produk, bukan analisis kandungan bahan''), lalu nyatakan konfirmasi KANDUNGAN akar ginseng sebagai bahan baku TIDAK tersedia. DILARANG menyajikan 400 itu sebagai ''mengandung ginseng'' tanpa label, atau mengarang tabel bahan. ERLA-only.'

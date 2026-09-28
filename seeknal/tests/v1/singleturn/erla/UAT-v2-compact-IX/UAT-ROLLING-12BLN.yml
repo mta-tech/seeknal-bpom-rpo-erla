@@ -1,0 +1,15 @@
+name: UAT_ROLLING_12BLN
+scenario_id: UAT-ROLLING-12BLN
+verification_date: '2026-09-22'
+description: 'UAT-ROLLING-12BLN — rolling 12 bulan, entity permohonan (raw). ERLA-only.'
+turns:
+- prompt: Tampilkan jumlah permohonan registrasi berdasarkan Tanggal Permohonan per bulan untuk 12 bulan terakhir.
+  assert_contains:
+  - '12 bulan'
+  - '2.183'
+  assert_any_of:
+  - - '546'
+    - '2025-10'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT to_char(date_trunc(''month'',tanggal_bayar),''YYYY-MM'') m, COUNT(DISTINCT produk_id) FROM t_produk_3_rilis_erla WHERE tanggal_bayar>=date_trunc(''month'',CURRENT_DATE)-INTERVAL ''11 months'' AND tanggal_bayar<date_trunc(''month'',CURRENT_DATE) AND trader_id<>3384 GROUP BY 1 ORDER BY 1. DB 2026-09-22 (window Okt2025-Agu2026, 12 bulan): Okt=546 | Nov=343 | Des=315 | Jan=272 | Feb=187 | Mar=206 | Apr=203 | Mei=111 | Jun-Agu=0. Total=2.183. ROLLING: batas dari CURRENT_DATE, jangan hardcode bulan. "Permohonan registrasi" tanpa kata izin -> bacaan raw (TANPA filter status), entity produk_id + tanggal_bayar (15-permohonan). Nyatakan 3 bulan terakhir kosong karena data ERLA berhenti di 2026-05-26. ERLA-only.'

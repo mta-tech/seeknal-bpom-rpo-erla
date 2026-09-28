@@ -1,0 +1,12 @@
+name: UAT_KOMITMEN_DIBATALKAN_1
+scenario_id: UAT-KOMITMEN-DIBATALKAN-1
+verification_date: '2026-09-22'
+description: 'UAT-KOMITMEN-DIBATALKAN-1 — komitmen dibatalkan MR; kolom status_komitmen tidak ada di ERLA. ERLA-only.'
+turns:
+- prompt: berapa produk menengah rendah yang dibatalkan komitmennya oleh BPOM?
+  assert_any_of:
+  - - 'komitmen'
+    - 'tidak tersedia|tidak ada|tidak memiliki|tidak ditemukan|belum tersedia'
+    - 'ERLA'
+  tolerance_pct: 5
+  note: 'SQL uji ketiadaan: SELECT COUNT(*) FROM information_schema.columns WHERE table_name=''t_produk_3_rilis_erla'' AND column_name IN (''status_komitmen'',''jenis_penolakan_komitmen'') -> 0. DB 2026-09-22: TIDAK TERSEDIA. Kolom status_komitmen (dan jenis_penolakan_komitmen) tidak ada di ERLA - siklus hidup komitmen adalah fitur ERBA (dictionary STATUS_KOMITMEN sumber=ERBA). Ekspektasi: jawaban jujur menyatakan dimensi komitmen tidak tersedia di data ini, TANPA angka palsu. Pembanding ERBA (kategori_dokumen=''303'' + status_komitmen=5) = 6.114 - di luar data ERLA.'

@@ -1,0 +1,13 @@
+name: UAT_ORGANIK_1
+scenario_id: UAT-ORGANIK-1
+verification_date: '2026-09-22'
+description: 'UAT-ORGANIK-1 — jumlah produk organik berizin edar. ERLA-only.'
+turns:
+- prompt: ada berapa produk organik yang punya izin edar di BPOM?
+  assert_contains:
+  - '604'
+  assert_any_of:
+  - - 'organik'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE pemrosesan=''301'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''. DB 2026-09-22: ERLA=604 NIE. ATURAN: binding tetap organik = pemrosesan ''301'' (35-klasifikasi-sifat), BUKAN klasifikasi_id ''309'' (decoy — namanya sama, populasi berbeda). Entity NIE = COUNT(DISTINCT nomor); kode pemrosesan 301 sama di kedua sistem. BEDA ERBA: pada filter sama ERBA ~214 (23Jul2026) — kode dictionary PEMROSESAN sama. ERLA-only.'

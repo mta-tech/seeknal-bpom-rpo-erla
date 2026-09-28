@@ -1,0 +1,12 @@
+name: UAT_KOMITMEN_DISETUJUI_1
+scenario_id: UAT-KOMITMEN-DISETUJUI-1
+verification_date: '2026-09-22'
+description: 'UAT-KOMITMEN-DISETUJUI-1 — komitmen disetujui MR; kolom status_komitmen tidak ada di ERLA. ERLA-only.'
+turns:
+- prompt: berapa produk MR yang komitmennya sudah disetujui BPOM?
+  assert_any_of:
+  - - 'komitmen'
+    - 'tidak tersedia|tidak ada|tidak memiliki|tidak ditemukan|belum tersedia'
+    - 'ERLA'
+  tolerance_pct: 5
+  note: 'SQL uji ketiadaan: SELECT COUNT(*) FROM information_schema.columns WHERE table_name=''t_produk_3_rilis_erla'' AND column_name=''status_komitmen'' -> 0. DB 2026-09-22: TIDAK TERSEDIA. Dimensi komitmen (status_komitmen) tidak ada di ERLA. Padanan label ''MR''/''Menengah Rendah'' juga tidak ada (ERLA jenis_dokumen=''303'' = Medium Risk gabungan). Ekspektasi: jawaban jujur menyebut dimensi tidak ada. Pembanding ERBA (status_komitmen IN (4,7)) = 16.652 - di luar data ERLA.'

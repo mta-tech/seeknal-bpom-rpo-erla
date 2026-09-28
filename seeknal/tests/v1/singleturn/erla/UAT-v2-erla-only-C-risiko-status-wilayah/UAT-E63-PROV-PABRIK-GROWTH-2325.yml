@@ -1,0 +1,18 @@
+name: UAT_E63_PROV_PABRIK_GROWTH_2325
+scenario_id: UAT-E63-PROV-PABRIK-GROWTH-2325
+verification_date: '2026-09-22'
+description: UAT-E63-PROV-PABRIK-GROWTH-2325 — Provinsi PABRIK dengan pertumbuhan 2023 vs 2025 tercepat (JP 301). ERLA-only.
+turns:
+- prompt: Bandingkan jumlah persetujuan Pendaftaran Baru per Provinsi Pabrik antara tahun 2023 dan 2025; provinsi mana yang tumbuh paling cepat?
+  assert_contains:
+  - provinsi
+  - pertumbuhan
+  assert_any_of:
+  - - '33'
+  - - DI Yogyakarta
+    - Yogyakarta
+    - DIY
+  - - ERBA
+  tolerance_pct: 5
+  note: 'SQL: SELECT LEFT(daerah_pabrik,2) prov, COUNT(DISTINCT nomor) FILTER (WHERE tanggal_bayar>=''2023-01-01'' AND tanggal_bayar<''2024-01-01'') a23, COUNT(DISTINCT nomor) FILTER (WHERE tanggal_bayar>=''2025-01-01'' AND tanggal_bayar<''2026-01-01'') a25 FROM t_produk_3_rilis_erla WHERE jenis_permohonan=''301'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>'''' AND daerah_pabrik NOT IN (''NULL'',''9999'') AND daerah_pabrik<>'''' GROUP BY 1. DB 2026-09-08 (min. basis 2023 >= 200): 33 DI Yogyakarta 819->1.392 (+70,0%) TERCEPAT | 12 Sumatera Utara 693->1.177 (+69,8%) nyaris sama, jangan tertukar | 18 Lampung 407->622 (+52,8%) | 51 Bali 625->916 (+46,6%) | 37 Jawa Barat 5.745->8.306 (+44,6%) | 38 Jawa Timur 4.008->5.767 (+43,9%) | 36 Banten 3.499->4.971 (+42,1%) | 33 Jawa Tengah 2.539->3.065 (+20,7%) | 31 DKI Jakarta 1.923->2.118 (+10,1%). Provinsi PABRIK=daerah_pabrik (beda dari daerah_trader); kode 37/38 = Jawa Barat/Jawa Timur TIDAK ada di kamus data_dictionary
+    (kamus 32/35 tak terpakai) -> sebut nama dari pengetahuan/alamat, jangan klaim dari kamus; wilayah sentinel (''NULL''/''9999'' = pabrik luar negeri) DIKECUALIKAN; provinsi basis kecil (<200) jangan dijadikan jawaban. ERLA-only.'

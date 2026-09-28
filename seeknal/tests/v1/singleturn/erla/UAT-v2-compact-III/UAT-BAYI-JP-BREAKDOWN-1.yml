@@ -1,0 +1,14 @@
+name: UAT_BAYI_JP_BREAKDOWN_1
+scenario_id: UAT-BAYI-JP-BREAKDOWN-1
+verification_date: '2026-09-22'
+description: 'UAT-BAYI-JP-BREAKDOWN-1 — breakdown formula bayi per jenis permohonan (kualitatif). ERLA-only.'
+turns:
+- prompt: dari izin edar formula bayi yang masih sah, apakah semuanya permohonan baru atau ada yang perubahan dan daftar ulang?
+  assert_contains:
+  - 'Formula Bayi'
+  assert_any_of:
+  - - 'permohonan baru'
+    - '301'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL: SELECT jenis_permohonan, COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE nama_kategori ILIKE ''Formula Bayi%'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>'''' GROUP BY 1 ORDER BY 1; DB 2026-09-22 (n=88): 301=80, 302=52, 303=34, 304=17, 305=8. Dictionary JENIS_PERMOHONAN (sumber ''ERLA dan ERBA'') kode sama: 301 Baru, 302 Perubahan Mayor, 303 Perubahan Minor, 304 Daftar Ulang, 305 Baru Notifikasi. Campuran baru/perubahan/daftar-ulang TERKONFIRMASI -> jawaban TIDAK boleh mengklaim ''semuanya permohonan baru''. SUM-OF-PARTITIONS: jumlah per-JP MELEBIHI total distinct (satu nomor melewati banyak JP via revisi) - headline wajib dari query global DISTINCT, jangan menjumlah breakdown. Test kualitatif (assert_any_of ringkas).'

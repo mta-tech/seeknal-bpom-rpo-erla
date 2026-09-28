@@ -1,0 +1,15 @@
+name: UAT_E32_PROV_RANK_2024
+scenario_id: UAT-E32-PROV-RANK-2024
+verification_date: '2026-09-22'
+description: UAT-E32-PROV-RANK-2024 — Ranking provinsi (daerah_trader); 37/38 divergensi kamus. ERLA-only.
+turns:
+- prompt: Ranking 10 provinsi dengan jumlah persetujuan Permohonan Baru terbanyak pada periode 2024.
+  assert_contains:
+  - DKI Jakarta
+  assert_any_of:
+  - - '11.188'
+    - '11.188'
+  - - Jawa Barat
+    - '36'
+  tolerance_pct: 5
+  note: 'SQL: SELECT LEFT(daerah_trader,2) prov, COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE jenis_permohonan=''301'' AND tanggal_bayar>=''2024-01-01'' AND tanggal_bayar<''2025-01-01'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>'''' AND daerah_trader<>'''' GROUP BY 1 ORDER BY 2 DESC LIMIT 10. DB 2026-09-04: 31 DKI=11.188 | 36 Jawa Barat=3.941 | 38 Jawa Timur=3.385 | 36 Banten=3.185 | 33 Jateng=1.687. PROVINSI=derived LEFT(daerah_trader,2); 36/38 (JaBar/JaTim) TIDAK di kamus -> sebut nama BPS, jangan buang/label ''unmapped''. ERLA-only.'

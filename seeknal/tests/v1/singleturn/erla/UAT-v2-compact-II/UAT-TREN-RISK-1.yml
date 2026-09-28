@@ -1,0 +1,17 @@
+name: UAT_TREN_RISK_1
+scenario_id: UAT-TREN-RISK-1
+verification_date: '2026-09-22'
+description: 'UAT-TREN-RISK-1 — tren Menengah Rendah -> padanan jenis_dokumen 301 per tahun. ERLA-only.'
+turns:
+- prompt: Bagaimana tren jumlah NIE risiko menengah rendah dari tahun ke tahun?
+  assert_contains:
+  - '3.811'
+  - '2.075'
+  - '885'
+  assert_any_of:
+  - - 'rendah'
+    - 'Menengah Rendah'
+    - 'Low'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL: SELECT EXTRACT(YEAR FROM tanggal)::int, COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE jenis_dokumen=''301'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>'''' GROUP BY 1 ORDER BY 1 -> 2023=3.811, 2024=2.075, 2025=885. DB 2026-09-22: 3.811 / 2.075 / 885. ''Menengah Rendah'' dipadankan ke jenis_dokumen=''301'' (Pangan Low Risk) - kolom & taksonomi berbeda dari kategori_dokumen ERBA (303). Tren menurun (daya legacy ERLA). Jangkar assert 2023/2024/2025. Pembanding ERBA (kategori_dokumen=''303''): 9.689/10.963/15.644.'

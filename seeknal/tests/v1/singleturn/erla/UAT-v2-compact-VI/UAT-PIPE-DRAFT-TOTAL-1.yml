@@ -1,0 +1,13 @@
+name: UAT_PIPE_DRAFT_TOTAL_1
+scenario_id: UAT-PIPE-DRAFT-TOTAL-1
+verification_date: '2026-09-22'
+description: 'UAT-PIPE-DRAFT-TOTAL-1 — total permohonan nyangkut di draft; tahapan tidak ada di ERLA. ERLA-only.'
+turns:
+- prompt: total permohonan yang masih nyangkut di tahap draft berapa?
+  assert_contains:
+  - 'tidak tersedia|tidak ada|tidak menyimpan|tidak tersimpan'
+  assert_any_of:
+  - - 'draft'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'KONDISI DATA (verifikasi 22Sep2026): kode Draft (0910/0912) adalah status tahapan; t_produk_3_rilis_erla hanya memuat keadaan final. SQL: tidak ada query valid di ERLA. DB 2026-09-22: dimensi tahapan TIDAK TERSEDIA. ATURAN: jawab jujur tanpa angka palsu (20-status-pipeline). BEDA ERBA: bucket draft hanya di sisi ERBA. ERLA-only.'

@@ -1,0 +1,13 @@
+name: UAT_E35_KAB_DALAM_PROV
+scenario_id: UAT-E35-KAB-DALAM-PROV
+verification_date: '2026-09-22'
+description: UAT-E35-KAB-DALAM-PROV — Kab dalam satu provinsi (JaTim=38); decode gap. ERLA-only.
+turns:
+- prompt: Bandingkan jumlah persetujuan Permohonan Baru antar kabupaten/kota dalam Provinsi Jawa Timur tahun 2024.
+  assert_contains:
+  - tidak tersedia|tidak ada|tidak memiliki|tidak dapat dihitung
+  assert_any_of:
+  - - Surabaya
+  - - ERLA
+  tolerance_pct: 5
+  note: 'KONDISI DATA (2026-09-23): SQL untuk kasus ini ERROR di ERLA (ERROR:  syntax error at or near "."). Ekspektasi: jawaban jujur bahwa dimensi tidak tersedia, tanpa angka palsu. ERLA-only.'

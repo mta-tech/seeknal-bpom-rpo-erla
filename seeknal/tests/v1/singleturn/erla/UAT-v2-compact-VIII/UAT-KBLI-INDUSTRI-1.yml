@@ -1,0 +1,15 @@
+name: UAT_KBLI_INDUSTRI_1
+scenario_id: UAT-KBLI-INDUSTRI-1
+verification_date: '2026-09-22'
+description: 'UAT-KBLI-INDUSTRI-1 — KBLI tidak ada di ERLA (jawaban jujur). ERLA-only.'
+turns:
+- prompt: industri apa yang paling banyak mendaftarkan produk pangan ke BPOM?
+  assert_contains:
+  - industri
+  assert_any_of:
+  - - tidak tersedia
+    - tidak ada kolom
+    - tidak punya
+  - - ERLA
+  tolerance_pct: 0
+  note: 'KONDISI: kolom kode_kbli hanya ada di t_produk_3_erba (salah satu dari 6 kolom ERBA-only; 95-dimensi-lain / data_architecture). t_produk_3_rilis_erla tidak punya kode_kbli -> peringkat bidang usaha (KBLI) TIDAK dapat dihitung di ERLA; jawab jujur "tidak tersedia", jangan mengarang industri. Jangan mengganti diam-diam dengan skala_industri (m_trader_rla) - itu KONSEP LAIN (50-pihak-wilayah: bidang usaha vs skala industri); sebut keduanya pertanyaan berbeda. Jangan memakai jenis_pangan sbg proksi KBLI. ERLA-only.'

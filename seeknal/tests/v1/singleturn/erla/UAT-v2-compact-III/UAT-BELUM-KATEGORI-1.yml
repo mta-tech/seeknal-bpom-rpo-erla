@@ -1,0 +1,13 @@
+name: UAT_BELUM_KATEGORI_1
+scenario_id: UAT-BELUM-KATEGORI-1
+verification_date: '2026-09-22'
+description: 'UAT-BELUM-KATEGORI-1 — produk belum dikategorikan risiko (jenis_dokumen 000). ERLA-only.'
+turns:
+- prompt: berapa produk yang belum punya kategori risiko di BPOM?
+  assert_contains:
+  - '20'
+  assert_any_of:
+  - - 'belum'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE jenis_dokumen=''000'' AND nomor<>''''; DB 2026-09-22: 20. TANPA filter status: populasi ''belum dikategorikan'' adalah state tersendiri (menumpuk filter tier NIE sah akan menghapusnya). Dictionary JENIS_DOKUMEN kode 000 = ''Belum Dikategorikan'' (sumber ''ERLA dan ERBA''). ENTITY: nomor. JANGAN tertukar dengan kategori_dokumen ERBA (namespace berbeda). Pembanding ERBA = 31.032.'

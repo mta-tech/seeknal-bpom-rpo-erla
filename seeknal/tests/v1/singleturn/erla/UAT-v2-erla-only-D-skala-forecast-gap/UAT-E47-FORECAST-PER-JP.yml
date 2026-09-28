@@ -1,0 +1,18 @@
+name: UAT_E47_FORECAST_PER_JP
+scenario_id: UAT-E47-FORECAST-PER-JP
+verification_date: '2026-09-22'
+description: UAT-E47-FORECAST-PER-JP — Proyeksi per JP (engine per-series; registry gap). ERLA-only.
+turns:
+- prompt: Buatkan proyeksi jumlah persetujuan periode mendatang, dipecah per Jenis Permohonan.
+  assert_contains:
+  - proyeksi
+  assert_any_of:
+  - - run_forecast
+  - - ERBA
+  - - '2.875'
+    - '2.290'
+    - '2.107'
+    - '1.856'
+    - '1.687'
+  tolerance_pct: 5
+  note: 'run_forecast PER Jenis Permohonan (Baru 301, Perubahan 302/303) sebagai deret terpisah -> bagian berlabel per JP. Registry §3 tak menyediakan deret per-JP siap pakai -> bangun SQL per deret (filter jenis_permohonan) dari template §1, atau nyatakan deret yang tak eligible. WAJIB engine, bukan execute_sql. ERBA-only. DB: forecast per JP dari engine; anchor historis lihat E45.'

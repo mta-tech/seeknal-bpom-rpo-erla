@@ -1,0 +1,13 @@
+name: UAT_CHAR_PANGAN_BAYI_ERLA_1
+scenario_id: UAT-CHAR-PANGAN-BAYI-ERLA-1
+verification_date: '2026-09-22'
+description: 'UAT-CHAR-PANGAN-BAYI-ERLA-1 — jumlah produk pangan bayi yang terdaftar. ERLA-only.'
+turns:
+- prompt: berapa produk pangan bayi yang terdaftar?
+  assert_contains:
+  - '81'
+  assert_any_of:
+  - - 'bayi'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE klasifikasi_id=''311'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''. DB 2026-09-22: ERLA=81 NIE (produk_id=224). ATURAN: ''pangan bayi'' = klasifikasi_id ''311'' (Pangan Bayi & Anak) — kelas yang lebih luas dari ''formula bayi''; entity NIE = COUNT(DISTINCT nomor). Tier Terdaftar ERLA termasuk ''0099'' (Tidak Berlaku). BEDA ERBA: pada filter sama ERBA ~9 (27Jul2026). ERLA-only.'

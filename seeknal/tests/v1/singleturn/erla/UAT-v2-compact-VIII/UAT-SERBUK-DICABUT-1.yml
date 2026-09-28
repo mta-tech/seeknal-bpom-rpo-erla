@@ -1,0 +1,13 @@
+name: UAT_SERBUK_DICABUT_1
+scenario_id: UAT-SERBUK-DICABUT-1
+verification_date: '2026-09-23'
+description: UAT-SERBUK-DICABUT-1 — pencabutan minuman serbuk berperisa. ERLA-only.
+turns:
+- prompt: minuman serbuk berperisa ada yang izin edarnya dicabut atau dibatalkan BPOM?
+  assert_contains:
+  - '376'
+  assert_any_of:
+  - - Minuman Serbuk Berperisa
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE nama_kategori=''Minuman Serbuk Berperisa (Tidak Berkarbonat)'' AND status IN (''0'',''0000'') AND trader_id<>3384 AND nomor<>''''. DB 2026-09-22: 0 (semuanya 0 Dicabut/Dibatalkan; 0000 Dihapus=0). NIE berstatus sah di segmen sama = 4.822 -> rasio ~0/5.198 (7,2%). Kelas pencabutan = 0000+0 SAJA (20-status-pipeline); JANGAN masukkan 0099 (Tidak Berlaku = kedaluwarsa) atau 9999 (Sudah Diubah = versi). nama_kategori PERSIS (ILIKE ''%serbuk%'' menjaring puluhan kategori serbuk lain). Entity izin edar -> nomor. ERLA-only.'

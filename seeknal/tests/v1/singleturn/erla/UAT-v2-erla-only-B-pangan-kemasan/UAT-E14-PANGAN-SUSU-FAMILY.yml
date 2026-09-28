@@ -1,0 +1,15 @@
+name: UAT_E14_PANGAN_SUSU_FAMILY
+scenario_id: UAT-E14-PANGAN-SUSU-FAMILY
+verification_date: '2026-09-23'
+description: UAT-E14-PANGAN-SUSU-FAMILY — Keluarga tematik via probe nama_kategori. ERLA-only.
+turns:
+- prompt: Berapa jumlah izin edar untuk jenis pangan yang mengandung susu?
+  assert_contains:
+  - '7.633'
+  assert_any_of:
+  - - nama_kategori
+    - probe
+  - - '7.633'
+    - ERLA
+  tolerance_pct: 5
+  note: 'PROSEDUR (05-filter-katalog thematic families): probe nama_kategori lalu hitung SEKALI dgn HIMPUNAN KANONIK. SQL ERLA: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE nama_kategori ~* ''susu|whey|buttermilk'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''. DB 2026-09-07: himpunan KANONIK sempit ''susu|whey|buttermilk'' = 7.633 NIE di 27 kode jenis_pangan. JANGAN LEBARKAN ke ''krim|cream|es susu'' (bacaan lebar +krim/cream = 2.935; probe agent bahkan bisa >40rb bila menjaring nama majemuk) -> patok ke set sempit ini & sebut kodenya. ERLA-only.'

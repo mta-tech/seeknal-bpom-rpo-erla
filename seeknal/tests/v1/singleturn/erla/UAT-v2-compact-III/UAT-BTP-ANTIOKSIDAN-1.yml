@@ -1,0 +1,12 @@
+name: UAT_BTP_ANTIOKSIDAN_1
+scenario_id: UAT-BTP-ANTIOKSIDAN-1
+verification_date: '2026-09-22'
+description: 'UAT-BTP-ANTIOKSIDAN-1 — BTP antioksidan tidak dapat dipetakan di ERLA (tidak tersedia). ERLA-only.'
+turns:
+- prompt: berapa izin edar BTP antioksidan yang ada?
+  assert_any_of:
+  - - 'antioksidan|Antioksidan'
+    - 'tidak tersedia|tidak ada|tidak memiliki|tidak dapat dipetakan|belum tersedia'
+    - 'ERLA'
+  tolerance_pct: 5
+  note: 'SQL konteks: SELECT jenis_btp, COUNT(*) FROM t_btp_3_erla GROUP BY 1 -> hanya kode 777-805 (tak berlabel). DB 2026-09-22: TIDAK TERSEDIA. ''Antioksidan'' = jenis_btp ERBA kode 48 (dictionary sumber tertulis ''ERLA dan ERBA''); namun t_btp_3_erla memakai rentang kode jenis_btp 777-805 yang TIDAK TERDAFTAR di dictionary manapun, sehingga kode 48 tidak berlaku di ERLA dan ''Antioksidan'' tidak dapat dipetakan secara sahih. Menjalankan filter jenis_btp=''48'' pada ERLA = 0, tetapi itu artinya ''namespace kode berbeda'', BUKAN ''tidak ada produk''. Jawaban jujur menyebut keterbatasan; JANGAN melaporkan 0 sebagai fakta bisnis. Pembanding ERBA = 979.'

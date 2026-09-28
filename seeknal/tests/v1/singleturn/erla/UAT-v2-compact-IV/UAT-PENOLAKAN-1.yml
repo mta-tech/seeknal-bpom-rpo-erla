@@ -1,0 +1,14 @@
+name: UAT_PENOLAKAN_1
+scenario_id: UAT-PENOLAKAN-1
+verification_date: '2026-09-22'
+description: 'UAT-PENOLAKAN-1 — alasan penolakan komitmen; kolom jenis_penolakan_komitmen TIDAK ADA di ERLA. ERLA-only.'
+turns:
+- prompt: apa alasan paling banyak komitmen ditolak BPOM?
+  assert_contains:
+  - 'tidak tersedia|tidak ada|tidak menyimpan|tidak tersimpan'
+  assert_any_of:
+  - - 'komitmen'
+    - 'ditolak'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'KONDISI DATA (verifikasi 22Sep2026): kolom jenis_penolakan_komitmen (dan status_komitmen) TIDAK ADA di t_produk_3_rilis_erla — dicek via information_schema; m_trader_rla pun tidak membawanya. SQL: tidak ada query valid di ERLA. DB 2026-09-22: dimensi penolakan komitmen TIDAK TERSEDIA. ATURAN: jawab jujur, tanpa angka palsu (30-risiko-komitmen §Commitment is not applicable). BEDA ERBA: alasan penolakan (multi-nilai dipisah pipe) hanya ada di sisi ERBA. ERLA-only.'

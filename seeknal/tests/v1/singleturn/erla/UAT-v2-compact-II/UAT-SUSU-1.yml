@@ -1,0 +1,15 @@
+name: UAT_SUSU_1
+scenario_id: UAT-SUSU-1
+verification_date: '2026-09-22'
+description: 'UAT-SUSU-1 — susu merk sekolah Mei 2026; hasil nol (anti-fabrikasi). ERLA-only.'
+turns:
+- prompt: Jumlah produk susu merk sekolah yang disetujui selama periode bulan Mei 2026
+  assert_contains:
+  - '0'
+  assert_any_of:
+  - - 'susu'
+    - 'tidak ditemukan'
+    - 'tidak ada'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE (nama ILIKE ''%susu%'' OR merk ILIKE ''%susu%'') AND (nama ILIKE ''%sekolah%'' OR merk ILIKE ''%sekolah%'') AND tanggal>=''2026-05-01'' AND tanggal<''2026-06-01'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''; DB 2026-09-22: 0. REGRESSION anti-fabrikasi: hasil EXACT 0. Kolom yang benar: nama & merk (bukan nama_produk), tanggal terbit. Sistem tidak boleh mengarang angka; ''tidak ditemukan''/''tidak ada'' sama-sama jujur. Pembanding ERBA = 0 juga.'

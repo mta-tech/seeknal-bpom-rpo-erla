@@ -1,0 +1,14 @@
+name: UAT_E58_ORGANIK
+scenario_id: UAT-E58-ORGANIK
+verification_date: '2026-09-23'
+description: UAT-E58-ORGANIK — Organik=pemrosesan=301 (decoy klasifikasi 309). ERLA-only.
+turns:
+- prompt: Berapa jumlah izin edar produk Organik?
+  assert_contains:
+  - Organik
+  assert_any_of:
+  - - '604'
+    - '604'
+  - - ERBA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE pemrosesan=''301'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''. DB 2026-09-04: 604. ''Organik''=pemrosesan=''301'' (BUKAN klasifikasi_id=''309'' yg nyaris tak terpakai). Entity NIE. ERLA-only.'

@@ -1,0 +1,13 @@
+name: UAT_BTP_1
+scenario_id: UAT-BTP-1
+verification_date: '2026-09-23'
+description: UAT-BTP-1 — NIE BTP 2023 (t_btp_3_erla). ERLA-only.
+turns:
+- prompt: berapa jumlah NIE produk BTP tahun 2023?
+  assert_contains:
+  - '584'
+  assert_any_of:
+  - - BTP
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL: SELECT COUNT(DISTINCT nomor) FROM t_btp_3_erla WHERE tanggal>=''2023-01-01'' AND tanggal<''2024-01-01'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND nomor<>''''; DB 2026-09-22: 5.119. ENTITY ''NIE'' -> nomor; TANPA filter JP (''tahun 5.119'' bukan pemicu JP); kolom tanggal (terbit). t_btp_3_erla hanya punya status 0999/0906/9999 (tanpa 0099). Prompt sumber menyebut batas sistem - dibuang; scope ERLA. Pembanding ERBA 5.119 = 951.'

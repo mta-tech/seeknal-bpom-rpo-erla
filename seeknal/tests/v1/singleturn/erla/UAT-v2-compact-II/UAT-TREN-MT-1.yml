@@ -1,0 +1,12 @@
+name: UAT_TREN_MT_1
+scenario_id: UAT-TREN-MT-1
+verification_date: '2026-09-22'
+description: 'UAT-TREN-MT-1 — tren Menengah Tinggi tidak ada di ERLA (tidak tersedia). ERLA-only.'
+turns:
+- prompt: Bagaimana tren jumlah NIE risiko menengah tinggi dari tahun ke tahun?
+  assert_any_of:
+  - - 'Menengah Tinggi|menengah tinggi'
+    - 'tidak tersedia|tidak ada|tidak memiliki|tidak dapat dipisahkan|belum tersedia'
+    - 'ERLA'
+  tolerance_pct: 5
+  note: 'SQL konteks: SELECT EXTRACT(YEAR FROM tanggal)::int, COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE jenis_dokumen=''302'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>'''' GROUP BY 1. DB 2026-09-22: TIDAK TERSEDIA. ''Menengah Tinggi'' bukan kelas ERLA; jenis_dokumen ERLA hanya Low/Medium/High dan Medium (303) mencakup seluruh tingkat menengah, sehingga tidak ada tren MT yang sah. Jawaban jujur menyebut keterbatasan. Pembanding ERBA (kategori_dokumen=''302''): 2024=4.195, 2025=3.854.'

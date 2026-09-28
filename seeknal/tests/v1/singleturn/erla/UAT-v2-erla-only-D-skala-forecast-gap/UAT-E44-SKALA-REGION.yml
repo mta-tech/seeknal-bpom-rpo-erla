@@ -1,0 +1,22 @@
+name: UAT_E44_SKALA_REGION
+scenario_id: UAT-E44-SKALA-REGION
+verification_date: '2026-09-22'
+description: UAT-E44-SKALA-REGION — Skala x region; region mapping TIDAK ada di DB (app-side). ERLA-only.
+turns:
+- prompt: Tampilkan perbandingan struktur Skala Industri antar wilayah Barat, Tengah, dan Timur Indonesia, dalam periode 2025.
+  assert_contains:
+  - tidak tersedia|tidak ada|tidak memiliki|tidak dapat dihitung
+  assert_any_of:
+  - - Besar
+  - - tidak
+    - app
+    - diturunkan
+  - - ERLA
+  tolerance_pct: 5
+  assert_sql:
+  - JOIN m_trader_rla
+  - COUNT(DISTINCT nomor)
+  assert_sql_forbid:
+  - FROM m_trader_rla
+  - FROM warehouse.public.m_trader_rla
+  note: 'KONDISI DATA (2026-09-23): SQL untuk kasus ini ERROR di ERLA (ERROR:  syntax error at or near "BATAS"). Ekspektasi: jawaban jujur bahwa dimensi tidak tersedia, tanpa angka palsu. ERLA-only.'

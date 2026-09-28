@@ -1,0 +1,13 @@
+name: UAT_E26_MR_KOMITMEN_BATAL
+scenario_id: UAT-E26-MR-KOMITMEN-BATAL
+verification_date: '2026-09-23'
+description: UAT-E26-MR-KOMITMEN-BATAL — Komitmen dibatalkan (status_komitmen=5) Case B, lepas status. ERLA-only.
+turns:
+- prompt: Berapa produk Menengah Rendah yang komitmennya dibatalkan?
+  assert_contains:
+  - tidak tersedia|tidak ada|tidak memiliki|tidak dapat dihitung
+  assert_any_of:
+  - - Menengah Rendah|dibatalkan
+  - - ERLA
+  tolerance_pct: 5
+  note: 'KONDISI DATA (verifikasi 2026-09-23): kolom status_komitmen tidak ada di t_produk_3_rilis_erla. SQL konsep ini tidak dapat dijalankan di repo ini. Ekspektasi: jawaban jujur menyatakan dimensi tidak tersedia, TANPA angka palsu. ERLA-only.'

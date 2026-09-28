@@ -1,0 +1,16 @@
+name: UAT_CHAR_KOMPOSIT_1
+scenario_id: UAT-CHAR-KOMPOSIT-1
+verification_date: '2026-09-22'
+description: 'UAT-CHAR-KOMPOSIT-1 — kemasan komposit/laminat (kemasan_id 34+37). ERLA-only.'
+turns:
+- prompt: berapa produk pangan olahan yang menggunakan kemasan komposit atau laminat?
+  assert_contains:
+  - '3.361'
+  assert_any_of:
+  - - 'komposit'
+    - 'Komposit'
+    - 'laminat'
+    - 'Laminat'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE kemasan_id IN (''34'',''37'') AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''; DB 2026-09-22: 3.361 (=34 Karton Laminat + 37 Komposit). BEDA GRANULARITAS: ERBA kode 4=''Komposit/laminat'' (SATU kode dua konsep); ERLA memecahnya jadi 34=''Karton Laminat'' dan 37=''Komposit'' -> karena prompt ''komposit ATAU laminat'' sisi ERLA WAJIB IN (''34'',''37''). ENTITY: nomor. Pembanding ERBA (kemasan_id=''4'') = 42.379.'

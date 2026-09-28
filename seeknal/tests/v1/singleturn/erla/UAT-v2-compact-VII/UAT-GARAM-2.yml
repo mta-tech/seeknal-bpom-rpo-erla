@@ -1,0 +1,14 @@
+name: UAT_GARAM_2
+scenario_id: UAT-GARAM-2
+verification_date: '2026-09-22'
+description: 'UAT-GARAM-2 — garam beryodium all-time, dua tier status. ERLA-only.'
+turns:
+- prompt: garam beryodium punya berapa NIE yang aktif di BPOM?
+  assert_contains:
+  - '1.446'
+  - '1.398'
+  assert_any_of:
+  - - aktif
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL ERLA (aktif): SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE kategori_pangan LIKE ''12010103%'' AND status=''0999'' AND trader_id<>3384 AND nomor<>'''' -> 1.398. SQL ERLA (terdaftar/pernah-terbit): status IN (''0099'',''0999'',''0906'',''9999'') -> 1.446. DB 2026-09-22. DUA TIER HIDUP BERSAMA (00-menghitung): pimpin "terdaftar" (1.446) dan lampirkan "aktif" (1.398) berlabel - KEDUA angka wajib disajikan, jangan memilih satu diam-diam. Anchor garam ERLA = kategori_pangan ''12010103'' (tanpa namespace 1204). Entity NIE -> nomor. ERLA-only.'

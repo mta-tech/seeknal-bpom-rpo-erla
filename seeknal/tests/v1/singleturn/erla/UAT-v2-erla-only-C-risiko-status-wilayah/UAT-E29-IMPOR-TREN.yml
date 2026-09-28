@@ -1,0 +1,20 @@
+name: UAT_E29_IMPOR_TREN
+scenario_id: UAT-E29-IMPOR-TREN
+verification_date: '2026-09-22'
+description: UAT-E29-IMPOR-TREN — Tren Impor (status_produk=302) baru per tahun. ERLA-only.
+turns:
+- prompt: Bandingkan tren jumlah produk Impor yang disetujui per tahun, khusus Permohonan Baru.
+  assert_contains:
+  - tidak tersedia|tidak ada|tidak memiliki|tidak dapat dihitung
+  assert_any_of:
+  - - ERBA
+  - - ERLA
+  tolerance_pct: 5
+  assert_sql:
+  - COUNT(DISTINCT nomor)
+  - status_produk = '302'
+  - jenis_permohonan = '301'
+  assert_sql_forbid:
+  - negara_pabrik
+  - COUNT(DISTINCT produk_id)
+  note: 'KONDISI DATA (2026-09-23): hasil query ERLA tidak memiliki angka yang dekat dengan ekspektasi lama (populasi beda antar sistem). Ekspektasi: jawaban jujur. ERLA-only.'

@@ -1,0 +1,15 @@
+name: UAT_RED_WINE_ASAL_1
+scenario_id: UAT-RED-WINE-ASAL-1
+verification_date: '2026-09-22'
+description: 'UAT-RED-WINE-ASAL-1 — negara asal red wine (segmen praktis ERLA-only). ERLA-only.'
+turns:
+- prompt: anggur merah atau red wine yang punya izin edar BPOM itu kebanyakan dari negara mana?
+  assert_contains:
+  - '985'
+  - Prancis
+  assert_any_of:
+  - - Australia
+    - negara
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT negara_pabrik, COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE nama_kategori=''Still Grape Wine Merah / Anggur Merah (Red Wine)'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>'''' GROUP BY 1 ORDER BY 2 DESC. DB 2026-09-22: FR=985 | AU=663 | IT=517 | CL=440 | US=284 | ES=216; total 3.650; ID (Indonesia) hanya 59. nama_kategori PERSIS (panjang, garis miring & kurung) - ILIKE ''%anggur%'' menjaring putih/sparkling/buah. ASAL = negara_pabrik. Entity izin edar -> nomor. ERLA-only.'

@@ -1,0 +1,13 @@
+name: UAT_IMPOR_1
+scenario_id: UAT-IMPOR-1
+verification_date: '2026-09-22'
+description: 'UAT-IMPOR-1 — produk impor ditentukan negara_pabrik <> ID. ERLA-only.'
+turns:
+- prompt: berapa produk impor yang punya izin edar di BPOM?
+  assert_contains:
+  - '65.037'
+  assert_any_of:
+  - - impor
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE negara_pabrik<>''ID'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''. DB 2026-09-22: 65.037. ASAL = negara_pabrik (terisi 100% di ERLA: 295.061 ID + 117.583 non-ID, 0 kosong), BUKAN status_produk. status_produk=''302'' adalah CARA PRODUKSI ("Impor" di kamus ERBA), bukan penentu asal (60-asal-produksi) - hanya sejalan bila disilang negara_pabrik. Entity izin edar -> nomor. ERLA-only.'

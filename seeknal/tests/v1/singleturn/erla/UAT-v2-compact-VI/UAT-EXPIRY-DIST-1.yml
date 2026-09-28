@@ -1,0 +1,13 @@
+name: UAT_EXPIRY_DIST_1
+scenario_id: UAT-EXPIRY-DIST-1
+verification_date: '2026-09-22'
+description: 'UAT-EXPIRY-DIST-1 — tahun puncak berakhirnya masa berlaku izin edar. ERLA-only.'
+turns:
+- prompt: kapan paling banyak izin edar BPOM yang akan berakhir masa berlakunya?
+  assert_contains:
+  - '32.064'
+  assert_any_of:
+  - - '2026'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT to_char(tanggal_exp,''YYYY'') thn, COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>'''' AND tanggal_exp IS NOT NULL GROUP BY 1 ORDER BY 2 DESC. DB 2026-09-22: puncak ERLA = 2026 (32.064) · 2027=30.804 · 2025=26.481 · 2024=23.538 · 2023=21.097. ATURAN: bentuk kanonik = SATU GROUP BY per tahun, lalu sebut tahun terbesar (jangan pilih tahun dengan tangan); entity NIE; tanggal_exp native. Pola: masa berlaku NIE 5 tahun sehingga distribusi kedaluwarsa adalah bayangan distribusi terbitan 5 tahun sebelumnya. BEDA ERBA: puncak gabungan/ERBA ada di 2030; puncak ERLA di 2026 karena ERLA hampir beku sejak 2023 -> sebut domain yang dipakai. ERLA-only.'

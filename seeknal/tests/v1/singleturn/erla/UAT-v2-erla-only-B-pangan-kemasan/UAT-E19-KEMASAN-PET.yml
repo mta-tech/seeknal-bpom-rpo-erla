@@ -1,0 +1,12 @@
+name: UAT_E19_KEMASAN_PET
+scenario_id: UAT-E19-KEMASAN-PET
+verification_date: '2026-09-23'
+description: UAT-E19-KEMASAN-PET — Material spesifik PET -> sub_kemasan_id (ERLA-only struktural). ERLA-only.
+turns:
+- prompt: Berapa jumlah izin edar berkemasan PET?
+  assert_contains:
+  - tidak tersedia|tidak ada|tidak memiliki|tidak dapat dihitung
+  assert_any_of:
+  - - ERLA
+  tolerance_pct: 5
+  note: 'KONDISI DATA (verifikasi 2026-09-23): sub_kemasan_id (material spesifik PET) tidak ada di t_produk_3_rilis_erla. SQL konsep ini tidak dapat dijalankan di repo ini. Ekspektasi: jawaban jujur menyatakan dimensi tidak tersedia, TANPA angka palsu. ERLA-only.'

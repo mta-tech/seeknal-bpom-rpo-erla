@@ -1,0 +1,13 @@
+name: UAT_PERUNTUKAN_1
+scenario_id: UAT-PERUNTUKAN-1
+verification_date: '2026-09-22'
+description: 'UAT-PERUNTUKAN-1 — jumlah produk pangan peruntukan khusus berizin edar. ERLA-only.'
+turns:
+- prompt: produk pangan dengan peruntukan khusus yang punya izin edar ada berapa?
+  assert_contains:
+  - '1.775'
+  assert_any_of:
+  - - 'peruntukan'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE peruntukan=''0201'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''. DB 2026-09-22: ERLA=1.775 NIE (peruntukan ''0201'' khusus). ATURAN: pimpin dengan kode bisnis ''0201''; kolom juga memuat kode tak terdokumentasi (0103/0105/0106/010101, dan ''0000'' umum = 173.990) — sebut keterbatasan bila menyajikan ''seluruh peruntukan khusus''. Entity NIE; kode 0201 sama di kedua sistem. BEDA ERBA: pada filter sama ERBA ~435 (23Jul2026). ERLA-only.'

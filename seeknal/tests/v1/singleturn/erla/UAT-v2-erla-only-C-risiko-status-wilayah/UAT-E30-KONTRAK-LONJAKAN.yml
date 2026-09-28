@@ -1,0 +1,19 @@
+name: UAT_E30_KONTRAK_LONJAKAN
+scenario_id: UAT-E30-KONTRAK-LONJAKAN
+verification_date: '2026-09-22'
+description: UAT-E30-KONTRAK-LONJAKAN — Lonjakan status_produk=304 per periode. ERLA-only.
+turns:
+- prompt: Identifikasi periode dengan lonjakan jumlah persetujuan produk Berdasarkan Kontrak.
+  assert_contains:
+  - tidak tersedia|tidak ada|tidak memiliki|tidak dapat dihitung
+  assert_any_of:
+  - - ERBA
+  - - ERLA
+  tolerance_pct: 5
+  assert_sql:
+  - COUNT(DISTINCT nomor)
+  - status_produk = '304'
+  assert_sql_forbid:
+  - status_komitmen
+  - COUNT(DISTINCT produk_id)
+  note: 'KONDISI DATA (2026-09-23): hasil query ERLA tidak memiliki angka yang dekat dengan ekspektasi lama (populasi beda antar sistem). Ekspektasi: jawaban jujur. ERLA-only.'

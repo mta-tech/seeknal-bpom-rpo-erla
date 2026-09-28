@@ -1,0 +1,17 @@
+name: UAT_BTP_CAMPURAN_1
+scenario_id: UAT-BTP-CAMPURAN-1
+verification_date: '2026-09-22'
+description: 'UAT-BTP-CAMPURAN-1 — BTP campuran vs tunggal (jenis_produk_btp 302 vs 301). ERLA-only.'
+turns:
+- prompt: berapa jumlah BTP campuran dibanding BTP tunggal?
+  assert_contains:
+  - '3.582'
+  - '833'
+  assert_any_of:
+  - - 'campuran'
+    - 'Campuran'
+    - 'tunggal'
+    - 'Tunggal'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL: SELECT jenis_produk_btp, COUNT(DISTINCT nomor) FROM t_btp_3_erla WHERE jenis_produk_btp IN (''301'',''302'') AND status IN (''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>'''' GROUP BY 1 -> 302 Campuran=3.582, 301 Tunggal=833. DB 2026-09-22: Campuran=3.582, Tunggal=833. Dictionary JENIS_PRODUK_BTP kode 301=''Tunggal'', 302=''Campuran'' (sumber ''ERLA dan ERBA'') - berfungsi di kedua sistem. Rasio campuran:tunggal ~4:1. ENTITY: nomor. Pembanding ERBA = 2.887/718.'

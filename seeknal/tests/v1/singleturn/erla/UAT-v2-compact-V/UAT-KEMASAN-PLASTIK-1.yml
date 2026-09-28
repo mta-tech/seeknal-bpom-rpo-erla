@@ -1,0 +1,13 @@
+name: UAT_KEMASAN_PLASTIK_1
+scenario_id: UAT-KEMASAN-PLASTIK-1
+verification_date: '2026-09-22'
+description: 'UAT-KEMASAN-PLASTIK-1 — produk berkemasan plastik. ERLA-only.'
+turns:
+- prompt: berapa produk BPOM yang menggunakan kemasan plastik?
+  assert_contains:
+  - '97.967'
+  assert_any_of:
+  - - 'plastik'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE kemasan_id=''32'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''. DB 2026-09-22: ERLA=97.967 NIE. ATURAN: plastik = kemasan_id ''32'' di ERLA (BUKAN ''2'' yang dipakai ERBA); namespace ERLA 31-39. Definisi ERLA 32 lebih lebar (Metalized, PS, PP, PET, LDPE, HDPE). BEDA ERBA: ERBA kemasan_id ''2'' ''Plastik tunggal (monolayer)'' = ~45.975 (27Jul2026); angka gabungan akan mencampur dua lebar definisi. Entity NIE. ERLA-only.'

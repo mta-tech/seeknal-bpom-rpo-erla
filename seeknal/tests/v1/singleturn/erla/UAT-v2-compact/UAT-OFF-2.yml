@@ -1,0 +1,16 @@
+name: UAT_OFF_2
+scenario_id: UAT-OFF-2
+verification_date: '2026-09-22'
+description: 'UAT-OFF-2 — persetujuan AMDK 2024-2025 (kanonik sama UAT-AMDK-3). ERLA-only.'
+turns:
+- prompt: Tampilkan jumlah persetujuan produk AMDK pada tahun 2024 sampai 2025
+  assert_contains:
+  - '213'
+  - '91'
+  assert_any_of:
+  - - 'AMDK'
+    - '2024'
+    - '2025'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL: SELECT EXTRACT(YEAR FROM tanggal)::int th, COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE jenis_pangan IN (''651'',''652'',''655'') AND tanggal>=''2024-01-01'' AND tanggal<''2026-01-01'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>'''' GROUP BY 1 ORDER BY 1; DB 2026-09-22: 2024=213, 2025=91. ENTITY ''persetujuan produk'' -> COUNT(DISTINCT nomor), kolom tanggal (context v4); tanpa filter JP. Varian: produk_id 265/105; JP-filter 114/52. Prompt sumber menyebut batas sistem; klausa dibuang, scope tetap ERLA. AMDK ERLA = jenis_pangan 651/652/655.'

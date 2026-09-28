@@ -1,0 +1,16 @@
+name: UAT_IMPORTIR_1
+scenario_id: UAT-IMPORTIR-1
+verification_date: '2026-09-22'
+description: 'UAT-IMPORTIR-1 — flag perusahaan importir tidak ada di ERLA (jawaban jujur). ERLA-only.'
+turns:
+- prompt: ada berapa perusahaan importir yang terdaftar di BPOM?
+  assert_contains:
+  - importir
+  - tidak
+  assert_any_of:
+  - - tidak tersedia
+    - tidak ada kolom
+    - tidak punya
+  - - ERLA
+  tolerance_pct: 0
+  note: 'KONDISI: m_trader_rla TIDAK punya kolom is_status_industri_importir / is_status_industri_produsen (hanya ada di m_trader_rba) -> tidak ada angka perusahaan-importir di ERLA; ERBA-only secara struktural (50-pihak-wilayah). GANTI di level PRODUK (status_usaha di t_produk_3_rilis_erla): ''33'' importir = 65.037 NIE, ''31'' produsen = 110.604 NIE (status_usaha menghitung PRODUK, bukan perusahaan). Catatan: konteks mendefinisikan Importir di master ERLA sebagai skala_industri kosong (1.348 baris m_trader_rla) - itu definisi master, bukan flag produsen/importir yang ditanya; boleh disebut. JANGAN mengarang angka perusahaan ERLA.'

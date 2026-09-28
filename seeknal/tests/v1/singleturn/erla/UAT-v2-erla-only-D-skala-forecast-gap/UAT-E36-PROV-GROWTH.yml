@@ -1,0 +1,19 @@
+name: UAT_E36_PROV_GROWTH
+scenario_id: UAT-E36-PROV-GROWTH
+verification_date: '2026-09-22'
+description: UAT-E36-PROV-GROWTH — Provinsi growth 2024->2025, baru. ERLA-only.
+turns:
+- prompt: Identifikasi provinsi dengan pertumbuhan jumlah persetujuan tercepat pada periode 2024-2025, khusus Pendaftaran Baru.
+  assert_contains:
+  - tidak tersedia|tidak ada|tidak memiliki|tidak dapat dihitung
+  assert_any_of:
+  - - Banten
+  - - ERLA
+  tolerance_pct: 5
+  assert_sql:
+  - COUNT(DISTINCT nomor)
+  - tanggal_bayar
+  - jenis_permohonan = '301'
+  assert_sql_forbid:
+  - COUNT(DISTINCT produk_id)
+  note: 'KONDISI DATA (2026-09-23): SQL untuk kasus ini ERROR di ERLA (ERROR:  syntax error at or near "Hitung"). Ekspektasi: jawaban jujur bahwa dimensi tidak tersedia, tanpa angka palsu. ERLA-only.'

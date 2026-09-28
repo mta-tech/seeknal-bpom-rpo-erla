@@ -1,0 +1,16 @@
+name: UAT_E34_KAB_TOP_2025
+scenario_id: UAT-E34-KAB-TOP-2025
+verification_date: '2026-09-22'
+description: UAT-E34-KAB-TOP-2025 — Kab/kota 4-digit top-20; decode via kamus (titik). ERLA-only.
+turns:
+- prompt: Untuk periode 2025 dan permohonan baru, tampilkan 20 kabupaten/kota dengan jumlah persetujuan terbanyak.
+  assert_contains:
+  - kabupaten
+  - kota
+  assert_any_of:
+  - - '3.716'
+    - '3.716'
+  - - Jakarta Timur
+    - '3.171'
+  tolerance_pct: 5
+  note: 'SQL: SELECT daerah_trader kab, COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE jenis_permohonan=''301'' AND tanggal_bayar>=''2025-01-01'' AND tanggal_bayar<''2026-01-01'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>'''' AND daerah_trader<>'''' GROUP BY 1 ORDER BY 2 DESC LIMIT 20. DB 2026-09-04: 3.171 Jaktim=3.716 | 3174 Jaksel=3.454 | 3171 Jakpus=3.007 | 3173 Jakbar=2.669 | 3671 Tangsel=2.388 | 3603 Kab Tangerang=2.103. KAB=kode penuh 4-digit; decode via kamus DAERAH (REPLACE titik); kode 37xx/38xx bisa kosong nama -> pakai kode/BPS. ERLA-only.'

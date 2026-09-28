@@ -1,0 +1,14 @@
+name: UAT_SURAT_KEPUTUSAN_2025
+scenario_id: UAT-SURAT-KEPUTUSAN-2025
+verification_date: '2026-09-22'
+description: 'UAT-SURAT-KEPUTUSAN-2025 — P6: surat keputusan dihitung dari kolom nomor_surat (surat asli). ERLA-only.'
+turns:
+- prompt: berapa jumlah surat keputusan yang diterbitkan pada tahun 2025?
+  assert_contains:
+  - '5.375'
+  assert_any_of:
+  - - 'surat keputusan'
+    - 'keputusan'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL: SELECT COUNT(DISTINCT nomor_surat) FROM t_produk_3_rilis_erla WHERE tanggal_bayar>=''2025-01-01'' AND tanggal_bayar<''2026-01-01'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor_surat IS NOT NULL. DB 2026-09-22: 5.375. ATURAN (poin 2 & 6): di ERLA nomor_surat adalah SURAT KEPUTUSAN ASLI (berawalan PN.…) — BERBEDA dari ERBA yang menyalin produk_id; kardinalitas keduanya 1:1 dengan produk_id (15-permohonan, data_architecture). ERLA-only.'

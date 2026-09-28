@@ -1,0 +1,18 @@
+name: UAT_BTP_TREN_1
+scenario_id: UAT-BTP-TREN-1
+verification_date: '2026-09-22'
+description: 'UAT-BTP-TREN-1 — tren izin edar BTP per tahun. ERLA-only.'
+turns:
+- prompt: Bagaimana tren jumlah izin edar BTP dari tahun ke tahun?
+  assert_contains:
+  - '584'
+  - '275'
+  - '52'
+  assert_any_of:
+  - - 'BTP'
+    - '2023'
+    - '2024'
+    - '2025'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL: SELECT EXTRACT(YEAR FROM tanggal)::int, COUNT(DISTINCT nomor) FROM t_btp_3_erla WHERE status IN (''0099'',''0999'',''0906'',''9999'') AND nomor<>'''' GROUP BY 1 ORDER BY 1; DB 2026-09-22: 2023=584, 2024=275, 2025=52. TREN MENURUN (puncak ~2021=1.276) karena ERLA legacy beku. ENTITY: nomor; tanpa filter JP; kolom tanggal. Prompt sumber menyebut batas sistem - dibuang. SUM-OF-PARTITIONS: total lintas tahun wajib dari query global DISTINCT (5.121), jangan menjumlah baris per tahun. Pembanding ERBA 2023/24/25 = 951/1.107/1.542.'

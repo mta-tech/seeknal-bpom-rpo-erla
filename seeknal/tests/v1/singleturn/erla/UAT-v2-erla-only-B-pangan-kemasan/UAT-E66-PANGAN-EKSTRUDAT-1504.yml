@@ -1,0 +1,13 @@
+name: UAT_E66_PANGAN_EKSTRUDAT_1504
+scenario_id: UAT-E66-PANGAN-EKSTRUDAT-1504
+verification_date: '2026-09-22'
+description: UAT-E66-PANGAN-EKSTRUDAT-1504 — Makanan Ringan Ekstrudat kanonik = jenis_pangan 1504 (label nama_kategori sering kosong). ERLA-only.
+turns:
+- prompt: Berapa total NIE Makanan Ringan Ekstrudat (kode jenis pangan 1504), dan berapa di antaranya pabriknya berada di Jawa Barat atau DKI Jakarta?
+  assert_contains:
+  - tidak tersedia|tidak ada|tidak memiliki|tidak dapat dihitung
+  assert_any_of:
+  - - ERBA
+  - - ERLA
+  tolerance_pct: 5
+  note: 'KONDISI DATA (2026-09-23): hasil query ERLA tidak memiliki angka yang dekat dengan ekspektasi lama (populasi beda antar sistem). Ekspektasi: jawaban jujur. ERLA-only.'

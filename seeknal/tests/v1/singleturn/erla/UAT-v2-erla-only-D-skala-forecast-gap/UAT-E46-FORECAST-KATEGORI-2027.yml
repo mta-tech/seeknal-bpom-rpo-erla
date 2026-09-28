@@ -1,0 +1,19 @@
+name: UAT_E46_FORECAST_KATEGORI_2027
+scenario_id: UAT-E46-FORECAST-KATEGORI-2027
+verification_date: '2026-09-22'
+description: UAT-E46-FORECAST-KATEGORI-2027 — Forecast per kategori 2027 (engine per-series). ERLA-only.
+turns:
+- prompt: Identifikasi Kategori Pangan yang berpotensi menjadi tren naik tahun 2027 berdasarkan pertumbuhan pendaftaran baru terakhir.
+  assert_contains:
+  - '2027'
+  assert_any_of:
+  - - run_forecast
+    - proyeksi
+  - - ERBA
+  - - '2.875'
+    - '2.290'
+    - '2.107'
+    - '1.856'
+    - '1.687'
+  tolerance_pct: 5
+  note: 'Ambil kategori teratas (top jenis_pangan pendaftaran baru), lalu run_forecast PER kategori (satu deret per kategori; masing-masing self-upload CSV). BUKAN perhitungan manual. Forecast != tren historis; naik/turun dari label proyeksi. Registry §3 tak punya deret per-kategori -> bangun SQL per kategori dari template §1 (y=COUNT(DISTINCT produk_id) bulanan, filter jenis_pangan=<kode>) atau tolak yang tak eligible (<10 periode / CV>0.8). ERBA-only. DB: forecast per kategori dari engine; anchor historis lihat E45; naik/turun 2027 dari label proyeksi, bukan tren historis mentah.'

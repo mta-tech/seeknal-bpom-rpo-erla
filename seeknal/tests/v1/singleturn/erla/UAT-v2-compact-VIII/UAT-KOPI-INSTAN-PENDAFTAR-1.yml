@@ -1,0 +1,15 @@
+name: UAT_KOPI_INSTAN_PENDAFTAR_1
+scenario_id: UAT-KOPI-INSTAN-PENDAFTAR-1
+verification_date: '2026-09-22'
+description: 'UAT-KOPI-INSTAN-PENDAFTAR-1 — pendaftar kopi instan asal Indonesia. ERLA-only.'
+turns:
+- prompt: siapa saja perusahaan yang mendaftarkan kopi instan asal Indonesia, dan berapa izin edar masing-masing?
+  assert_contains:
+  - '67'
+  - Crown Pratama
+  assert_any_of:
+  - - Sari Incofood
+    - nama_trader
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT nama_trader, COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE nama_kategori=''Kopi Instan'' AND negara_pabrik=''ID'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>'''' GROUP BY 1 ORDER BY 2 DESC. DB 2026-09-22: PT. Crown Pratama=67 | PT. Sari Incofood Corporation=47 | PT. SAMUDRA MONTAZ=37 | PT NESTLE INDONESIA=16 | PT. INDRACO GLOBAL INDONESIA=11. Pendaftar = nama_trader, BUKAN nama_pabrik. nama_trader ERLA berprefiks "PT." + kapital campur -> normalisasi bila dibanding lintas sistem; trader_id TIDAK berlaku lintas sistem. Total seluruh baris = 197 (konsisten UAT-KOPI-INSTAN-ID-1). Entity izin edar -> nomor. ERLA-only.'

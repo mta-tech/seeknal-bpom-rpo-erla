@@ -1,0 +1,15 @@
+name: UAT_E59_KACA_KERAMIK
+scenario_id: UAT-E59-KACA-KERAMIK
+verification_date: '2026-09-23'
+description: UAT-E59-KACA-KERAMIK — Kaca/Keramik induk (k1); induk memayungi 2 material. ERLA-only.
+turns:
+- prompt: Berapa jumlah izin edar berkemasan Kaca atau Keramik?
+  assert_contains:
+  - Kaca
+  - Keramik
+  assert_any_of:
+  - - '19.823'
+    - '19.823'
+  - - ERBA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE kemasan_id=''31'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''. DB 2026-09-04: 19.823. kemasan_id=''31'' berlabel ''Kaca ATAU Keramik'' (satu kode dua material) -> bila user minta Kaca SAJA atau Keramik SAJA, turun ke sub_kemasan_id 101/102. Di sini gabungan induk. ERLA-only.'

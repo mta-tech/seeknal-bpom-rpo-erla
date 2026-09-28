@@ -1,0 +1,14 @@
+name: UAT_MEI_MR_1
+scenario_id: UAT-MEI-MR-1
+verification_date: '2026-09-22'
+description: 'UAT-MEI-MR-1 — jumlah izin edar terbit bulan Mei untuk kategori risiko Menengah Rendah. ERLA-only.'
+turns:
+- prompt: berapa jumlah izin edar yang terbit pada bulan Mei untuk kategori risiko Menengah Rendah?
+  assert_contains:
+  - '10.601'
+  assert_any_of:
+  - - 'Mei'
+    - 'Medium'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE jenis_dokumen=''303'' AND EXTRACT(MONTH FROM tanggal)=5 AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''. DB 2026-09-22: jenis_dokumen ''303'' (Pangan Medium Risk) bulan Mei = 10.601. ATURAN: skema risiko ERLA = jenis_dokumen (301 Low · 302 High · 303 Medium · 000 belum; ''Menengah Rendah/MR'' adalah istilah skema ERBA yang tidak punya label persis di ERLA). Kolom kategori_dokumen ADA & terisi di ERLA tetapi bukan skema risiko ERLA — jangan dipakai. BEDA ERBA: di ERBA MR = kategori_dokumen ''303'' (Mei = 3.717 per 23Jul2026). Padanan ketat ERBA-MR -> ERLA-Low (jenis_dokumen ''301'') bulan Mei = 11.164; kolom kategori_dokumen ''303'' (bukan skema ERLA) = 728. Entity NIE = COUNT(DISTINCT nomor); tanpa filter jenis_permohonan. ERLA-only.'

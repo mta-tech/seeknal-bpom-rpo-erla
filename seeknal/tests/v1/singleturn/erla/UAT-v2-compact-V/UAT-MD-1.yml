@@ -1,0 +1,14 @@
+name: UAT_MD_1
+scenario_id: UAT-MD-1
+verification_date: '2026-09-23'
+description: UAT-MD-1 — jumlah produk ber-NIE MD (produksi dalam negeri) terbit 2025. ERLA-only.
+turns:
+- prompt: Berapa jumlah produk MD tahun 2025?
+  assert_contains:
+  - '2.683'
+  assert_any_of:
+  - - '2.683'
+    - MD
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE nomor LIKE ''MD %'' AND tanggal>=''2025-01-01'' AND tanggal<''2026-01-01'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384. DB 2026-09-22: ERLA=2.683 NIE. ATURAN: MD = produksi dalam negeri, pola penomoran ''MD '' + digit (satu spasi); ML = impor; prefiks ER... = id pengajuan internal yang NIE-nya belum terbit. Kolom tanggal = terbit NIE; entity NIE. Baris menyimpang tanpa spasi / ber-carriage-return tidak tertangkap LIKE ''MD %'' (puluhan baris) -> sebut bila menyajikan total lengkap. BEDA ERBA: pada filter sama ERBA ~36.636 (27Jul2026); pola ''MD %'' sama di kedua sistem. ERLA-only.'

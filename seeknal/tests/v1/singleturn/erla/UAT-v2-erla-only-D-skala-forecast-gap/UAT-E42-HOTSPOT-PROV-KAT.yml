@@ -1,0 +1,22 @@
+name: UAT_E42_HOTSPOT_PROV_KAT
+scenario_id: UAT-E42-HOTSPOT-PROV-KAT
+verification_date: '2026-09-22'
+description: UAT-E42-HOTSPOT-PROV-KAT — Hotspot 2D provinsi x kategori, satu query. ERLA-only.
+turns:
+- prompt: Tampilkan peta hot spot jumlah persetujuan per Provinsi dan Kategori Pangan, dalam periode 2025 dan Permohonan Baru.
+  assert_contains:
+  - Provinsi
+  assert_any_of:
+  - - '4.263'
+    - '4263'
+  - - DKI
+    - Jakarta
+    - '31'
+  tolerance_pct: 5
+  assert_sql:
+  - COUNT(DISTINCT nomor)
+  - tanggal_bayar
+  - jenis_permohonan = '301'
+  assert_sql_forbid:
+  - COUNT(DISTINCT produk_id)
+  note: 'SQL ERLA (SATU query 2D): SELECT LEFT(daerah_trader,2) prov, LEFT(kategori_pangan,2) kat, COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE jenis_permohonan=''301'' AND tanggal_bayar>=''2025-01-01'' AND tanggal_bayar<''2026-01-01'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>'''' AND daerah_trader<>'''' AND kategori_pangan<>'''' GROUP BY 1,2 ORDER BY 3 DESC. DB 2026-09-14 sel tertinggi (KANON: persetujuan=tanggal_bayar + nomor, 00-menghitung §1): DKI(31) x Minuman(14)=4.263 | DKI x Permen/Cokelat(05)=1.974 | DKI x Bumbu(12)=1.470. CATATAN: TIDAK ADA rendering PETA geografis -> ''peta hotspot'' = MATRIKS provinsi x kelompok kategori pangan (heatmap/tabel); ekspektasi = perbandingan antar sel (kombinasi tertinggi/terendah), BUKAN peta. 37/38 nama BPS. ERLA-only.'

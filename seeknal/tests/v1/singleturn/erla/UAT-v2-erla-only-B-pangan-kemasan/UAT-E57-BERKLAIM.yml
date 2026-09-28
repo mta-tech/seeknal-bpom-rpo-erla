@@ -1,0 +1,14 @@
+name: UAT_E57_BERKLAIM
+scenario_id: UAT-E57-BERKLAIM
+verification_date: '2026-09-23'
+description: UAT-E57-BERKLAIM — Berklaim=klasifikasi_id=305 (bukan klaim flag). ERLA-only.
+turns:
+- prompt: Berapa jumlah izin edar Pangan Berklaim?
+  assert_contains:
+  - Berklaim
+  assert_any_of:
+  - - '8.691'
+    - '8.691'
+  - - ERBA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE klasifikasi_id=''305'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''. DB 2026-09-04: 8.691. ''Pangan Berklaim''=klasifikasi_id=''305'' (BUKAN klaim=''1'' yg flag multi-value luas). Entity NIE. ERLA-only.'

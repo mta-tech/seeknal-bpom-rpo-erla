@@ -1,0 +1,15 @@
+name: UAT_JP_MINOR_VS_MAYOR_1
+scenario_id: UAT-JP-MINOR-VS-MAYOR-1
+verification_date: '2026-09-22'
+description: 'UAT-JP-MINOR-VS-MAYOR-1 — perbandingan volume perubahan minor vs mayor 2025. ERLA-only.'
+turns:
+- prompt: tahun 2025 lebih banyak perubahan minor atau perubahan mayor produk pangan?
+  assert_contains:
+  - '2.988'
+  - '2.278'
+  assert_any_of:
+  - - 'minor'
+    - 'mayor'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT jenis_permohonan, COUNT(DISTINCT produk_id) FROM t_produk_3_rilis_erla WHERE jenis_permohonan IN (''302'',''303'') AND tanggal_bayar>=''2025-01-01'' AND tanggal_bayar<''2026-01-01'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 GROUP BY 1. DB 2026-09-22: ERLA Minor(303)=2.988 · Mayor(302)=2.278 -> MINOR lebih banyak (selisih 710 / 24%). ATURAN: tampilkan KEDUA angka berlabel kode (302 Mayor, 303 Minor); entity permohonan = produk_id + tanggal_bayar. BEDA ERBA: pada filter sama ERBA Minor=9.258 · Mayor=8.182 (27Jul2026) — kesimpulan sama (minor > mayor) di kedua domain. ERLA-only.'

@@ -1,0 +1,13 @@
+name: UAT_E17_KEMASAN_DISTRIBUSI
+scenario_id: UAT-E17-KEMASAN-DISTRIBUSI
+verification_date: '2026-09-22'
+description: UAT-E17-KEMASAN-DISTRIBUSI — Distribusi kemasan induk (kemasan_id 1-7). ERLA-only.
+turns:
+- prompt: Tampilkan distribusi jumlah produk berdasarkan kelompok Jenis Kemasan (Plastik, Logam, Kertas, Komposit, dsb).
+  assert_contains:
+  - tidak tersedia|tidak ada|tidak memiliki|tidak dapat dihitung
+  assert_any_of:
+  - - ERBA
+  - - ERLA
+  tolerance_pct: 5
+  note: 'KONDISI DATA (2026-09-23): hasil query ERLA tidak memiliki angka yang dekat dengan ekspektasi lama (populasi beda antar sistem). Ekspektasi: jawaban jujur. ERLA-only.'

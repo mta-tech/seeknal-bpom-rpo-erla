@@ -1,0 +1,17 @@
+name: UAT_E54_STATUS_PERUSAHAAN
+scenario_id: UAT-E54-STATUS-PERUSAHAAN
+verification_date: '2026-09-22'
+description: UAT-E54-STATUS-PERUSAHAAN — Status Perusahaan (status_usaha 31/33) level produk. ERLA-only.
+turns:
+- prompt: Bandingkan jumlah izin edar dari Produsen/Manufacturer vs Importir/Distributor (Status Perusahaan).
+  assert_contains:
+  - Produsen
+  - Importir
+  assert_any_of:
+  - - '110.604'
+    - '110.604'
+  - - '65.037'
+    - '65.037'
+  - - ERBA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT status_usaha, COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE status_usaha IN (''31'',''33'') AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>'''' GROUP BY 1. DB 2026-09-04: 31 Produsen=110.604 | 33 Importir=65.037. ''Status Perusahaan'' pada level PRODUK pakai status_usaha (31/33); jika ingin hitung PERUSAHAAN pakai m_trader_rla boolean is_status_industri_*. ERLA-only.'

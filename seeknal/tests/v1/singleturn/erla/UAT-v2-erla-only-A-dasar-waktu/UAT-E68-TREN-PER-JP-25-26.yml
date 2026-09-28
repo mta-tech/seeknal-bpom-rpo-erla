@@ -1,0 +1,21 @@
+name: UAT_E68_TREN_PER_JP_25_26
+scenario_id: UAT-E68-TREN-PER-JP-25-26
+verification_date: '2026-09-22'
+description: UAT-E68-TREN-PER-JP-25-26 — Perbandingan persetujuan per jenis permohonan, window sama Jan-8Sep 2025 vs 2026. ERLA-only.
+turns:
+- prompt: Bandingkan jumlah persetujuan per jenis permohonan (301 Permohonan Baru, 302 Perubahan Mayor, 303 Perubahan Minor, 305 Permohonan Baru Notifikasi) antara periode Januari sampai 8 September 2025 dan periode yang sama di 2026. Sebutkan tren masing-masing jenis permohonan.
+  assert_contains:
+  - permohonan
+  assert_any_of:
+  - - '29.880'
+    - '29880'
+  - - '19.517'
+    - '19517'
+  - - '5.818'
+    - '5818'
+  - - '1.540'
+    - '1.540'
+  - - ERBA
+  tolerance_pct: 5
+  note: 'SQL (window sama, bukan tahun penuh): SELECT jenis_permohonan, COUNT(DISTINCT nomor) FILTER (WHERE tanggal_bayar>=''2025-01-01'' AND tanggal_bayar<''2025-09-08'') a2025, COUNT(DISTINCT nomor) FILTER (WHERE tanggal_bayar>=''2026-01-01'' AND tanggal_bayar<''2026-09-08'') a2026 FROM t_produk_3_rilis_erla WHERE jenis_permohonan IN (''301'',''302'',''303'',''305'') AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>'''' GROUP BY 1. DB 2026-09-08: 301 29.880->19.517 (-34,7%) | 302 4.766->3.885 (-18,5%) | 303 4.755->5.818 (+22,4%) | 305 1.256->1.540 (+27,6%). Label mengikuti kamus jenis_permohonan. 304=Daftar Ulang: hanya 7 baris historis di ERBA, 0 di window 2025/2026 -> jangan dimunculkan sebagai tren. ENTITAS = COUNT(DISTINCT nomor) — JANGAN produk_id (revisi menggandakan: 305 jadi 2.214 vs 1.540, +38%). Bandingkan dengan WINDOW SAMA (Jan-8Sep), jangan 2025 tahun penuh vs 2026 YTD (tidak adil). Angka 2026 adalah YTD, bukan proyeksi; tanpa forecast engine
+    JANGAN ekstrapolasi. ERLA-only.'

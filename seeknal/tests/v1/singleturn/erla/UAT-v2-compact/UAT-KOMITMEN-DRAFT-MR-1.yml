@@ -1,0 +1,12 @@
+name: UAT_KOMITMEN_DRAFT_MR_1
+scenario_id: UAT-KOMITMEN-DRAFT-MR-1
+verification_date: '2026-09-22'
+description: 'UAT-KOMITMEN-DRAFT-MR-1 — draft pemenuhan komitmen MR; kolom status_komitmen tidak ada di ERLA. ERLA-only.'
+turns:
+- prompt: berapa banyak produk risiko menengah rendah yang masih dalam status draft pemenuhan komitmen?
+  assert_any_of:
+  - - 'komitmen'
+    - 'tidak tersedia|tidak ada|tidak memiliki|tidak ditemukan|belum tersedia'
+    - 'ERLA'
+  tolerance_pct: 5
+  note: 'SQL uji ketiadaan: SELECT COUNT(*) FROM information_schema.columns WHERE table_name=''t_produk_3_rilis_erla'' AND column_name=''status_komitmen'' -> 0. DB 2026-09-22: TIDAK TERSEDIA. status_komitmen (kode 0 = ''Draft Pemenuhan Komitmen'') tidak ada di ERLA; label ''Menengah Rendah'' juga tidak ada (jenis_dokumen 303 = Medium Risk gabungan). Ekspektasi: jawaban jujur menyebut dimensi komitmen tidak ada. Pembanding ERBA (status_komitmen=0) = 30.026 - di luar data ERLA.'

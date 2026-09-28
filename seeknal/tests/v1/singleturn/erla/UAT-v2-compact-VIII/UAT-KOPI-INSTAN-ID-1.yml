@@ -1,0 +1,13 @@
+name: UAT_KOPI_INSTAN_ID_1
+scenario_id: UAT-KOPI-INSTAN-ID-1
+verification_date: '2026-09-22'
+description: 'UAT-KOPI-INSTAN-ID-1 — kopi instan asal Indonesia. ERLA-only.'
+turns:
+- prompt: ada berapa produk kopi instan asal Indonesia yang punya izin edar di BPOM?
+  assert_contains:
+  - '197'
+  assert_any_of:
+  - - Kopi Instan
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE nama_kategori=''Kopi Instan'' AND negara_pabrik=''ID'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''. DB 2026-09-22: 197 (seluruh negara = 244). KANON: nama_kategori=''Kopi Instan'' PERSIS (12-nama-kategori); ''Kopi Instan Dekafein'' terpisah, jangan dicampur. ASAL = negara_pabrik=''ID'' (terisi 100%), bukan negara_produsen (hampir kosong) atau status_produk. Entity izin edar -> nomor. ERLA-only.'

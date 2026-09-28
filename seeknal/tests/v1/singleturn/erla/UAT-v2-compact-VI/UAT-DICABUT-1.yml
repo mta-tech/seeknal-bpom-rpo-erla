@@ -1,0 +1,13 @@
+name: UAT_DICABUT_1
+scenario_id: UAT-DICABUT-1
+verification_date: '2026-09-22'
+description: 'UAT-DICABUT-1 — izin edar yang dicabut atau dibatalkan (status 0009). ERLA-only.'
+turns:
+- prompt: berapa izin edar yang sudah dicabut atau dibatalkan BPOM?
+  assert_contains:
+  - '1.240'
+  assert_any_of:
+  - - 'dicabut'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE status=''0009'' AND trader_id<>3384 AND nomor<>''''. DB 2026-09-22: ERLA=1.240 NIE. ATURAN: ''dicabut atau dibatalkan'' keduanya ada di deskripsi kode 0009 sehingga 0009 SAJA; kode 0000 ''Dihapus/Dibatalkan'' adalah tindakan lain (masuk hanya bila pengguna menyebut ''dihapus'', lihat UAT-LC-TERMINASI-1). TANPA filter tier NIE (populasi didefinisikan status itu sendiri). Jangan samakan dengan kedaluwarsa (0099) atau revisi (9999). Entity NIE. BEDA ERBA: pada filter sama ERBA dicabut=5.598 (27Jul2026) — ERBA jauh lebih besar. ERLA-only.'

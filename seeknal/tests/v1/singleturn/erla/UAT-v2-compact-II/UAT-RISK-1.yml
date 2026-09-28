@@ -1,0 +1,17 @@
+name: UAT_RISK_1
+scenario_id: UAT-RISK-1
+verification_date: '2026-09-22'
+description: 'UAT-RISK-1 — Low vs High Risk (jenis_dokumen 301 vs 302). ERLA-only.'
+turns:
+- prompt: Bandingkan jumlah NIE untuk kategori Risiko Rendah dan Risiko Tinggi?
+  assert_contains:
+  - '78.107'
+  - '22.602'
+  assert_any_of:
+  - - 'Rendah'
+    - 'Low'
+    - 'Tinggi'
+    - 'High'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL: SELECT jenis_dokumen, COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE jenis_dokumen IN (''301'',''302'') AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>'''' GROUP BY 1 -> 301 Low=78.107, 302 High=22.602. DB 2026-09-22: 78.107 / 22.602. TAKSONOMI ERLA: jenis_dokumen 301 = ''Pangan Low Risk'' (Risiko Rendah), 302 = ''Pangan High Risk'' (Risiko Tinggi). Bandingkan dua kelas ini; JANGAN mencampur kolom jenis_dokumen dengan kategori_dokumen (kode 301/302/303 bertabrakan makna). ENTITY: nomor. Pembanding ERBA (kategori_dokumen Rendah tidak ada; Tinggi 301+304=86.976): di luar ERLA.'

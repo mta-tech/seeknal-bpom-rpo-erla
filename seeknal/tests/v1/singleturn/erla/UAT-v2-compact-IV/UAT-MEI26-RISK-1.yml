@@ -1,0 +1,15 @@
+name: UAT_MEI26_RISK_1
+scenario_id: UAT-MEI26-RISK-1
+verification_date: '2026-09-22'
+description: 'UAT-MEI26-RISK-1 — jumlah izin edar terbit Mei 2026 per kategori risiko (jenis_dokumen). ERLA-only.'
+turns:
+- prompt: berapa NIE yang terbit selama bulan Mei 2026 per kategori risiko?
+  assert_contains:
+  - '161'
+  - '23'
+  assert_any_of:
+  - - 'Medium'
+    - 'Low'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT jenis_dokumen, COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE tanggal>=''2026-05-01'' AND tanggal<''2026-06-01'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>'''' GROUP BY 1. DB 2026-09-22: jenis_dokumen 303 Medium=161 · 301 Low=23 · 302 High=8 (jumlah 192 = total bulan). ATURAN: skema risiko ERLA = jenis_dokumen (301 Low · 302 High · 303 Medium); label ditulis, bukan kode telanjang. Jangan pakai kategori_dokumen (kode 301-304 terisi tapi bukan skema ERLA). Headline global (192) dari query DISTINCT sendiri, bukan penjumlahan partisi. BEDA ERBA: ERBA memakai kategori_dokumen 4 kelas (301/302/303/304) — taksonomi berbeda, tidak boleh digabung. Entity NIE. ERLA-only.'
