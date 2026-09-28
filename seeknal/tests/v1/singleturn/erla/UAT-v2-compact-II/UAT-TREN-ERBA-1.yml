@@ -1,0 +1,17 @@
+name: UAT_TREN_ERBA_1
+scenario_id: UAT-TREN-ERBA-1
+verification_date: '2026-09-22'
+description: 'UAT-TREN-ERBA-1 — tren permohonan per tahun (produk_id, tanggal_bayar). ERLA-only.'
+turns:
+- prompt: Bagaimana tren permohonan pangan olahan dari tahun ke tahun?
+  assert_contains:
+  - '18.890'
+  - '11.271'
+  - '5.377'
+  assert_any_of:
+  - - '2023'
+    - '2024'
+    - '2025'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL: SELECT EXTRACT(YEAR FROM tanggal_bayar)::int, COUNT(DISTINCT produk_id) FROM t_produk_3_rilis_erla WHERE tanggal_bayar IS NOT NULL GROUP BY 1 ORDER BY 1; DB 2026-09-22: 2023=18.890, 2024=11.271, 2025=5.377. Entity permohonan = produk_id; basis tanggal = tanggal_bayar (Bayar SPB); TANPA filter status (permohonan menghitung semua pengajuan). TREN ERLA MENURUN tajam karena ERLA adalah sistem legacy yang dibekukan (data berpindah ke sistem baru sejak ~2023) - nyatakan konteks ini; ada nilai tanggal janggal (1900/1970) yang sangat kecil. Pembanding ERBA naik: 42.329/46.447/70.007.'

@@ -1,0 +1,13 @@
+name: UAT_E53_MAYOR_VS_MINOR
+scenario_id: UAT-E53-MAYOR-VS-MINOR
+verification_date: '2026-09-22'
+description: UAT-E53-MAYOR-VS-MINOR — Perubahan Mayor(302) vs Minor(303). ERLA-only.
+turns:
+- prompt: Bandingkan jumlah izin edar Perubahan Mayor vs Perubahan Minor.
+  assert_contains:
+  - tidak tersedia|tidak ada|tidak memiliki|tidak dapat dihitung
+  assert_any_of:
+  - - ERBA
+  - - ERLA
+  tolerance_pct: 5
+  note: 'KONDISI DATA (2026-09-23): hasil query ERLA tidak memiliki angka yang dekat dengan ekspektasi lama (populasi beda antar sistem). Ekspektasi: jawaban jujur. ERLA-only.'

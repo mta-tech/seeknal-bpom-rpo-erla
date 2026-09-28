@@ -1,0 +1,13 @@
+name: UAT_KOMITMEN_PROSES_1
+scenario_id: UAT-KOMITMEN-PROSES-1
+verification_date: '2026-09-22'
+description: 'UAT-KOMITMEN-PROSES-1 — komitmen dalam proses penilaian kembali; kolom status_komitmen TIDAK ADA di ERLA. ERLA-only.'
+turns:
+- prompt: berapa produk menengah rendah yang komitmennya sedang dalam proses penilaian kembali?
+  assert_contains:
+  - 'tidak tersedia|tidak ada|tidak menyimpan|tidak tersimpan'
+  assert_any_of:
+  - - 'komitmen'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'KONDISI DATA (verifikasi 22Sep2026): kolom status_komitmen TIDAK ADA di t_produk_3_rilis_erla (information_schema). SQL: tidak ada query valid di ERLA. DB 2026-09-22: dimensi komitmen TIDAK TERSEDIA. ATURAN: jawab jujur tanpa angka palsu (30-risiko-komitmen §Commitment is not applicable). BEDA ERBA: di ERBA ini status_komitmen kode 1 ''Proses Penilaian Kembali'' (kategori_dokumen 303) — tidak ada padanannya di ERLA. ERLA-only.'

@@ -1,0 +1,13 @@
+name: UAT_KOMITMEN_VARIASI_1
+scenario_id: UAT-KOMITMEN-VARIASI-1
+verification_date: '2026-09-22'
+description: 'UAT-KOMITMEN-VARIASI-1 — status variasi komitmen; kolom status_komitmen TIDAK ADA di ERLA. ERLA-only.'
+turns:
+- prompt: ada berapa produk MR dengan status variasi komitmen di BPOM?
+  assert_contains:
+  - 'tidak tersedia|tidak ada|tidak menyimpan|tidak tersimpan'
+  assert_any_of:
+  - - 'komitmen'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'KONDISI DATA (verifikasi 22Sep2026): kolom status_komitmen (tempat kode 9 ''Variasi Komitmen'') TIDAK ADA di t_produk_3_rilis_erla. SQL: tidak ada query valid di ERLA. DB 2026-09-22: dimensi komitmen TIDAK TERSEDIA. ATURAN: jawab jujur; jangan mengarang angka (30-risiko-komitmen). BEDA ERBA: kode 9 khusus Menengah Rendah di sisi ERBA. ERLA-only.'

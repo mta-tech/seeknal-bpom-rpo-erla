@@ -1,0 +1,12 @@
+name: UAT_OFF_4
+scenario_id: UAT-OFF-4
+verification_date: '2026-09-22'
+description: 'UAT-OFF-4 — pembatalan komitmen MR s.d. 2026; kolom status_komitmen tidak ada di ERLA. ERLA-only.'
+turns:
+- prompt: Berapa jumlah produk MR yang dibatalkan sampai dengan tahun 2026
+  assert_any_of:
+  - - 'komitmen|MR|Menengah Rendah'
+    - 'tidak tersedia|tidak ada|tidak memiliki|tidak ditemukan|belum tersedia'
+    - 'ERLA'
+  tolerance_pct: 5
+  note: 'SQL uji ketiadaan status_komitmen: SELECT COUNT(*) FROM information_schema.columns WHERE table_name=''t_produk_3_rilis_erla'' AND column_name=''status_komitmen'' -> 0. DB 2026-09-22: TIDAK TERSEDIA. ''dibatalkan'' di sini merujuk pembatalan KOMITMEN (status_komitmen), kolom yang tidak ada di ERLA. ERLA hanya punya kolom `status`; status=''0009'' (Dicabut/Dibatalkan) ada 2.064 baris, tetapi itu pembatalan NIE, BUKAN pembatalan komitmen - jangan dipakai tanpa membedakan. Jawaban jujur menyebut dimensi komitmen tidak ada. Pembanding ERBA = 6.114.'

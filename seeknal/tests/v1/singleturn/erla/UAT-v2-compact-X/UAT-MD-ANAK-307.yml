@@ -1,0 +1,14 @@
+name: UAT_MD_ANAK_307
+scenario_id: UAT-MD-ANAK-307
+verification_date: '2026-09-22'
+description: 'UAT-MD-ANAK-307 — P9b: Single MD Anak dipilih bila prompt menyebutnya (status_produk 307). ERLA-only.'
+turns:
+- prompt: berapa produk dengan status produksi Single MD Anak?
+  assert_contains:
+  - '3.588'
+  assert_any_of:
+  - - 'Single MD Anak'
+    - 'MD Anak'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE status_produk=''307'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''. DB 2026-09-22: 3.588. ATURAN (poin 9): prompt MENYEBUT status produk secara spesifik ("Single MD Anak") -> filter status_produk=''307'' aktif. MD Anak = satu perusahaan dengan induknya, membuat pabrikasi baru di tempat lain, NIE tetap sama (60-asal-produksi). Tanpa penyebutan status produk, JANGAN memakai filter status_produk. Kolom ERLA native, tanpa cast. ERLA-only.'

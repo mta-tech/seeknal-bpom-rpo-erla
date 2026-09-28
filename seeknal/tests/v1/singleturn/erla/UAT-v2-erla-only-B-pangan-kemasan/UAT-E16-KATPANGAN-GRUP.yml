@@ -1,0 +1,13 @@
+name: UAT_E16_KATPANGAN_GRUP
+scenario_id: UAT-E16-KATPANGAN-GRUP
+verification_date: '2026-09-22'
+description: UAT-E16-KATPANGAN-GRUP — Distribusi kelompok kategori pangan LEFT(,2). ERLA-only.
+turns:
+- prompt: Tampilkan distribusi jumlah izin edar per kelompok kategori pangan (2 digit).
+  assert_contains:
+  - '175.641'
+  assert_any_of:
+  - - kategori pangan|kategori_pangan
+  - - ERLA
+  tolerance_pct: 5
+  note: 'KONDISI DATA (verifikasi 24Sep2026): kategori_pangan TERISI di ERLA — 17 kelompok 2-digit; distribusi LEFT(kategori_pangan,2) BISA dihitung (premis "tidak tersedia" lama keliru). Verifikasi DB: total NIE tier terdaftar = 175.641 = jumlah seluruh kelompok. Aturan agregat: cukup total ATAU rincian per baris. ERLA-only.'

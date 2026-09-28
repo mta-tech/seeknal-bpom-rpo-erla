@@ -1,0 +1,14 @@
+name: UAT_SEMESTER_2026
+scenario_id: UAT-SEMESTER-2026
+verification_date: '2026-09-22'
+description: 'UAT-SEMESTER-2026 — permohonan diajukan semester 1 vs 2 tahun berjalan. ERLA-only.'
+turns:
+- prompt: Bandingkan jumlah permohonan yang diajukan pada semester 1 vs semester 2 tahun ini.
+  assert_contains:
+  - '979'
+  assert_any_of:
+  - - YTD
+    - semester 1
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT COUNT(DISTINCT produk_id) FILTER (WHERE tanggal_bayar<''2026-07-01'') sem1, COUNT(DISTINCT produk_id) FILTER (WHERE tanggal_bayar>=''2026-07-01'') sem2 FROM t_produk_3_rilis_erla WHERE tanggal_bayar>=''2026-01-01'' AND tanggal_bayar<''2027-01-01'' AND trader_id<>3384. DB 2026-09-22 (tahun berjalan=2026): S1 Jan-Jun=979 | S2 Jul-Des=0 (data ERLA berhenti di 2026-05-26 -> S2 kosong). Total=979. "Diajukan" = bacaan pengajuan mentah -> entity produk_id + tanggal_bayar, TANPA filter status (15-permohonan). SEMESTER 2 BELUM ADA DATA di ERLA - wajib dilabeli (bukan "nol permanen"); tahun berjalan dari CURRENT_DATE. ERLA-only.'

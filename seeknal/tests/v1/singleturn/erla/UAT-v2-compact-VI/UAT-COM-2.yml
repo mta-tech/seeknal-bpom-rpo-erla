@@ -1,0 +1,13 @@
+name: UAT_COM_2
+scenario_id: UAT-COM-2
+verification_date: '2026-09-22'
+description: 'UAT-COM-2 — status komitmen Validasi Pembatalan; kolom status_komitmen TIDAK ADA di ERLA. ERLA-only.'
+turns:
+- prompt: Berapa jumlah produk MR dengan status komitmen Validasi Pembatalan?
+  assert_contains:
+  - 'tidak tersedia|tidak ada|tidak menyimpan|tidak tersimpan'
+  assert_any_of:
+  - - 'komitmen'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'KONDISI DATA (verifikasi 22Sep2026): kolom status_komitmen TIDAK ADA di t_produk_3_rilis_erla. SQL: tidak ada query valid di ERLA. DB 2026-09-22: dimensi komitmen TIDAK TERSEDIA. ATURAN: jawab jujur tanpa angka palsu (30-risiko-komitmen). BEDA ERBA: kode 8 ''Validasi Pembatalan'' (tahap transien) hanya ada di ERBA. ERLA-only.'

@@ -1,0 +1,14 @@
+name: UAT_BTP_SERBUK_1
+scenario_id: UAT-BTP-SERBUK-1
+verification_date: '2026-09-22'
+description: 'UAT-BTP-SERBUK-1 — BTP bentuk serbuk (bentuk_sediaan 102). ERLA-only.'
+turns:
+- prompt: ada berapa BTP dalam bentuk serbuk yang terdaftar di BPOM?
+  assert_contains:
+  - '2.221'
+  assert_any_of:
+  - - 'serbuk'
+    - 'Serbuk'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL: SELECT COUNT(DISTINCT nomor) FROM t_btp_3_erla WHERE bentuk_sediaan=''102'' AND status IN (''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''; DB 2026-09-22: 2.221. Dictionary BENTUK_SEDIAAN kode 102 = ''Serbuk'' (sumber ''ERLA dan ERBA'') - berlaku di kedua tabel. ENTITY: nomor. Sekeluarga: 101 Cair/Pasta (2.899) lebih besar. Pembanding ERBA = 1.850. (Tanpa eksklusi trader 3384: 2.223.)'

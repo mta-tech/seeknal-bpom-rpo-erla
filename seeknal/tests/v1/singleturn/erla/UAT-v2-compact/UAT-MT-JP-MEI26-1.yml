@@ -1,0 +1,16 @@
+name: UAT_MT_JP_MEI26_1
+scenario_id: UAT-MT-JP-MEI26-1
+verification_date: '2026-09-22'
+description: 'UAT-MT-JP-MEI26-1 — permohonan baru MT Mei 2026; kelas MT tidak ada di ERLA. ERLA-only.'
+turns:
+- prompt: untuk permohonan baru produk menengah tinggi yang terbit bulan Mei 2026 berapa jumlahnya?
+  assert_asked: true
+  assert_sql_forbid:
+  - kategori_dokumen
+  - skala_industri_id
+  assert_contains:
+  - Low|Medium|High|menengah|tidak tersedia|tidak ada
+  assert_any_of:
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL konteks: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE jenis_dokumen=''302'' AND jenis_permohonan=''301'' AND tanggal>=''2026-05-01'' AND tanggal<''2026-06-01'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''; DB 2026-09-22: TIDAK TERSEDIA. Dimensi yang diminta (''Menengah Tinggi'' = kategori_dokumen ERBA 302) tidak ada di ERLA - jenis_dokumen ERLA hanya Low/Medium/High dan tidak memisahkan tingkat menengah. ''Permohonan baru'' & ''terbit Mei 2026'' tersedia (JP 301, kolom tanggal), tetapi tanpa kelas MT tidak ada angka sah. EKSPEKTASI v6: agent WAJIB request_clarification menawarkan Low/Medium/High (30-risiko-komitmen v6) lalu menjawab kelas pilihan user; label Menengah Tinggi tidak tersedia di ERLA — jangan dipetakan diam-diam. Pembanding ERBA = 147. Pembanding ERBA = 147.'

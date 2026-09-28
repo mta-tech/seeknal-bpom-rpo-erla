@@ -1,0 +1,14 @@
+name: UAT_E31_NEGARA_CHINA
+scenario_id: UAT-E31-NEGARA-CHINA
+verification_date: '2026-09-23'
+description: UAT-E31-NEGARA-CHINA — negara_pabrik ISO (CN), decode ke nama. ERLA-only.
+turns:
+- prompt: Berapa jumlah produk yang diproduksi dari pabrik di China dan punya izin edar?
+  assert_contains:
+  - China
+  assert_any_of:
+  - - '5.563'
+    - '5.563'
+  - - ERBA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE negara_pabrik=''CN'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''. DB 2026-09-04: ERBA=5.563. negara_pabrik = kode ISO 2-huruf (CN=China/Tiongkok via kamus ''NEGARA_PABRIK dan NEGARA_PRODUSEN''); BUKAN negara_produsen. Terjemahkan ISO->nama di jawaban. ERLA-only.'

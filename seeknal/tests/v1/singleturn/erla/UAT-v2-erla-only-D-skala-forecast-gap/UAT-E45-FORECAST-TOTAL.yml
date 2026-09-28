@@ -1,0 +1,20 @@
+name: UAT_E45_FORECAST_TOTAL
+scenario_id: UAT-E45-FORECAST-TOTAL
+verification_date: '2026-09-22'
+description: UAT-E45-FORECAST-TOTAL — Proyeksi via run_forecast (engine, bukan SQL), ERLA-only. ERLA-only.
+turns:
+- prompt: Buatkan proyeksi sederhana jumlah persetujuan izin edar periode mendatang berdasarkan tren historis.
+  assert_contains:
+  - proyeksi
+  assert_any_of:
+  - - run_forecast
+    - proyeksi
+    - Proyeksi
+  - - ERBA
+  - - '2.875'
+    - '2.290'
+    - '2.107'
+    - '1.856'
+    - '1.687'
+  tolerance_pct: 5
+  note: 'FORECAST WAJIB lewat run_forecast (engine ETS), BUKAN execute_sql/perhitungan manual. Series ''NIE Terbit'' (forecast_guide §3): t_produk_3_rilis_erla, y=COUNT(DISTINCT produk_id) per bulan tanggal_bayar>= ''2022-09-01'', status IN (''0099'',''0999'',''0906'',''9999'') + jenis_permohonan IN (''301'',''305''), exclude test. run_forecast(sql,periods). Cap horizon 36 bulan (nyatakan bila diminta lebih). Forecast ERBA-only (ERLA CV terlalu tinggi). Assert: engine dipanggil, label kualitas ditampilkan, tiap periode proyeksi satu baris + Rentang Realistis; CSV gabungan otomatis dari tool. DB anchor deret historis (NIE Terbit: produk_id, tanggal_bayar, JP 301/305) 2026: Apr=2.875, Mei=2.290, Jun=1.856, Jul=2.107, Ags=1.687 -> blok historis WAJIB tampil bersama proyeksi (angka proyeksi dari engine, bukan mati).'

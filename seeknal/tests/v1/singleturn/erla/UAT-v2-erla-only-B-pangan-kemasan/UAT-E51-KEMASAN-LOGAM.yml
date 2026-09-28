@@ -1,0 +1,14 @@
+name: UAT_E51_KEMASAN_LOGAM
+scenario_id: UAT-E51-KEMASAN-LOGAM
+verification_date: '2026-09-23'
+description: UAT-E51-KEMASAN-LOGAM — Kemasan Logam induk (kemasan_id=5). ERLA-only.
+turns:
+- prompt: Berapa jumlah izin edar berkemasan Logam?
+  assert_contains:
+  - Logam
+  assert_any_of:
+  - - '6.965'
+    - '6.965'
+  - - ERBA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE kemasan_id=''35'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''. DB 2026-09-04: 6.965. Kelompok Logam=kemasan_id=''35'' (induk; mencakup kaleng Fe, kaleng aluminium, aluminium tunggal di sub 5xx). ERLA-only.'

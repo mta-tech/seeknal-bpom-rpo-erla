@@ -1,0 +1,13 @@
+name: UAT_NIE25_2
+scenario_id: UAT-NIE25-2
+verification_date: '2026-09-23'
+description: UAT-NIE25-2 — total izin edar terbit tahun 2025 (sebelumnya dibatasi ke satu sistem). ERLA-only.
+turns:
+- prompt: Berapa NIE yang terbit di tahun 2025?
+  assert_contains:
+  - '3.671'
+  assert_any_of:
+  - - '3.671'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE tanggal>=''2025-01-01'' AND tanggal<''2026-01-01'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''. DB 2026-09-22: ERLA=3.671 NIE (sama dgn UAT-NIE25-1; prompt lama membatasi satu sistem, kini klausa itu dihapus sehingga dihitung pada domain ERLA). ATURAN: entity NIE = COUNT(DISTINCT nomor), kolom tanggal, tanpa filter JP. ERLA-only.'

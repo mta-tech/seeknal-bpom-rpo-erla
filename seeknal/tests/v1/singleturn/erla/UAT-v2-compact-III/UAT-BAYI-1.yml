@@ -1,0 +1,14 @@
+name: UAT_BAYI_1
+scenario_id: UAT-BAYI-1
+verification_date: '2026-09-22'
+description: 'UAT-BAYI-1 — formula bayi; entity nomor (match nama_kategori). ERLA-only.'
+turns:
+- prompt: berapa jumlah produk formula bayi yang telah memiliki izin edar
+  assert_contains:
+  - '88'
+  assert_any_of:
+  - - 'Formula Bayi'
+    - 'formula bayi'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE nama_kategori ILIKE ''Formula Bayi%'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''; DB 2026-09-22: 88. ENTITY ''produk ... izin edar'' -> COUNT(DISTINCT nomor) (produk_id menggelembung). BEDA KODE ERBA vs ERLA: ERBA memakai jenis_pangan IN (''1301'',''1302''); ERLA memakai jenis_pangan 604/622/624 = keluarga Pangan Bayi & Anak yang DIPAKAI BERSAMA kategori lain (622=Formula Pertumbuhan/MP-ASI/selingan, 624=PKMK/medis) sehingga IN(604,622,624)=804 (overcount, bukan formula bayi) - maka dipakai match nama_kategori ILIKE ''Formula Bayi%'' = 88. JENIS_PANGAN/KATEGORI_PANGAN tidak terdaftar di data_dictionary. Pembanding ERBA = 61.'

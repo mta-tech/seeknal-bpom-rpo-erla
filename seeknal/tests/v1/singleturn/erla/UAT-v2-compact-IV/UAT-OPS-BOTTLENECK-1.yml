@@ -1,0 +1,14 @@
+name: UAT_OPS_BOTTLENECK_1
+scenario_id: UAT-OPS-BOTTLENECK-1
+verification_date: '2026-09-22'
+description: 'UAT-OPS-BOTTLENECK-1 — tahap paling menumpuk; dimensi tahapan pipeline TIDAK tersedia di ERLA. ERLA-only.'
+turns:
+- prompt: tahap mana yang paling banyak permohonan nyangkut dalam proses registrasi BPOM?
+  assert_contains:
+  - 'tidak tersedia|tidak ada|tidak menyimpan|tidak tersimpan'
+  assert_any_of:
+  - - 'tahap'
+    - 'proses'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'KONDISI DATA (verifikasi 22Sep2026): t_produk_3_rilis_erla hanya menyimpan KEADAAN FINAL; nilai status yang ada = {0000, 0009, 0099, 0501, 0906, 0999, 9999}. Tidak ada kode tahapan pipeline (Draft 0910/0912, Bayar 0903/0907, Verifikator, Evaluator, Direktur, Data Tambahan, Ditolak Sistem). SQL: tidak ada query valid untuk peringkat tahapan pada data ini. DB 2026-09-22: dimensi tahapan pipeline TIDAK TERSEDIA di ERLA. ATURAN: jawab JUJUR bahwa data ini hanya membawa keadaan final sehingga peringkat antrian tidak dapat dihitung (20-status-pipeline §Which table), tanpa angka palsu. BEDA ERBA: peringkat tahapan (mis. Draft teratas) hanya ada di sisi ERBA. ERLA-only.'

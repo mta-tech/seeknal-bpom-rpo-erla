@@ -1,0 +1,14 @@
+name: UAT_BTP_CAIR_1
+scenario_id: UAT-BTP-CAIR-1
+verification_date: '2026-09-22'
+description: 'UAT-BTP-CAIR-1 — BTP bentuk cair (bentuk_sediaan 101). ERLA-only.'
+turns:
+- prompt: berapa BTP yang tersedia dalam bentuk cair di BPOM?
+  assert_contains:
+  - '2.899'
+  assert_any_of:
+  - - 'cair'
+    - 'Cair'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL: SELECT COUNT(DISTINCT nomor) FROM t_btp_3_erla WHERE bentuk_sediaan=''101'' AND status IN (''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''; DB 2026-09-22: 2.899. Dictionary BENTUK_SEDIAAN kode 101 = ''Cair/Pasta'' (sumber ''ERLA dan ERBA'') - kode ini BERFUNGSI di kedua sistem (beda dari jenis_btp yang rentangnya beda), sehingga konsep dapat dipetakan. ENTITY: nomor. Pembanding ERBA = 2.362. (Tanpa eksklusi trader 3384: 2.901.)'

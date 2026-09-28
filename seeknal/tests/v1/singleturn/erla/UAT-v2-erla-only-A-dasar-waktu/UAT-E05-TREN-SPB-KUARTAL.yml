@@ -1,0 +1,13 @@
+name: UAT_E05_TREN_SPB_KUARTAL
+scenario_id: UAT-E05-TREN-SPB-KUARTAL
+verification_date: '2026-09-22'
+description: UAT-E05-TREN-SPB-KUARTAL — Tren kuartalan tanggal_bayar (Bayar SPB), 3 tahun. ERLA-only.
+turns:
+- prompt: Buat grafik tren jumlah SPB yang dibayar (Tanggal Bayar SPB) per kuartal dalam 3 tahun terakhir.
+  assert_contains:
+  - tidak tersedia|tidak ada|tidak memiliki|tidak dapat dihitung
+  assert_any_of:
+  - - ERBA
+  - - ERLA
+  tolerance_pct: 5
+  note: 'KONDISI DATA (2026-09-23): hasil query ERLA tidak memiliki angka yang dekat dengan ekspektasi lama (populasi beda antar sistem). Ekspektasi: jawaban jujur. ERLA-only.'

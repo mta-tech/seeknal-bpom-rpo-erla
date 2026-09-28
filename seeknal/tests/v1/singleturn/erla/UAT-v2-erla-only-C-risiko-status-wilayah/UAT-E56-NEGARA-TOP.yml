@@ -1,0 +1,15 @@
+name: UAT_E56_NEGARA_TOP
+scenario_id: UAT-E56-NEGARA-TOP
+verification_date: '2026-09-22'
+description: UAT-E56-NEGARA-TOP — Ranking negara asal (negara_pabrik ISO->nama). ERLA-only.
+turns:
+- prompt: Tampilkan 10 negara asal pabrik dengan jumlah izin edar terbanyak.
+  assert_contains:
+  - Indonesia
+  assert_any_of:
+  - - '110.604'
+    - '110.604'
+  - - China
+    - CN
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT negara_pabrik, COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>'''' GROUP BY 1 ORDER BY 2 DESC LIMIT 10. DB 2026-09-04: ID Indonesia=110.604 | CN China=11.594 | MY=5.094 | KR=3.120 | IT=3.096 | FR=3.025 | US=2.656 | JP=2.649. negara_pabrik ISO -> terjemahkan ke nama. Dominan lokal (ID). ERLA-only.'

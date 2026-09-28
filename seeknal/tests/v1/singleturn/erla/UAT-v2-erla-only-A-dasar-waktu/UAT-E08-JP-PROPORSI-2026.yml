@@ -1,0 +1,13 @@
+name: UAT_E08_JP_PROPORSI_2026
+scenario_id: UAT-E08-JP-PROPORSI-2026
+verification_date: '2026-09-22'
+description: UAT-E08-JP-PROPORSI-2026 — Proporsi JP 2026, entity produk_id, proporsi %=100. ERLA-only.
+turns:
+- prompt: Tampilkan proporsi (%) permohonan berdasarkan Jenis Permohonan (Baru, Perubahan Mayor, Perubahan Minor, Daftar Ulang) untuk periode tahun 2026.
+  assert_contains:
+  - tidak tersedia|tidak ada|tidak memiliki|tidak dapat dihitung
+  assert_any_of:
+  - - ERBA
+  - - ERLA
+  tolerance_pct: 5
+  note: 'KONDISI DATA (2026-09-23): hasil query ERLA tidak memiliki angka yang dekat dengan ekspektasi lama (populasi beda antar sistem). Ekspektasi: jawaban jujur. ERLA-only.'

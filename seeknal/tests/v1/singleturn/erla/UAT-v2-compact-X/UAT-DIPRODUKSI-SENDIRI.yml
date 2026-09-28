@@ -1,0 +1,14 @@
+name: UAT_DIPRODUKSI_SENDIRI
+scenario_id: UAT-DIPRODUKSI-SENDIRI
+verification_date: '2026-09-22'
+description: 'UAT-DIPRODUKSI-SENDIRI — P9d: keluarga Diproduksi Sendiri di ERLA = 301+303+305. ERLA-only.'
+turns:
+- prompt: berapa produk dengan status produksi Diproduksi Sendiri?
+  assert_contains:
+  - '99.981'
+  assert_any_of:
+  - - 'Diproduksi Sendiri'
+    - 'produksi sendiri'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE status_produk IN (''301'',''303'',''305'') AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''. DB 2026-09-22: 99.981. ATURAN (poin 9): di ERLA keluarga "Diproduksi Sendiri" = 301 Diproduksi Sendiri + 303 (panel: Berdasarkan Kontrak Notifikasi) + 305 (panel: Diproduksi Sendiri Notifikasi) — satu kesatuan. Kode 303 (1.432 baris) dan 305 (198 baris) TIDAK punya baris di data_dictionary; labelnya dari panel dan BELUM terverifikasi. Panel ERLA memuat lebih banyak label daripada yang ada di data: Lisensi dan Pengemas Kembali tidak punya kode/baris — katakan jujur bila ditanya. Beda ERBA: hanya 301 (303/305 tidak berlaku di ERBA). Sebut ketiga komponennya saat menjawab. ERBA-only secara sejarah label dictionary (sumber ERBA). ERLA-only.'

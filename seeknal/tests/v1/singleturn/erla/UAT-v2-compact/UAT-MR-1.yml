@@ -1,0 +1,16 @@
+name: UAT_MR_1
+scenario_id: UAT-MR-1
+verification_date: '2026-09-22'
+description: 'UAT-MR-1 — izin edar risiko Menengah Rendah; padanan ERLA jenis_dokumen=301 (Low Risk). ERLA-only.'
+turns:
+- prompt: Berapa jumlah izin edar pangan olahan dengan risiko menengah rendah?
+  assert_contains:
+  - '78.107'
+  assert_any_of:
+  - - 'Menengah Rendah'
+    - 'Risiko Rendah'
+    - 'Low Risk'
+    - 'rendah'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE jenis_dokumen=''301'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''; DB 2026-09-22: 78.107. BEDA KOLOM & TAKSONOMI: ''Menengah Rendah'' adalah label kategori_dokumen ERBA (303); ERLA tidak punya entri itu, sehingga padanan terdekat memakai KOLOM LAIN yaitu jenis_dokumen=''301'' (Pangan Low Risk, dictionary sumber ''ERLA dan ERBA''). Low Risk TIDAK identik dengan Menengah Rendah - sebutkan perbedaan skema. ENTITY: ''izin edar'' -> nomor. Jangan mencampur kategori_dokumen & jenis_dokumen (kode 301/302/303 bertabrakan makna). Pembanding ERBA = 42.263.'

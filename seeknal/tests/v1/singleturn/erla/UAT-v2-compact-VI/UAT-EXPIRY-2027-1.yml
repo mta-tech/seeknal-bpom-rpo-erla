@@ -1,0 +1,13 @@
+name: UAT_EXPIRY_2027_1
+scenario_id: UAT-EXPIRY-2027-1
+verification_date: '2026-09-23'
+description: UAT-EXPIRY-2027-1 — izin edar yang habis masa berlaku tahun 2027. ERLA-only.
+turns:
+- prompt: berapa izin edar yang akan habis masa berlakunya di tahun 2027?
+  assert_contains:
+  - '30.804'
+  assert_any_of:
+  - - '30.804'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE tanggal_exp>=''2027-01-01'' AND tanggal_exp<''2028-01-01'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''. DB 2026-09-22: ERLA=30.804 NIE. ATURAN: tanggal_exp = kolom kondisi masa berlaku (native timestamp, tanpa cast); pakai rentang tanggal, bukan LIKE ''30.804%''; entity NIE. BEDA ERBA: pada filter sama ERBA ~1.412 (27Jul2026); ERLA ~22x lebih besar karena NIE lama berlaku 5 tahun dan gelombang terbitan legacy jatuh tempo ~30.804 -> pecah per domain. ERLA-only.'

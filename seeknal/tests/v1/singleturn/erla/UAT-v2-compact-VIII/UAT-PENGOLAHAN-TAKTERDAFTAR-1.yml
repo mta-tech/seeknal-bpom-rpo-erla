@@ -1,0 +1,17 @@
+name: UAT_PENGOLAHAN_TAKTERDAFTAR_1
+scenario_id: UAT-PENGOLAHAN-TAKTERDAFTAR-1
+verification_date: '2026-09-22'
+description: 'UAT-PENGOLAHAN-TAKTERDAFTAR-1 — kolom pengolahan tanpa dictionary + ambigu dgn pemrosesan. ERLA-only.'
+turns:
+- prompt: produk BPOM itu metode pengolahannya apa saja, ada berapa jenis?
+  assert_contains:
+  - pengolahan
+  - tidak
+  assert_any_of:
+  - - tidak terdokumentasi
+    - tidak terdaftar
+    - tidak ada
+  - - ERLA
+  assert_asked: true
+  tolerance_pct: 0
+  note: 'KLARIFIKASI (Gate 1): istilah "metode pengolahan" memetakan ke DUA kolom yang sama-sama berarti pengolahan -> `pengolahan` (kode 401-405 di ERLA) dan `pemrosesan` (kategori dict PEMROSESAN: 300 Tanpa Proses, 301 Organik, 302 GMO, 304 Iradiasi) (95-dimensi-lain). Dua kolom kandidat sama masuk akal -> Gate 1, tanya. BILA DIJAWAB: SQL ERLA SELECT pengolahan, COUNT(*) FROM t_produk_3_rilis_erla GROUP BY 1 -> 5 kode terpakai (405=182.999 | 403=27.522 | 402=16.175 | 401=11.658 | 404=8.940) + 165.350 kosong; TIDAK ADA kategori dictionary untuk `pengolahan`, jadi ARTI kodenya tidak terdokumentasi -> nyatakan itu, jangan meminjam label kategori lain. Entity: jumlah JENIS (5). ERLA-only.'

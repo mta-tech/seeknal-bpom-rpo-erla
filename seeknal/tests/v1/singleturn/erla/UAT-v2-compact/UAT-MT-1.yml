@@ -1,0 +1,16 @@
+name: UAT_MT_1
+scenario_id: UAT-MT-1
+verification_date: '2026-09-22'
+description: 'UAT-MT-1 — risiko Menengah Tinggi tidak dapat dipisahkan di ERLA (tidak tersedia). ERLA-only.'
+turns:
+- prompt: Berapa jumlah izin edar produk pangan dengan risiko menengah tinggi?
+  assert_asked: true
+  assert_sql_forbid:
+  - kategori_dokumen
+  - skala_industri_id
+  assert_contains:
+  - Low|Medium|High|menengah|tidak tersedia|tidak ada
+  assert_any_of:
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL konteks: SELECT jenis_dokumen, COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE jenis_dokumen IN (''301'',''302'',''303'') AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>'''' GROUP BY 1 -> 301 Low=78.107, 303 Medium=86.309, 302 High=22.602. DB 2026-09-22: ''Menengah Tinggi'' TIDAK TERSEDIA. ERLA jenis_dokumen hanya mengenal Low/Medium/High Risk (+000 belum) - TIDAK ada kelas ''Menengah Tinggi''; kategori Medium (303)=86.309 mencakup SELURUH tingkat menengah sehingga MT tidak dapat dipisahkan. EKSPEKTASI v5 (24Sep2026): pertanyaan memakai label skala ERBA -> agent WAJIB request_clarification menawarkan Low/Medium/High (30-risiko-komitmen v5), lalu menjawab kelas pilihan user. Label Menengah Tinggi sendiri tidak tersedia di ERLA — jangan dipetakan diam-diam. ''Menengah Tinggi'' = kategori_dokumen ERBA 302 (=12.445 di ERBA) - di luar ERLA.'

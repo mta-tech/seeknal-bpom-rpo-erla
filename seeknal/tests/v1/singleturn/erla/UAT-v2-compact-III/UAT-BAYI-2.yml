@@ -1,0 +1,14 @@
+name: UAT_BAYI_2
+scenario_id: UAT-BAYI-2
+verification_date: '2026-09-22'
+description: 'UAT-BAYI-2 — formula bayi masih sah / aktif; perlu tanggal_exp. ERLA-only.'
+turns:
+- prompt: apakah semua izin edar formula bayi tersebut masih sah? berapa yang masih aktif?
+  assert_contains:
+  - '19'
+  assert_any_of:
+  - - 'Formula Bayi'
+    - 'formula bayi'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE nama_kategori ILIKE ''Formula Bayi%'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>'''' AND tanggal_exp>=CURRENT_DATE; DB 2026-09-22: 19. ''Masih sah/berlaku'' (belum kedaluwarsa) = tanggal_exp >= CURRENT_DATE; ''aktif'' = status=''0999'' (82 dari 88). Di ERLA banyak baris berstatus terbit tetapi tanggal_exp sudah lewat (sistem legacy beku, status tak diperbarui) sehingga status saja TIDAK cukup. Formula bayi ERLA = nama_kategori ILIKE ''Formula Bayi%'' (kode 604/622/624 dipakai bersama kategori lain). Pembanding ERBA = 61 (semua belum kedaluwarsa).'

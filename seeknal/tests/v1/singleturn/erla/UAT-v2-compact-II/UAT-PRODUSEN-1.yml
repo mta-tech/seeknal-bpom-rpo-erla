@@ -1,0 +1,17 @@
+name: UAT_PRODUSEN_1
+scenario_id: UAT-PRODUSEN-1
+verification_date: '2026-09-22'
+description: 'UAT-PRODUSEN-1 — flag produsen/importir level perusahaan tidak ada; pengganti status_usaha level produk. ERLA-only.'
+turns:
+- prompt: berapa banyak perusahaan produsen yang terdaftar di BPOM dibanding importir?
+  assert_contains:
+  - '110.604'
+  - '65.037'
+  assert_any_of:
+  - - 'produsen'
+    - 'importir'
+    - 'Produsen'
+    - 'Importir'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL uji ketiadaan flag: SELECT COUNT(*) FROM information_schema.columns WHERE table_name=''m_trader_rla'' AND column_name IN (''is_status_industri_produsen'',''is_status_industri_importir'') -> 0. SQL pengganti: SELECT status_usaha, COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE status_usaha IN (''31'',''33'') AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>'''' GROUP BY 1 -> 31 Produsen=110.604, 33 Importir=65.037. DB 2026-09-22: 110.604 / 65.037. TIDAK TERSEDIA di level PERUSAHAAN: m_trader_rla tidak punya flag is_status_industri_produsen/importir (ERBA punya di m_trader_rba: 13.690/1.312). status_usaha 31/33 ada di tabel PRODUK (LEVEL PRODUK, bukan perusahaan). Ekspektasi: jawab jujur batas level-perusahaan, lalu sajikan angka level-produk berlabel.'

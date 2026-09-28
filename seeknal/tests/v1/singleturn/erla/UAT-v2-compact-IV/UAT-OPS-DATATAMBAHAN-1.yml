@@ -1,0 +1,13 @@
+name: UAT_OPS_DATATAMBAHAN_1
+scenario_id: UAT-OPS-DATATAMBAHAN-1
+verification_date: '2026-09-22'
+description: 'UAT-OPS-DATATAMBAHAN-1 — permohonan menunggu data tambahan; tahapan pipeline tidak ada di ERLA. ERLA-only.'
+turns:
+- prompt: berapa permohonan yang sedang diminta untuk melengkapi data tambahan?
+  assert_contains:
+  - 'tidak tersedia|tidak ada|tidak menyimpan|tidak tersimpan'
+  assert_any_of:
+  - - 'data tambahan'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'KONDISI DATA (verifikasi 22Sep2026): bucket Data Tambahan (kode petugas 0308/0402/0407 + pendaftar 0901/0914/0915/0917/0951) hidup di kolom status tahapan, sedangkan t_produk_3_rilis_erla hanya memuat keadaan final {0000,0009,0099,0501,0906,0999,9999}. SQL: tidak ada query valid di ERLA. DB 2026-09-22: dimensi tahapan TIDAK TERSEDIA. ATURAN: jawab jujur tanpa angka palsu (20-status-pipeline). BEDA ERBA: bucket ini hanya ada di sisi ERBA. ERLA-only.'

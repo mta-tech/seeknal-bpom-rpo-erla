@@ -1,0 +1,12 @@
+name: UAT_E01_TOTAL_NIE
+scenario_id: UAT-E01-TOTAL-NIE
+verification_date: '2026-09-23'
+description: 'UAT-E01-TOTAL-NIE — Dasar: entity NIE = COUNT(DISTINCT nomor), tanpa JP, ERLA-only. ERLA-only.'
+turns:
+- prompt: Berapa total izin edar pangan olahan yang terbit?
+  assert_contains:
+  - '175.641'
+  assert_any_of:
+  - - ERBA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''. DB 2026-09-14: ERBA=175.641 (04Sep=145.854 — drift data, angka ini WAJIB di-refresh berkala). ENTITY ''izin edar/NIE'' -> COUNT(DISTINCT nomor); COUNT(*)/produk_id TERLARANG (baris versi menggelembung ~26-47%). Tanpa filter jenis_permohonan (''terbit'' bukan pemicu JP). ERBA-only diminta di prompt; nyatakan batas (bukan angka nasional).'

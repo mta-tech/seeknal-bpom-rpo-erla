@@ -1,0 +1,15 @@
+name: UAT_SKALA_2
+scenario_id: UAT-SKALA-2
+verification_date: '2026-09-22'
+description: 'UAT-SKALA-2 — perusahaan skala besar yang punya produk. ERLA-only.'
+turns:
+- prompt: perusahaan skala besar yang punya produk di BPOM ada berapa?
+  assert_contains:
+  - 'besar'
+  assert_any_of:
+  - - '825'
+    - '719'
+    - '717'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL (a) master: SELECT COUNT(*) FROM m_trader_rla WHERE skala_industri=''4'' = 825; (b) punya produk apa pun: ... AND EXISTS (SELECT 1 FROM t_produk_3_rilis_erla p WHERE p.trader_id=m.trader_id) = 719; (c) punya NIE sah: ... p.status IN (''0099'',''0999'',''0906'',''9999'') AND p.nomor<>'''' = 717. DB 2026-09-22: 825 (master) / 719 / 717. TIGA bacaan sah karena prompt ''punya produk'' (kanon: angka master wajib tampil, join berlabel di sampingnya). SKALA = m_trader_rla.skala_industri=''4'' (Besar). Jangan dedup by nama. ERLA punya 3 lapis (jumlah baris = 10.350).'

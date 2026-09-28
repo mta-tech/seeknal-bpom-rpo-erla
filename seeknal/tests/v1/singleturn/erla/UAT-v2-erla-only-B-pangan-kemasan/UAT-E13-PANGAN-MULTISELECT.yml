@@ -1,0 +1,12 @@
+name: UAT_E13_PANGAN_MULTISELECT
+scenario_id: UAT-E13-PANGAN-MULTISELECT
+verification_date: '2026-09-23'
+description: UAT-E13-PANGAN-MULTISELECT — Multi-select satu IN-list. ERLA-only.
+turns:
+- prompt: Berapa jumlah izin edar untuk Sosis Daging (0809) dan Udang Segar (0905)?
+  assert_contains:
+  - 2.453|0 NIE|0 izin|tidak tersedia|tidak ada
+  assert_any_of:
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE jenis_pangan IN (''0809'',''0905'') ... ; kode 0809/0905 = namespace ERBA, TIDAK ada di ERLA. DB 2026-09-24: jalur kode = 0; jalur nama (nama_kategori ILIKE ''%Sosis Daging%'', tier terdaftar) = 2.453. Kedua jalur sah: jawab 0 dengan alasan namespace ATAU resolve via nama_kategori dengan menyebut metodenya. MULTI-SELECT=SATU IN-list. ERLA-only.'

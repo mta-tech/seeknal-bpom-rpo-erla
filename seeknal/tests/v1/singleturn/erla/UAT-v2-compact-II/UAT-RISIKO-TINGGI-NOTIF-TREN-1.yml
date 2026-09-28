@@ -1,0 +1,12 @@
+name: UAT_RISIKO_TINGGI_NOTIF_TREN_1
+scenario_id: UAT-RISIKO-TINGGI-NOTIF-TREN-1
+verification_date: '2026-09-22'
+description: 'UAT-RISIKO-TINGGI-NOTIF-TREN-1 — tren Tinggi Notifikasi tidak ada di ERLA (tidak tersedia). ERLA-only.'
+turns:
+- prompt: bagaimana tren izin edar dengan risiko tinggi notifikasi dari tahun ke tahun?
+  assert_any_of:
+  - - 'Tinggi Notifikasi'
+    - 'tidak tersedia|tidak ada|tidak memiliki|tidak dapat dipetakan|belum tersedia'
+    - 'ERLA'
+  tolerance_pct: 5
+  note: 'SQL konteks ERLA: SELECT EXTRACT(YEAR FROM tanggal)::int, COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE jenis_dokumen=''304'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>'''' GROUP BY 1. DB 2026-09-22: TIDAK TERSEDIA. ''Tinggi Notifikasi'' bukan kelas taksonomi ERLA (jenis_dokumen ERLA = Low/Medium/High/000); kode 304 ada di data ERLA tanpa label dictionary, jadi tidak ada tren sah untuk kategori ini. Jawaban jujur menyebutnya. Pembanding ERBA (kategori_dokumen=''304''): 2024=519, 2025=1.891 - di luar ERLA.'

@@ -1,0 +1,14 @@
+name: UAT_ERLA_1
+scenario_id: UAT-ERLA-1
+verification_date: '2026-09-23'
+description: UAT-ERLA-1 — total permohonan pangan olahan seluruh periode data (produk_id) + pendamping NIE. ERLA-only.
+turns:
+- prompt: Berapa total permohonan pangan olahan yang terdaftar untuk seluruh periode data?
+  assert_contains:
+  - '412.591'
+  - '412.591'
+  assert_any_of:
+  - - NIE
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT COUNT(DISTINCT produk_id) FROM t_produk_3_rilis_erla WHERE trader_id<>3384. DB 2026-09-22: ERLA=412.591 permohonan. ATURAN: subjek ''permohonan'' -> entity produk_id; TANPA filter status (''seluruh periode data'' termasuk dicabut/kedaluwarsa/sudah diubah). Angka NIE = COUNT(DISTINCT nomor) pada populasi sama = 412.591 -> WAJIB dilampirkan berlabel karena selisihnya ~2,3x (satu NIE dipecah banyak baris pengajuan/revisi); menyebut 412.591 sebagai ''jumlah produk'' salah baca >2x. Rentang data ERLA 2012->kini; praktis beku sejak 2023. ERLA-only.'

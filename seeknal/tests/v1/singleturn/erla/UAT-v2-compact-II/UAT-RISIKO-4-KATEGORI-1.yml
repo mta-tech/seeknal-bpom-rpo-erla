@@ -1,0 +1,20 @@
+name: UAT_RISIKO_4_KATEGORI_1
+scenario_id: UAT-RISIKO-4-KATEGORI-1
+verification_date: '2026-09-22'
+description: 'UAT-RISIKO-4-KATEGORI-1 — distribusi izin edar per kategori risiko (jenis_dokumen ERLA). ERLA-only.'
+turns:
+- prompt: bisa tampilkan distribusi izin edar berdasarkan kategori risiko dari yang paling banyak?
+  assert_contains:
+  - '86.309'
+  - '78.107'
+  - '22.602'
+  assert_any_of:
+  - - 'Medium'
+    - 'Low'
+    - 'High'
+    - 'rendah'
+    - 'menengah'
+    - 'tinggi'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL: SELECT jenis_dokumen, COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>'''' GROUP BY 1 ORDER BY 2 DESC -> 303 Medium=86.309, 301 Low=78.107, 302 High=22.602, 304=1.708 (tak berlabel), 000=9. DB 2026-09-22: 86.309 / 78.107 / 22.602. RISIKO ERLA = kolom jenis_dokumen (301 Pangan Low Risk, 302 High Risk, 303 Medium Risk, 000 Belum Dikategorikan) - hanya 3 kelas risiko, BUKAN 4 seperti kategori_dokumen ERBA (301 Tinggi/302 MT/303 MR/304 Tinggi Notifikasi). Kode 304 muncul di data ERLA tanpa label dictionary (jangan dipetakan diam-diam). Jawaban menyajikan 3 kelas berlabel; sentinel 000/304 disebut apa adanya.'

@@ -1,0 +1,13 @@
+name: UAT_DRAFT_PROSES_1
+scenario_id: UAT-DRAFT-PROSES-1
+verification_date: '2026-09-22'
+description: 'UAT-DRAFT-PROSES-1 — draft pipeline; tahapan proses tidak ada di ERLA. ERLA-only.'
+turns:
+- prompt: berapa produk yang masih dalam status draft dan belum diproses lebih lanjut?
+  assert_contains:
+  - 'tidak tersedia|tidak ada|tidak menyimpan|tidak tersimpan'
+  assert_any_of:
+  - - 'draft'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'KONDISI DATA (verifikasi 22Sep2026): kode Draft pipeline (0910/0912) adalah status tahapan; t_produk_3_rilis_erla hanya memuat keadaan final {0000,0009,0099,0501,0906,0999,9999}. SQL: tidak ada query valid di ERLA. DB 2026-09-22: dimensi tahapan TIDAK TERSEDIA. ATURAN: jawab jujur tanpa angka palsu (20-status-pipeline). BEDA ERBA: draft pipeline hanya ada di sisi ERBA. ERLA-only.'

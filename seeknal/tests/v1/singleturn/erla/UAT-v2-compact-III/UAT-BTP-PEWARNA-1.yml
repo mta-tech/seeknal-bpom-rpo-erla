@@ -1,0 +1,12 @@
+name: UAT_BTP_PEWARNA_1
+scenario_id: UAT-BTP-PEWARNA-1
+verification_date: '2026-09-22'
+description: 'UAT-BTP-PEWARNA-1 — BTP pewarna tidak dapat dipetakan di ERLA (tidak tersedia). ERLA-only.'
+turns:
+- prompt: ada berapa BTP pewarna yang terdaftar di BPOM?
+  assert_any_of:
+  - - 'pewarna|Pewarna'
+    - 'tidak tersedia|tidak ada|tidak memiliki|tidak dapat dipetakan|belum tersedia'
+    - 'ERLA'
+  tolerance_pct: 5
+  note: 'SQL konteks: SELECT jenis_btp, COUNT(*) FROM t_btp_3_erla GROUP BY 1 -> hanya 777-805 (tak berlabel). DB 2026-09-22: TIDAK TERSEDIA. ''Pewarna'' = jenis_btp ERBA kode 47; ERLA memakai rentang kode berbeda (777-805) yang TIDAK TERDAFTAR di dictionary, sehingga tidak ada pemetaan resmi untuk filter ''Pewarna'' di ERLA. ERLA PUNYA data BTP (5.121 NIE terdaftar) - jadi filter ERBA=''0'' itu artinya ''sistem kode berbeda'', BUKAN ''tidak ada produk''. Jawaban jujur menyebut angka ERBA & keterbatasan ERLA, tidak melaporkan ERLA=0 sebagai fakta. Pembanding ERBA = 620.'

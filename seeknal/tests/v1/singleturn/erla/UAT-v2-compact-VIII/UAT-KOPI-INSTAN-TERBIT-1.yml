@@ -1,0 +1,15 @@
+name: UAT_KOPI_INSTAN_TERBIT_1
+scenario_id: UAT-KOPI-INSTAN-TERBIT-1
+verification_date: '2026-09-22'
+description: 'UAT-KOPI-INSTAN-TERBIT-1 — waktu terbit NIE kopi instan asal Indonesia. ERLA-only.'
+turns:
+- prompt: kopi instan asal Indonesia itu izin edarnya terbit tahun berapa saja sejak 2023?
+  assert_contains:
+  - '2023'
+  - '12'
+  assert_any_of:
+  - - '3'
+    - '2024'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT EXTRACT(YEAR FROM tanggal)::int th, COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE nama_kategori=''Kopi Instan'' AND negara_pabrik=''ID'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>'''' AND tanggal>=''2023-01-01'' GROUP BY 1 ORDER BY 1. DB 2026-09-22: 2023=12 | 2024=3 | 2025=0 | 2026=0. "Terbit" -> kolom tanggal (bukan tanggal_bayar/tanggal_aju) (80-waktu-periode). Di ERLA tidak ada penerbitan kopi instan Indonesia sejak 2025 (sistem lama berhenti menerima aktivitas); deret tanpa menyebut 2025/2026=0 menyesatkan. Entity izin edar -> nomor. ERLA-only.'

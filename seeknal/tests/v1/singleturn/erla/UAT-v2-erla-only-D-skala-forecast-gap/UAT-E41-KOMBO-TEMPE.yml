@@ -1,0 +1,12 @@
+name: UAT_E41_KOMBO_TEMPE
+scenario_id: UAT-E41-KOMBO-TEMPE
+verification_date: '2026-09-22'
+description: UAT-E41-KOMBO-TEMPE — Kombinasi 4 filter (multi-pangan+skala+risiko), satu query. ERLA-only.
+turns:
+- prompt: Berapa izin edar untuk produk Tempe, Usus Ayam Goreng, dan Sayur Asin, skala Mikro, risiko Tinggi?
+  assert_contains:
+  - 0 NIE|0 izin|0 produk|tidak tersedia|tidak ada|tidak memiliki|tidak dapat dihitung
+  assert_any_of:
+  - - ERLA
+  tolerance_pct: 5
+  note: 'KONDISI DATA (verifikasi 24Sep2026): kolom skala ERLA = m_trader_rla.skala_industri (BUKAN skala_industri_id milik ERBA). Verifikasi DB: tempe + skala Mikro (skala_industri=1) + jenis_dokumen 302 (Tinggi) = 0 NIE — nol adalah jawaban sah (90-kualitas-data). Terima "0 NIE/0 izin/0 produk" ATAU frasa tidak-tersedia. ERLA-only.'

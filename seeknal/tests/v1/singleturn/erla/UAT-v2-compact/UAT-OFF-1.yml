@@ -1,0 +1,14 @@
+name: UAT_OFF_1
+scenario_id: UAT-OFF-1
+verification_date: '2026-09-22'
+description: 'UAT-OFF-1 — NIE terbit Mei 2026; entity nomor + kolom tanggal, tanpa filter JP. ERLA-only.'
+turns:
+- prompt: berapa NIE yang terbit selama bulan Mei 2026?
+  assert_contains:
+  - '192'
+  assert_any_of:
+  - - 'Mei 2026'
+    - 'Mei'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE tanggal>=''2026-05-01'' AND tanggal<''2026-06-01'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''; DB 2026-09-22: 192. TIGA ATURAN: entity ''NIE terbit'' -> nomor; kolom `tanggal` (terbit NIE), bukan tanggal_bayar; ''terbit'' BUKAN pemicu JP -> SEMUA jenis permohonan, tanpa filter. ERLA tanggal bertipe timestamp (tanpa ::cast, beda dari ERBA yang TEXT). Pembanding ERBA = 5.084 (di luar scope ERLA).'

@@ -1,0 +1,14 @@
+name: UAT_JP_MAYOR_2025_1
+scenario_id: UAT-JP-MAYOR-2025-1
+verification_date: '2026-09-22'
+description: 'UAT-JP-MAYOR-2025-1 — permohonan perubahan mayor yang disetujui tahun 2025. ERLA-only.'
+turns:
+- prompt: berapa permohonan perubahan mayor yang disetujui tahun 2025?
+  assert_contains:
+  - '1.967'
+  assert_any_of:
+  - - 'mayor'
+    - '2025'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE jenis_permohonan=''302'' AND tanggal>=''2025-01-01'' AND tanggal<''2026-01-01'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''. DB 2026-09-22: 1.967 NIE. ATURAN: ''disetujui'' -> cabang persetujuan -> entity nomor + kolom tanggal (terbit) + tier status sah (00-menghitung.md §1; 15-permohonan.md); tanggal native tanpa cast. JP 302 = Perubahan Mayor. Pembanding bacaan pengajuan (produk_id + tanggal_bayar) = 2.278 — sebut berlabel bila perlu. ERLA-only.'

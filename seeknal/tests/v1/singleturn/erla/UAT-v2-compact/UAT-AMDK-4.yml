@@ -1,0 +1,13 @@
+name: UAT_AMDK_4
+scenario_id: UAT-AMDK-4
+verification_date: '2026-09-23'
+description: UAT-AMDK-4 — izin edar AMDK (air minum dalam kemasan) 2023; eja penuh. ERLA-only.
+turns:
+- prompt: ada berapa izin edar produk air minum dalam kemasan tahun 2023?
+  assert_contains:
+  - '423'
+  assert_any_of:
+  - - AMDK
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE jenis_pangan IN (''651'',''652'',''655'') AND tanggal>=''2023-01-01'' AND tanggal<''2024-01-01'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''; DB 2026-09-22: 9.127. ENTITY ''izin edar'' -> nomor; kolom tanggal. Jawaban WAJIB mengeja ''Air Minum Dalam Kemasan (AMDK)'' minimal sekali. BEDA KODE: AMDK ERLA = jenis_pangan 651/652/655 (ERBA 1401/1402); 651/652/655 tidak ada di dictionary JENIS_PANGAN (mapping anchor terverifikasi).'

@@ -1,0 +1,14 @@
+name: UAT_E04_STATUS_PRODUK_BRK
+scenario_id: UAT-E04-STATUS-PRODUK-BRK
+verification_date: '2026-09-22'
+description: UAT-E04-STATUS-PRODUK-BRK — Breakdown status_produk (5 kode), label dari kamus. ERLA-only.
+turns:
+- prompt: Berapa izin edar per Status Produk (Diproduksi Sendiri, Impor, Berdasarkan Kontrak, Single MD)?
+  assert_contains:
+  - Diproduksi Sendiri
+  - Impor
+  assert_any_of:
+  - - '99.462'
+  - - ERBA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT status_produk, COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>'''' GROUP BY 1. DB 2026-09-04: 301 Diproduksi Sendiri=99.462 | 302 Impor=46.687 | 306 Single MD Induk=6.070 | 304 Berdasarkan Kontrak=2.330 | 307 Single MD Anak=2.146. Kode 303/305 (Lisensi/Pengemas Kembali) tak terdekode di ERBA. ERLA-only.'

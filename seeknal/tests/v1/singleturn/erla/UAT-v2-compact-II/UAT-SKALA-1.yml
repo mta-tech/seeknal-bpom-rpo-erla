@@ -1,0 +1,13 @@
+name: UAT_SKALA_1
+scenario_id: UAT-SKALA-1
+verification_date: '2026-09-22'
+description: 'UAT-SKALA-1 — perusahaan skala mikro (m_trader_rla.skala_industri=''1''). ERLA-only.'
+turns:
+- prompt: ada berapa perusahaan dengan skala industri mikro yang terdaftar di BPOM?
+  assert_contains:
+  - '2.431'
+  assert_any_of:
+  - - 'mikro'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL: SELECT COUNT(*) FROM m_trader_rla WHERE skala_industri=''1''; DB 2026-09-22: 2.431. SKALA ERLA = m_trader_rla.skala_industri (dictionary ''SKALA_INDUSTRI dan SKALA_INDUSTRI_ID'': 1 Mikro, 2 Kecil, 3 Menengah, 4 Besar) - BUKAN skala_industri_id seperti ERBA. ENTITY = jumlah baris trader (perusahaan). Baris tanpa skala (kosong) = Importir by convention - tidak termasuk. Pembanding ERBA (skala_industri_id=''1'') = 9.057.'

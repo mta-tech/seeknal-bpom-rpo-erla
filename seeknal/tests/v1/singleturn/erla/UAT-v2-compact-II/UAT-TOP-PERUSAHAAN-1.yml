@@ -1,0 +1,15 @@
+name: UAT_TOP_PERUSAHAAN_1
+scenario_id: UAT-TOP-PERUSAHAAN-1
+verification_date: '2026-09-22'
+description: 'UAT-TOP-PERUSAHAAN-1 — perusahaan dengan NIE terbanyak. ERLA-only.'
+turns:
+- prompt: siapa perusahaan yang paling banyak produknya terdaftar di BPOM?
+  assert_contains:
+  - 'INTERFOOD'
+  - '2.704'
+  assert_any_of:
+  - - 'perusahaan'
+    - 'trader'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL: SELECT m.nama, COUNT(DISTINCT p.nomor) FROM t_produk_3_rilis_erla p JOIN m_trader_rla m ON p.trader_id=m.trader_id WHERE status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>'''' GROUP BY m.nama ORDER BY 2 DESC LIMIT 5 -> #1 PT. INTERFOOD SUKSES JASINDO=2.704, #2 PT PANDURASA KHARISMA=1.693, #3 PT. KOIN BUMI=1.604. DB 2026-09-22: #1 INTERFOOD=2.704. Kolom nama = m.nama (bukan nama_perusahaan); entity NIE = nomor. Ranking bergeser - assert hanya #1. Pembanding ERBA #1 = 2.142.'

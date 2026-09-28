@@ -1,0 +1,13 @@
+name: UAT_SINGLE_MD_1
+scenario_id: UAT-SINGLE-MD-1
+verification_date: '2026-09-22'
+description: 'UAT-SINGLE-MD-1 — Single MD Induk (status_produk 306). ERLA-only.'
+turns:
+- prompt: berapa produk yang terdaftar sebagai Single MD Induk di BPOM?
+  assert_contains:
+  - '6.979'
+  assert_any_of:
+  - - 'Single MD'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE status_produk=''306'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''; DB 2026-09-22: 6.979. ENTITY ''produk terdaftar'' -> nomor (COUNT(DISTINCT produk_id) akan menggelembung karena versioning ERLA). status_produk ERLA = 7 kode (301 Diproduksi Sendiri, 302 Impor, 303*, 304 Berdasarkan Kontrak, 305*, 306 Single MD Induk, 307 Single MD Anak) - 306 = Single MD Induk. Keluarga ''Diproduksi Sendiri'' ERLA = 301+303+305. Pembanding ERBA = 6.070.'

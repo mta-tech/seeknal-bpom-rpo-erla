@@ -1,0 +1,13 @@
+name: UAT_PIPELINE_EVAL_1
+scenario_id: UAT-PIPELINE-EVAL-1
+verification_date: '2026-09-22'
+description: 'UAT-PIPELINE-EVAL-1 — antrian evaluator; ERLA tidak punya status 03xx. ERLA-only.'
+turns:
+- prompt: berapa produk yang sedang diproses oleh evaluator BPOM saat ini?
+  assert_contains:
+  - '0'
+  assert_any_of:
+  - - 'evalu'
+  - - ERLA
+  tolerance_pct: 10
+  note: 'SQL: SELECT COUNT(DISTINCT produk_id) FROM t_produk_3_rilis_erla WHERE status IN (''0301'',''0308''); DB 2026-09-22: 0. Distribusi status ERLA hanya {0000,0009,0099,0501,0906,0999,9999} - TIDAK ada status evaluator (03xx). Antrian evaluator kosong di ERLA (sistem legacy beku; tahap proses tidak tersimpan). Entity permohonan/antrian = produk_id; ''nol adalah jawaban'' - jangan mengarang angka. Pembanding ERBA = 6.930 (di luar ERLA).'

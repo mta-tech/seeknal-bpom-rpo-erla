@@ -1,0 +1,15 @@
+name: UAT_TOTAL_1
+scenario_id: UAT-TOTAL-1
+verification_date: '2026-09-22'
+description: 'UAT-TOTAL-1 — total izin edar pangan olahan (ERLA). ERLA-only.'
+turns:
+- prompt: Berapa produk pangan olahan terdaftar di BPOM saat ini
+  assert_contains:
+  - '175.641'
+  assert_any_of:
+  - - 'pangan olahan'
+    - 'izin edar'
+    - 'produk'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''; DB 2026-09-22: 175.641. Entity ''terdaftar'' -> nomor; TANPA filter JP; pangan olahan = tabel produk saja (BTP tidak termasuk). ''Saat ini'' BUKAN pemicu filter aktif (context §3) - tier terdaftar = status IN (''0099'',''0999'',''0906'',''9999''). DILARANG menjumlah per-status (nomor hidup di banyak status) - wajib satu query DISTINCT global. Pembanding ERBA = 146.734; ERLA legacy beku.'

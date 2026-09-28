@@ -1,0 +1,13 @@
+name: UAT_PANGAN_DIET_1
+scenario_id: UAT-PANGAN-DIET-1
+verification_date: '2026-09-22'
+description: 'UAT-PANGAN-DIET-1 — jumlah izin edar produk pangan diet. ERLA-only.'
+turns:
+- prompt: ada berapa izin edar produk pangan diet di BPOM?
+  assert_contains:
+  - '819'
+  assert_any_of:
+  - - 'diet'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE klasifikasi_id=''310'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''. DB 2026-09-22: ERLA=819 NIE. ATURAN: pangan diet = klasifikasi_id ''310'' (keluarga 305 Berklaim, 311 Bayi & Anak, 312 Ibu Hamil — jangan tertukar); entity NIE; kode 310 sama di kedua sistem. BEDA ERBA: pada filter sama ERBA ~35 (23Jul2026) — jauh lebih kecil. ERLA-only.'

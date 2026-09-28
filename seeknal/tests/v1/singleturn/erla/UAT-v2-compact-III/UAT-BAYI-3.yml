@@ -1,0 +1,14 @@
+name: UAT_BAYI_3
+scenario_id: UAT-BAYI-3
+verification_date: '2026-09-22'
+description: 'UAT-BAYI-3 — phrasing alternatif formula bayi; entity nomor. ERLA-only.'
+turns:
+- prompt: Total produk formula bayi yang diizinkan BPOM berapa?
+  assert_contains:
+  - '88'
+  assert_any_of:
+  - - 'Formula Bayi'
+    - 'formula bayi'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE nama_kategori ILIKE ''Formula Bayi%'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''; DB 2026-09-22: 88. ENTITY ''produk ... diizinkan'' -> nomor. Kanonik identik UAT-BAYI-1 (scope/filter sama). Formula bayi ERLA = match nama_kategori (kode jenis_pangan 604/622/624 dipakai bersama Formula Pertumbuhan/MP-ASI/PKMK). Pembanding ERBA = 61.'

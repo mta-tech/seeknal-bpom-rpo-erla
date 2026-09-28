@@ -1,0 +1,16 @@
+name: UAT_BAYI_DICABUT_1
+scenario_id: UAT-BAYI-DICABUT-1
+verification_date: '2026-09-22'
+description: 'UAT-BAYI-DICABUT-1 — formula bayi dicabut; hasil nol (anti-fabrikasi). ERLA-only.'
+turns:
+- prompt: apakah ada izin edar formula bayi yang dicabut atau dibatalkan BPOM?
+  assert_contains:
+  - '0'
+  assert_any_of:
+  - - 'Formula Bayi'
+    - 'formula bayi'
+    - 'tidak ditemukan'
+    - 'tidak ada'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE nama_kategori ILIKE ''Formula Bayi%'' AND status=''0009''; DB 2026-09-22: 0. Dictionary STATUS ERLA: ''0009'' = ''Dicabut/Dibatalkan''. Hasil 0 -> klaim ''tidak ditemukan'' TERKONFIRMASI. CATATAN SCOPE: bila memakai definisi longgar jenis_pangan IN (604,622,624) hasilnya >0, tetapi itu leakage dari Formula Pertumbuhan/MP-ASI/PKMK, bukan formula bayi. Sistem tidak boleh mengarang angka. Pembanding ERBA = 0.'

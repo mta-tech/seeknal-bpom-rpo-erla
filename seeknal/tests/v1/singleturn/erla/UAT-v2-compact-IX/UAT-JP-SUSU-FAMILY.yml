@@ -1,0 +1,14 @@
+name: UAT_JP_SUSU_FAMILY
+scenario_id: UAT-JP-SUSU-FAMILY
+verification_date: '2026-09-22'
+description: 'UAT-JP-SUSU-FAMILY — keluarga tematik "mengandung susu" via probe. ERLA-only.'
+turns:
+- prompt: Berapa jumlah izin edar untuk jenis pangan yang mengandung susu?
+  assert_contains:
+  - '7.633'
+  assert_any_of:
+  - - nama_kategori
+    - probe
+  - - ERLA
+  tolerance_pct: 5
+  note: 'PROSEDUR (10-segmen-produk thematic family): probe nama_kategori lalu hitung SEKALI dgn himpunan sempit. SQL ERLA: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE nama_kategori ~* ''susu|whey|buttermilk'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''. DB 2026-09-22: 7.633 NIE tersebar di 125 nilai nama_kategori / 55 kode jenis_pangan. JANGAN lebarkan ke krim/cream/es susu (bacaan lebar membengkak). Tidak ada satu kode "susu"; keluarganya lintas prefiks -> sebut himpunan yang dipakai. Entity izin edar -> nomor. ERLA-only.'

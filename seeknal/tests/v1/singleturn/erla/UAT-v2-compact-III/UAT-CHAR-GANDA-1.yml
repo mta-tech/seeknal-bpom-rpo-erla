@@ -1,0 +1,14 @@
+name: UAT_CHAR_GANDA_1
+scenario_id: UAT-CHAR-GANDA-1
+verification_date: '2026-09-22'
+description: 'UAT-CHAR-GANDA-1 — kemasan ganda (kemasan_id 38). ERLA-only.'
+turns:
+- prompt: berapa produk pangan olahan yang menggunakan kemasan ganda di BPOM?
+  assert_contains:
+  - '28.094'
+  assert_any_of:
+  - - 'kemasan ganda'
+    - 'Ganda'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE kemasan_id=''38'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''; DB 2026-09-22: 28.094. BEDA NAMESPACE KODE: kemasan_id ERBA memakai 1-7 (7=Ganda), ERLA memakai 31-39 (31 Kaca, 32 Plastik, 33 Karton/Kertas, 34 Karton Laminat, 35 Kaleng, 36 Aluminium Foil, 37 Komposit, 38 Ganda, 39 Lain-lain). Konsep ''Ganda'' sama, ANGKA KODE beda -> memakai kode satu sistem di tabel lain salah total. ENTITY: nomor. Pembanding ERBA (kemasan_id=''7'') = 30.556.'

@@ -1,0 +1,12 @@
+name: UAT_KOMITMEN_DISETUJUI_CATATAN_1
+scenario_id: UAT-KOMITMEN-DISETUJUI-CATATAN-1
+verification_date: '2026-09-22'
+description: 'UAT-KOMITMEN-DISETUJUI-CATATAN-1 — komitmen disetujui dengan catatan MR; kolom status_komitmen tidak ada di ERLA. ERLA-only.'
+turns:
+- prompt: berapa produk MR yang komitmennya disetujui tapi dengan catatan?
+  assert_any_of:
+  - - 'komitmen'
+    - 'tidak tersedia|tidak ada|tidak memiliki|tidak ditemukan|belum tersedia'
+    - 'ERLA'
+  tolerance_pct: 5
+  note: 'SQL uji ketiadaan: SELECT COUNT(*) FROM information_schema.columns WHERE table_name=''t_produk_3_rilis_erla'' AND column_name=''status_komitmen'' -> 0. DB 2026-09-22: TIDAK TERSEDIA. status_komitmen (kode 7 = ''Komitmen Disetujui Dengan Catatan'') tidak ada di ERLA. Ekspektasi: jawaban jujur menyebut dimensi tidak ada, tanpa angka palsu. Pembanding ERBA (status_komitmen=7) = 13.415 - di luar data ERLA.'

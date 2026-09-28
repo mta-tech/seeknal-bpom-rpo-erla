@@ -1,0 +1,13 @@
+name: UAT_LC_TERMINASI_1
+scenario_id: UAT-LC-TERMINASI-1
+verification_date: '2026-09-22'
+description: 'UAT-LC-TERMINASI-1 — izin edar yang dicabut atau dihapus. ERLA-only.'
+turns:
+- prompt: berapa izin edar yang sudah dicabut atau dihapus BPOM secara keseluruhan?
+  assert_contains:
+  - '1.252'
+  assert_any_of:
+  - - 'dicabut'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE status IN (''0000'',''0009'') AND trader_id<>3384 AND nomor<>''''. DB 2026-09-22: ERLA=1.252 NIE (0009 Dicabut/Dibatalkan=1.240 · 0000 Dihapus/Dibatalkan=12). ATURAN: ''dicabut/dibatalkan'' = 0000 + 0009 saja; 0099 = kedaluwarsa dan 9999 = revisi adalah kelas berbeda — jangan dijumlahkan sebagai ''izin bermasalah''. Rincian per kode bisa tidak menjumlah ke total DISTINCT (satu NIE bisa punya baris di kedua kode) -> headline dari query DISTINCT global. TANPA filter tier NIE (populasi didefinisikan status terminasi itu sendiri). Entity NIE. BEDA ERBA: pada filter sama ERBA ~5.833 (27Jul2026). ERLA-only.'

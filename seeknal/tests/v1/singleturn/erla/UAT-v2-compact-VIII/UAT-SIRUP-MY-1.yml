@@ -1,0 +1,15 @@
+name: UAT_SIRUP_MY_1
+scenario_id: UAT-SIRUP-MY-1
+verification_date: '2026-09-22'
+description: 'UAT-SIRUP-MY-1 — sirup berperisa asal Malaysia. ERLA-only.'
+turns:
+- prompt: kalau sirup berperisa buatan Malaysia, berapa NIE-nya di BPOM?
+  assert_contains:
+  - '124'
+  - Malaysia
+  assert_any_of:
+  - - Sirup Berperisa
+    - MY
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE nama_kategori=''Sirup Berperisa'' AND negara_pabrik=''MY'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''. DB 2026-09-22: 124 (''Sirup Berperisa'' seluruh negara = 1.238). nama_kategori PERSIS: tetangga ''Sirup Encer Berperisa'' LEBIH BESAR -> melebarkan ke ILIKE ''%sirup%berperisa%'' membalik urutan besaran. MY = Malaysia (dictionary NEGARA). ASAL = negara_pabrik. Entity NIE -> nomor. ERLA-only.'

@@ -1,0 +1,13 @@
+name: UAT_PIPE_VERIF2_1
+scenario_id: UAT-PIPE-VERIF2-1
+verification_date: '2026-09-22'
+description: 'UAT-PIPE-VERIF2-1 — tahap verifikasi kedua; tahapan pipeline tidak ada di ERLA. ERLA-only.'
+turns:
+- prompt: berapa permohonan yang sedang di tahap verifikasi kedua?
+  assert_contains:
+  - 'tidak tersedia|tidak ada|tidak menyimpan|tidak tersimpan'
+  assert_any_of:
+  - - 'verifikasi'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'KONDISI DATA (verifikasi 22Sep2026): kode Verifikator 2 (0500/0502/0504) adalah status tahapan; t_produk_3_rilis_erla hanya memuat keadaan final dan satu-satunya kode 05xx di sana adalah 0501 (1 baris nyasar). SQL: tidak ada query valid di ERLA. DB 2026-09-22: dimensi tahapan TIDAK TERSEDIA. ATURAN: jawab jujur tanpa angka palsu (20-status-pipeline). Catatan: istilah ''verifikasi'' sendiri ambigu (Verifikator 1 vs 2, context 20-status-pipeline) tetapi karena data ini tidak menyimpan tahapan apa pun, klarifikasi pun tidak mengubah ketersediaan. ERLA-only.'

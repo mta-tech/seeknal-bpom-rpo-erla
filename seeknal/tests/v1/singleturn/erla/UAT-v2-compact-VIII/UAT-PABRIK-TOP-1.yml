@@ -1,0 +1,14 @@
+name: UAT_PABRIK_TOP_1
+scenario_id: UAT-PABRIK-TOP-1
+verification_date: '2026-09-22'
+description: 'UAT-PABRIK-TOP-1 — pabrik pembuat terbanyak (nama_pabrik). ERLA-only.'
+turns:
+- prompt: pabrik mana yang paling banyak memproduksi produk terdaftar di BPOM?
+  assert_contains:
+  - '1.245'
+  assert_any_of:
+  - - ASIA SAKTI
+    - Crown Pratama
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT nama_pabrik, COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>'''' AND nama_pabrik<>'''' GROUP BY 1 ORDER BY 2 DESC. DB 2026-09-22: PT. ASIA SAKTI WAHID FOODS MANUFACTURE=1.245 | PT. Indofood CBP Sukses Makmur Tbk=924 | PT. Crown Pratama=853. PABRIK (nama_pabrik) BUKAN PENDAFTAR (nama_trader): pemilik merek memesan ke pabrik pihak ketiga (makloon) -> dua peringkat berbeda; menjawab dengan nama_trader = daftar salah (50-pihak-wilayah). Pabrik luar negeri ikut bila prompt tidak membatasi negara. Entity izin edar -> nomor. ERLA-only.'

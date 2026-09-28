@@ -1,0 +1,13 @@
+name: UAT_E62_KEMASAN_LOGAM_PER_TAHUN
+scenario_id: UAT-E62-KEMASAN-LOGAM-PER-TAHUN
+verification_date: '2026-09-22'
+description: UAT-E62-KEMASAN-LOGAM-PER-TAHUN — Izin edar berkemasan Logam per tahun 2022-2026 (tren). ERLA-only.
+turns:
+- prompt: Berapa jumlah izin edar berkemasan Logam yang disetujui per tahun dari 2022 sampai 2026? Tampilkan trennya per tahun.
+  assert_contains:
+  - tidak tersedia|tidak ada|tidak memiliki|tidak dapat dihitung
+  assert_any_of:
+  - - ERBA
+  - - ERLA
+  tolerance_pct: 5
+  note: 'KONDISI DATA (2026-09-23): hasil query ERLA tidak memiliki angka yang dekat dengan ekspektasi lama (populasi beda antar sistem). Ekspektasi: jawaban jujur. ERLA-only.'

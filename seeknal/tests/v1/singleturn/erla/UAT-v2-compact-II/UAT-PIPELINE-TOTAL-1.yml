@@ -1,0 +1,14 @@
+name: UAT_PIPELINE_TOTAL_1
+scenario_id: UAT-PIPELINE-TOTAL-1
+verification_date: '2026-09-22'
+description: 'UAT-PIPELINE-TOTAL-1 — total antrian proses; ERLA tidak punya status in-progress. ERLA-only.'
+turns:
+- prompt: total permohonan yang masih dalam antrian proses di BPOM ada berapa?
+  assert_contains:
+  - '0'
+  assert_any_of:
+  - - 'proses'
+    - 'antrian'
+  - - ERLA
+  tolerance_pct: 10
+  note: 'SQL: SELECT COUNT(DISTINCT produk_id) FROM t_produk_3_rilis_erla WHERE status NOT IN (''0999'',''0906'',''9999'',''0000'',''0009'',''0099'',''0501''); DB 2026-09-22: 0. ERLA tidak menyimpan status in-progress (03xx/04xx/05xx/06xx/07xx/08xx) - semua baris berada di status terminal (terbit/ubah/tidak berlaku/dicabut/dihapus/ditolak-validasi). Antrian = 0. Jawab apa adanya. Pembanding ERBA (belum selesai) = 60.169 (di luar ERLA).'

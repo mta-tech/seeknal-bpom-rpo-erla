@@ -1,0 +1,13 @@
+name: UAT_E03_LIST_USUSAYAM
+scenario_id: UAT-E03-LIST-USUSAYAM
+verification_date: '2026-09-23'
+description: 'UAT-E03-LIST-USUSAYAM — Lampiran raw-data: dedup nomor + jml_versi, NIE dilampirkan. ERLA-only.'
+turns:
+- prompt: Tampilkan daftar izin edar produk Usus Ayam Goreng (0803).
+  assert_contains:
+  - '0'
+  assert_any_of:
+  - - '0'
+  - - ERBA
+  tolerance_pct: 5
+  note: 'SQL ERLA (headline): SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE jenis_pangan=''0803'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''. DB 2026-09-04: ERBA=0 NIE (299 baris raw). LAMPIRAN: satu baris per NIE (dedup nomor) dengan kolom nomor(NIE), produk_id(pengajuan), merk, nama, nama_trader, daerah_trader(decode), nama_pabrik, negara_pabrik, tanggal + jml_versi=COUNT(*); baris lampiran (>=NIE karena versi) direkonsiliasi ke headline. NIE nyata WAJIB dari query, jangan dikarang. jenis_pangan tak ada di kamus (nama dari nama_kategori). ERLA-only.'

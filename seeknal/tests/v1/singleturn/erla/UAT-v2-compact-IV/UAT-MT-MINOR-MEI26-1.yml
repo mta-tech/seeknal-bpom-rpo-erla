@@ -1,0 +1,14 @@
+name: UAT_MT_MINOR_MEI26_1
+scenario_id: UAT-MT-MINOR-MEI26-1
+verification_date: '2026-09-22'
+description: 'UAT-MT-MINOR-MEI26-1 — perubahan minor untuk produk menengah tinggi terbit Mei 2026. ERLA-only.'
+turns:
+- prompt: variasi perubahan minor untuk produk menengah tinggi yang terbit bulan Mei 2026 berapa?
+  assert_contains:
+  - '95'
+  assert_any_of:
+  - - 'minor'
+    - 'Mei'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE jenis_dokumen=''303'' AND jenis_permohonan=''303'' AND tanggal>=''2026-05-01'' AND tanggal<''2026-06-01'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''. DB 2026-09-22: ERLA=95 NIE. ATURAN: ''menengah tinggi'' pada skema ERLA = jenis_dokumen ''303'' (Medium); ''variasi/minor'' = jenis_permohonan ''303'' (Perubahan Minor); ''terbit'' = kolom tanggal + tier Terdaftar; entity NIE. Filter jenis_permohonan SAH karena prompt menyebut jenis permohonannya. BEDA ERBA: di ERBA ''menengah tinggi'' = kategori_dokumen ''302'' (kode berbeda). Perhatikan dua ''303'' berasal dari kolom yang BERBEDA (jenis_dokumen vs jenis_permohonan) dengan arti berbeda. ERLA-only.'

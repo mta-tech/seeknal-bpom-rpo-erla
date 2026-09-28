@@ -1,0 +1,13 @@
+name: UAT_DQ_BELUM_RISIKO_1
+scenario_id: UAT-DQ-BELUM-RISIKO-1
+verification_date: '2026-09-22'
+description: 'UAT-DQ-BELUM-RISIKO-1 — produk belum ditetapkan kategori risikonya (jenis_dokumen 000). ERLA-only.'
+turns:
+- prompt: berapa produk pangan yang belum ditetapkan kategori risikonya oleh BPOM?
+  assert_contains:
+  - '9'
+  assert_any_of:
+  - - 'belum'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE jenis_dokumen=''000'' AND nomor<>'''' AND trader_id<>3384. DB 2026-09-22: ERLA=9 NIE dengan eksklusi akun uji; tanpa eksklusi = 20. ATURAN: ''belum ditetapkan kategori risikonya'' = jenis_dokumen ''000'' (Belum Dikategorikan); TANPA filter tier NIE (populasi keadaan itu sendiri). Jangan tertukar: kategori_dokumen kosong (66.797 NIE) adalah ARTEFAK migrasi, bukan konsep ini; jenis_dokumen (000/301/302/303) berbeda dari kategori_dokumen (skema ERBA). Entity NIE. ERLA-only.'

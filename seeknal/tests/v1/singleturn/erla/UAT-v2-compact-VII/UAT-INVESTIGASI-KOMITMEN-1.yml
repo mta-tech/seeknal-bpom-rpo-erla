@@ -1,0 +1,15 @@
+name: UAT_INVESTIGASI_KOMITMEN_1
+scenario_id: UAT-INVESTIGASI-KOMITMEN-1
+verification_date: '2026-09-22'
+description: 'UAT-INVESTIGASI-KOMITMEN-1 — status komitmen tidak ada di ERLA (jawaban jujur). ERLA-only.'
+turns:
+- prompt: bisa kasih ringkasan status komitmen untuk produk menengah rendah secara keseluruhan?
+  assert_contains:
+  - komitmen
+  assert_any_of:
+  - - tidak tersedia
+    - tidak ada
+    - tidak punya kolom
+  - - ERLA
+  tolerance_pct: 0
+  note: 'KONDISI: kolom status_komitmen dan jenis_penolakan_komitmen HANYA ada di t_produk_3_erba; t_produk_3_rilis_erla tidak punya keduanya (30-risiko-komitmen; salah satu dari 6 kolom ERBA-only di data_architecture). Tidak ada angka komitmen ERLA -> jawab jujur "tidak tersedia di data ERLA"; jangan mengarang kode/angka. ERLA hanya menyimpan keadaan final NIE, bukan daur hidup komitmen. ERLA-only.'

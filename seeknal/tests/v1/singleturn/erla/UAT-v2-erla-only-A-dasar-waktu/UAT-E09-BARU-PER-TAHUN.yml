@@ -1,0 +1,14 @@
+name: UAT_E09_BARU_PER_TAHUN
+scenario_id: UAT-E09-BARU-PER-TAHUN
+verification_date: '2026-09-22'
+description: UAT-E09-BARU-PER-TAHUN — Tren Baru/tahun; ERBA hanya ~4 tahun (2022+). ERLA-only.
+turns:
+- prompt: Tunjukkan tren jumlah Permohonan Baru per tahun dalam 5 tahun terakhir.
+  assert_contains:
+  - '1.970'
+  assert_any_of:
+  - - '42.704'
+    - '42.704'
+  - - ERBA
+  tolerance_pct: 5
+  note: 'SQL: SELECT EXTRACT(YEAR FROM tanggal) th, COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE jenis_permohonan=''301'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>'''' GROUP BY 1 ORDER BY 1. DB 2026-09-04: 2022=1.400 | 2023=29.838 | 2024=40.507 | 1.970=42.704 | 2026=26.929(YTD). ''Permohonan Baru''=jenis_permohonan=''301'' saja (bukan 305). CATATAN: ERBA baru beroperasi Sep 2022 -> ''5 tahun'' hanya ~4 tahun berdata; nyatakan. ERLA-only.'

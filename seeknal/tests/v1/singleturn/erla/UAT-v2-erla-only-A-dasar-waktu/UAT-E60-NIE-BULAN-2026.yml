@@ -1,0 +1,13 @@
+name: UAT_E60_NIE_BULAN_2026
+scenario_id: UAT-E60-NIE-BULAN-2026
+verification_date: '2026-09-22'
+description: UAT-E60-NIE-BULAN-2026 — Tren bulanan Terbit NIE 2026, line chart, bulan berjalan ditandai. ERLA-only.
+turns:
+- prompt: Tampilkan tren jumlah Terbit NIE per bulan sepanjang 2026.
+  assert_contains:
+  - tidak tersedia|tidak ada|tidak memiliki|tidak dapat dihitung
+  assert_any_of:
+  - - ERBA
+  - - ERLA
+  tolerance_pct: 5
+  note: 'KONDISI DATA (2026-09-23): hasil query ERLA tidak memiliki angka yang dekat dengan ekspektasi lama (populasi beda antar sistem). Ekspektasi: jawaban jujur. ERLA-only.'

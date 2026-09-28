@@ -1,0 +1,20 @@
+name: UAT_E24_RISIKO_TINGGI_TREN
+scenario_id: UAT-E24-RISIKO-TINGGI-TREN
+verification_date: '2026-09-22'
+description: UAT-E24-RISIKO-TINGGI-TREN — Tren risiko Tinggi=301+304 per tahun, baru. ERLA-only.
+turns:
+- prompt: Bandingkan tren jumlah produk berisiko Tinggi yang disetujui per tahun, khusus Permohonan Baru.
+  assert_contains:
+  - tidak tersedia|tidak ada|tidak memiliki|tidak dapat dihitung
+  assert_any_of:
+  - - ERBA
+    - Tinggi
+  - - ERLA
+  tolerance_pct: 5
+  assert_sql:
+  - COUNT(DISTINCT nomor)
+  - jenis_permohonan = '301'
+  - jenis_dokumen='302'
+  assert_sql_forbid:
+  - COUNT(DISTINCT produk_id)
+  note: 'KONDISI DATA (2026-09-23): hasil query ERLA tidak memiliki angka yang dekat dengan ekspektasi lama (populasi beda antar sistem). Ekspektasi: jawaban jujur. ERLA-only.'

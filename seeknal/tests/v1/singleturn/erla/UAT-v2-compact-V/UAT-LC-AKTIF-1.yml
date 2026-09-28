@@ -1,0 +1,14 @@
+name: UAT_LC_AKTIF_1
+scenario_id: UAT-LC-AKTIF-1
+verification_date: '2026-09-22'
+description: 'UAT-LC-AKTIF-1 — izin edar yang masih berlaku (dua tier status). ERLA-only.'
+turns:
+- prompt: berapa izin edar yang masih aktif saat ini?
+  assert_contains:
+  - '170.680'
+  assert_any_of:
+  - - 'berlaku'
+    - 'aktif'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE status=''0999'' AND trader_id<>3384 AND nomor<>''''. DB 2026-09-22: ERLA tier aktif (''0999'')=170.680 NIE (tier terdaftar IN (''0099'',''0999'',''0906'',''9999'')=175.641). ATURAN: ''masih berlaku/aktif'' -> tier AKTIF status=''0999'' saja; ''terdaftar/total/pernah terbit'' -> tier Terdaftar. DUA TIER hidup -> sajikan DUA ANGKA berlabel (pimpin terdaftar, lampirkan aktif berlabel), bukan bertanya (80-waktu-periode.md) -> assert_asked dihapus. Jangan menambah penyempitan tanggal_exp kecuali diminta ''masih berlaku dan belum kedaluwarsa'' (status vs masa berlaku dua dimensi). Entity NIE. BEDA ERBA: ERLA punya tambahan status ''0099'' (Tidak Berlaku) di tier terdaftar yang tidak ada di ERBA; kode aktif 0999 sama. ERLA-only.'

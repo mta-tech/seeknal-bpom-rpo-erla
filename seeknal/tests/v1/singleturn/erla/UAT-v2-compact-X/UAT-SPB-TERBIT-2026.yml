@@ -1,0 +1,14 @@
+name: UAT_SPB_TERBIT_2026
+scenario_id: UAT-SPB-TERBIT-2026
+verification_date: '2026-09-22'
+description: 'UAT-SPB-TERBIT-2026 — P8: kolom tanggal Terbit SPB = tanggal_hprspb. ERLA-only.'
+turns:
+- prompt: berapa izin edar yang tanggal terbit SPB-nya ada pada tahun 2026?
+  assert_contains:
+  - '791'
+  assert_any_of:
+  - - 'SPB'
+    - 'tanggal terbit SPB'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE tanggal_hprspb>=''2026-01-01'' AND tanggal_hprspb<''2027-01-01'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''. DB 2026-09-22: 791. ATURAN (poin 8): panel punya 4 pilihan tanggal, kolomnya ada — Tanggal Terbit SPB = tanggal_hprspb (80-waktu-periode). Kolom ERLA native timestamp, TANPA cast. Entity pertanyaan "izin edar" -> nomor + tier. ERLA-only.'

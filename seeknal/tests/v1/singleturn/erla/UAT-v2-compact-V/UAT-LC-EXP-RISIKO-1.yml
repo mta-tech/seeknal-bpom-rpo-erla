@@ -1,0 +1,14 @@
+name: UAT_LC_EXP_RISIKO_1
+scenario_id: UAT-LC-EXP-RISIKO-1
+verification_date: '2026-09-22'
+description: 'UAT-LC-EXP-RISIKO-1 — kategori risiko paling banyak di antara izin edar yang habis 2027. ERLA-only.'
+turns:
+- prompt: dari izin edar yang akan habis tahun 2027, kategori risiko mana yang paling banyak?
+  assert_contains:
+  - '19.737'
+  assert_any_of:
+  - - 'Medium'
+    - '2027'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT jenis_dokumen, COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE tanggal_exp>=''2027-01-01'' AND tanggal_exp<''2028-01-01'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>'''' GROUP BY 1 ORDER BY 2 DESC. DB 2026-09-22: 303 Medium=19.737 · 301 Low=7.442 · 302 High=4.404 · 304 (tak terdokumentasi)=117; total=30.804. Jawaban: Medium (Pangan Medium Risk) terbanyak (~64%). ATURAN: skema risiko ERLA = jenis_dokumen (301 Low · 302 High · 303 Medium); kode 304 muncul di data tapi tidak ada baris dictionary -> laporkan apa adanya. tanggal_exp = kolom kondisi masa berlaku (native timestamp, tanpa cast). BEDA ERBA: ERBA memakai kategori_dokumen (303=Menengah Rendah dst) — taksonomi dan kode berbeda; jangan mencampur (angka ERBA exp-2027 ~1.412 per 27Jul2026). Entity NIE. ERLA-only.'

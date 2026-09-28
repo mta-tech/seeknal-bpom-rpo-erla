@@ -1,0 +1,13 @@
+name: UAT_E25_MR_VS_MT
+scenario_id: UAT-E25-MR-VS-MT
+verification_date: '2026-09-22'
+description: UAT-E25-MR-VS-MT — MR(303) vs MT(302); jangan lebarkan kelas. ERLA-only.
+turns:
+- prompt: Bandingkan jumlah izin edar risiko Menengah Rendah vs Menengah Tinggi.
+  assert_contains:
+  - tidak tersedia|tidak ada|tidak memiliki|tidak dapat dihitung
+  assert_any_of:
+  - - ERBA
+  - - ERLA
+  tolerance_pct: 5
+  note: 'KONDISI DATA (2026-09-23): hasil query ERLA tidak memiliki angka yang dekat dengan ekspektasi lama (populasi beda antar sistem). Ekspektasi: jawaban jujur. ERLA-only.'

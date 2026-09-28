@@ -1,0 +1,13 @@
+name: UAT_KEMASAN_KACA_1
+scenario_id: UAT-KEMASAN-KACA-1
+verification_date: '2026-09-22'
+description: 'UAT-KEMASAN-KACA-1 — produk berkemasan kaca atau keramik; keramik tak punya kode sendiri di ERLA. ERLA-only.'
+turns:
+- prompt: berapa produk yang pakai kemasan kaca atau keramik di BPOM?
+  assert_contains:
+  - '20.069'
+  assert_any_of:
+  - - 'kaca'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE kemasan_id IN (''31'',''39'') AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''. DB 2026-09-22: kemasan_id ''31'' (Kaca) = 19.823 NIE · kemasan_id ''39'' (Lain-Lain: Drum, Keramik dan Lain-Lain) = 246 NIE -> total 20.069. ATURAN: namespace kemasan ERLA = 31-39 (31 kaca · 32 plastik · 33 kertas/karton · 34 karton laminat · 35 kaleng · 36 aluminium foil · 37 komposit · 38 ganda · 39 lainnya) — jangan memakai kode ERBA (1=kaca/keramik). KERAMIK: di ERLA tidak ada kode keramik tersendiri; keramik hanya terikut di bucket residual ''39'' = 246 NIE -> jawab sebagai BATAS ATAS, bukan angka keramik murni; sebut pecahannya berlabel. sub_kemasan_id tidak ada di ERLA (ERBA-only secara struktural). Entity NIE. ERLA-only.'

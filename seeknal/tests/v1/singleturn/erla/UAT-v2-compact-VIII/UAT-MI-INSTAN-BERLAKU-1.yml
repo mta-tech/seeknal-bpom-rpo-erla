@@ -1,0 +1,15 @@
+name: UAT_MI_INSTAN_BERLAKU_1
+scenario_id: UAT-MI-INSTAN-BERLAKU-1
+verification_date: '2026-09-22'
+description: 'UAT-MI-INSTAN-BERLAKU-1 — dua tafsir "masih berlaku" disajikan berdampingan. ERLA-only.'
+turns:
+- prompt: izin edar mi instan di BPOM masih aktif semua atau sudah ada yang lewat masa kedaluwarsanya?
+  assert_contains:
+  - '1.989'
+  - '496'
+  assert_any_of:
+  - - Mi Instan
+    - kedaluwarsa
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL ERLA (tier-aktif, 00-menghitung): SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE nama_kategori=''Mi Instan'' AND status=''0999'' AND trader_id<>3384 AND nomor<>'''' -> 1.989. SQL ERLA (aktif DAN belum kedaluwarsa, 80-waktu-periode): tambah AND (tanggal_exp IS NULL OR tanggal_exp>now()) -> 496. DB 2026-09-22. DUA TAFSIR SAMA-SAH: prompt menanyakan KEDUANYA -> jawaban WAJIB menyebut DUA angka berlabel (1.989 aktif; dari situ hanya 496 yang belum kedaluwarsa), bukan memilih satu diam-diam. Selisih terkonsentrasi di sistem lama (riwayat panjang, status tak diperbarui). "Dicabut" (0009/0000) = 58, kelas terpisah - jangan dicampur. Entity izin edar -> nomor. ERLA-only.'

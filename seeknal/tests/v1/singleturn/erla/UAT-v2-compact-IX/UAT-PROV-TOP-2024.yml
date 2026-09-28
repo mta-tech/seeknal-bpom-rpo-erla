@@ -1,0 +1,14 @@
+name: UAT_PROV_TOP_2024
+scenario_id: UAT-PROV-TOP-2024
+verification_date: '2026-09-22'
+description: 'UAT-PROV-TOP-2024 — ranking 10 provinsi persetujuan Permohonan Baru 2024 (daerah_pabrik). ERLA-only.'
+turns:
+- prompt: Ranking 10 provinsi dengan jumlah persetujuan Permohonan Baru tertinggi pada periode 2024
+  assert_contains:
+  - '56'
+  assert_any_of:
+  - - 'Jawa Barat'
+    - '32'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT left(daerah_pabrik,2) AS prov, COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE jenis_permohonan=''301'' AND tanggal>=''2024-01-01'' AND tanggal<''2025-01-01'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>'''' AND coalesce(daerah_pabrik,'''') NOT IN (''NULL'',''9999'') GROUP BY 1 ORDER BY 2 DESC LIMIT 10. DB 2026-09-22: 32 Jawa Barat=56 (teratas) · 33 Jawa Tengah=44 · 37=30 · 35 Jawa Timur=15 · 12 Sumatera Utara=14 · 38=13 · 64 Kalimantan Timur=11 · 73 Sulawesi Selatan=9 · 36 Banten=9 · 71 Sulawesi Utara=7. ATURAN: provinsi = DERIVED dari 2 digit pertama kode wilayah, bukan kolom tersendiri; ''persetujuan'' -> entity nomor + kolom tanggal (terbit) + tier status sah; kolom pihak untuk PERSETUJUAN/NIE = daerah_pabrik (50-pihak-wilayah), bukan daerah_trader. WAJIB: penanda impor ''9999'' (117.583 baris) harus dikecualikan agar left(...,2) tidak menghasilkan ''provinsi'' palsu 99. Dictionary hanya level kabupaten/kota dengan kode BERTITIK (''31.75'') sedangkan kolom TANPA titik (''3175'') -> join butuh REPLACE(kode,''.'',''''); kategori hanya memuat kabupaten/kota sehingga provinsi tak punya baris sendiri. DIVERGENSI: prefiks 37 dan 38 ADA di data tapi TIDAK ada di dictionary -> laporkan sebagai wilayah tak terpetakan, jangan dibuang. ERLA-only.'

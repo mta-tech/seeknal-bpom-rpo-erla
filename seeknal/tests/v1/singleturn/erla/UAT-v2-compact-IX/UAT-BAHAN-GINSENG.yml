@@ -1,0 +1,15 @@
+name: UAT_BAHAN_GINSENG
+scenario_id: UAT-BAHAN-GINSENG
+verification_date: '2026-09-22'
+description: 'UAT-BAHAN-GINSENG — honest gap: tabel bahan tidak ada; pencarian nama berlabel. ERLA-only.'
+turns:
+- prompt: Tampilkan produk yang mengandung bahan baku akar ginseng
+  assert_contains:
+  - bahan
+  - tidak
+  assert_any_of:
+  - - tidak tersedia
+    - tidak ada
+  - - ERLA
+  tolerance_pct: 0
+  note: 'KONDISI: tabel T_PRODUK_3_BAHAN (kandungan bahan) TIDAK ADA di warehouse rpo_v2 (tabel publik: t_produk_3_erba, t_produk_3_rilis_erla, t_btp_3_erba, t_btp_3_erla, m_trader_rba, m_trader_rla, data_dictionary). Jawaban SAH: (1) nyatakan analisis KANDUNGAN BAHAN "tidak tersedia"; (2) substitusi jujur yang BOLEH ditawarkan = pencarian NAMA produk: ERLA nama ILIKE ''%ginseng%'' = 178 baris - WAJIB dilabeli "pencarian nama produk, bukan analisis kandungan bahan". DILARANG menyajikan hasil ILIKE nama sbg "mengandung ginseng" tanpa label. ERLA-only.'

@@ -1,0 +1,15 @@
+name: UAT_E12_TOP_KATEGORI_2025
+scenario_id: UAT-E12-TOP-KATEGORI-2025
+verification_date: '2026-09-22'
+description: UAT-E12-TOP-KATEGORI-2025 — Ranking kategori pangan baru 2025; nama via nama_kategori. ERLA-only.
+turns:
+- prompt: Identifikasi 10 kategori pangan dengan jumlah pendaftaran baru terbanyak tahun 2025.
+  assert_contains:
+  - '2025'
+  assert_any_of:
+  - - '4.812'
+    - '4.812'
+    - '730'
+  - - ERBA
+  tolerance_pct: 5
+  note: 'SQL: SELECT jenis_pangan, COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE jenis_permohonan=''301'' AND tanggal>=''2025-01-01'' AND tanggal<''2026-01-01'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>'''' GROUP BY 1 ORDER BY 2 DESC LIMIT 10. DB 2026-09-04 top: 730=4.812 (produk bakeri) | 1408=2.606 | 1401=1.950 (AMDK) | 1414=1.591 | 1502=1.513 | 0501=1.446 | 0806=1.411 | 1202=1.322. jenis_pangan TAK ADA di kamus -> nama dari nama_kategori (40-60% kosong, sebut apa adanya). ERLA-only.'

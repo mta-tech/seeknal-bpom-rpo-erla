@@ -1,0 +1,13 @@
+name: UAT_DAERAH_1
+scenario_id: UAT-DAERAH-1
+verification_date: '2026-09-22'
+description: 'UAT-DAERAH-1 — produk terdaftar dari perusahaan di Jakarta Timur (daerah_trader). ERLA-only.'
+turns:
+- prompt: berapa produk pangan olahan yang terdaftar dari perusahaan di Jakarta Timur?
+  assert_contains:
+  - '22.728'
+  assert_any_of:
+  - - 'Jakarta Timur'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT COUNT(DISTINCT nomor) FROM t_produk_3_rilis_erla WHERE daerah_trader=''3175'' AND status IN (''0099'',''0999'',''0906'',''9999'') AND trader_id<>3384 AND nomor<>''''. DB 2026-09-22: ERLA=22.728 NIE. ATURAN: ''dari perusahaan di'' = domisili PENDAFTAR -> kolom daerah_trader (bukan daerah_pabrik/daerah_produsen); dictionary menyimpan kode BERTITIK ''31.75'' sedangkan data menyimpan ''3175'' tanpa titik -> probe dulu, jangan salin kode mentah. Kode wilayah sama di kedua sistem. Entity NIE; pembanding produk_id ERLA ~44k. BEDA ERBA: pada filter sama ERBA ~18.051 (27Jul2026). ERLA-only.'

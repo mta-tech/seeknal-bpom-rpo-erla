@@ -1,0 +1,16 @@
+name: UAT_MONITORING_STATUS_1
+scenario_id: UAT-MONITORING-STATUS-1
+verification_date: '2026-09-22'
+description: 'UAT-MONITORING-STATUS-1 — ringkasan kondisi registrasi produk pangan (multi-dimensi). ERLA-only.'
+turns:
+- prompt: bisa kasih gambaran kondisi registrasi produk pangan BPOM saat ini secara keseluruhan?
+  assert_contains:
+  - '175.641'
+  - '170.680'
+  - '1.240'
+  assert_any_of:
+  - - 'aktif'
+    - 'dicabut'
+  - - ERLA
+  tolerance_pct: 5
+  note: 'SQL ERLA: SELECT COUNT(DISTINCT nomor) FILTER (WHERE status IN (''0099'',''0999'',''0906'',''9999'')) terdaftar, COUNT(DISTINCT nomor) FILTER (WHERE status=''0999'') aktif, COUNT(DISTINCT nomor) FILTER (WHERE status=''0009'') dicabut, COUNT(DISTINCT nomor) FILTER (WHERE status=''0000'') dihapus FROM t_produk_3_rilis_erla WHERE trader_id<>3384 AND nomor<>''''. DB 2026-09-22: terdaftar=175.641 · aktif=170.680 · dicabut(0009)=1.240 · dihapus(0000)=12. ATURAN: ''saat ini'' saja bukan pemicu tier aktif — pimpin dengan tier Terdaftar, lampirkan Aktif berlabel. Kode terminasi 0009/0000 berbeda dari 0099 (kedaluwarsa) dan 9999 (sudah diubah) — jangan dicampur. BEDA ERBA a.l. ''dalam proses/pipeline'' TIDAK tersedia di ERLA: t_produk_3_rilis_erla hanya menyimpan keadaan final (status hanya {0000,0009,0099,0501,0906,0999,9999}). Entity NIE. ERLA-only.'
