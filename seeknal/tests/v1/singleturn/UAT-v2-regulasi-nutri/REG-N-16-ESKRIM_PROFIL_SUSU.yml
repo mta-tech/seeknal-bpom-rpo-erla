@@ -1,0 +1,14 @@
+name: REG_N_16_ESKRIM_PROFIL_SUSU
+scenario_id: REG-N-16-ESKRIM-PROFIL-SUSU
+verification_date: '2026-09-15'
+description: 'REG-N-16 — Profil 01.7 hanya untuk kategori berbasis susu. Definisional.'
+turns:
+- prompt: 'Es krim tanpa susu bisa pakai profil logo sehat yang 01.7 itu nggak?'
+  assert_contains:
+  - '01.7'
+  assert_any_of:
+  - - 'berbasis susu'
+  - - 'bukan'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 06-pilihan-lebih-sehat.md catatan cross-check — profil gizi 01.7 hanya berlaku untuk kategori BERBASIS SUSU. Produk es krim atau gelato tanpa susu berada di luar definisi 01.7 (lihat 04a-takaran-saji-susu-es.md bagian klasifikasi, kode 02.4). Definisional, tanpa SQL/chart/export.'

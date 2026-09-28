@@ -1,0 +1,14 @@
+name: REG_N_14_AMDK_NUTRI_PREMIS
+scenario_id: REG-N-14-AMDK-NUTRI-PREMIS
+verification_date: '2026-09-15'
+description: 'REG-N-14 — Salah premis: AMDK wajib nutri-level? Definisional.'
+turns:
+- prompt: 'Air mineral kemasan kan wajib pakai nutri-level, iya kan?'
+  assert_contains:
+  - 'tidak'
+  assert_any_of:
+  - - 'dikecualikan'
+  - - 'Pasal 3'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'SALAH PREMIS — jawaban benar mengoreksi. Sumber: 02-kewajiban-pengecualian.md Pasal 3 — AMDK dikecualikan dari kewajiban ING. 05-nutri-level.md menyatakan nutri-level adalah bentuk pencantuman ING di depan kemasan, jadi bila ING-nya saja dikecualikan, AMDK tidak relevan nutri-level. Agent harus menolak premis, bukan mengiyakan. Definisional, tanpa SQL/chart/export.'

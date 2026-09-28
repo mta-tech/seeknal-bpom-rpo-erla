@@ -1,0 +1,13 @@
+name: REG_X_14_GELATO_DATA
+scenario_id: REG-X-14-GELATO-DATA
+verification_date: '2026-09-15'
+description: 'REG-X-14 — Cross-check gelato dari data izin edar + honest gap komposisi. Boleh berdata (SQL diizinkan).'
+turns:
+- prompt: 'Aku mau cek produk gelato yang nggak pakai susu di data izin edar, bisa nggak?'
+  assert_contains:
+  - 'komposisi|bahan'
+  assert_any_of:
+  - - 'nama'
+  - - 'merk'
+  - - 'tidak'
+  note: 'CAMPURAN regulasi + data (SQL DIIZINKAN — tidak ada assert_no_sql). Sumber: 04a-takaran-saji-susu-es.md bagian klasifikasi: 01.7 = berbasis susu, 02.4 = non-dairy (Melorin). HONEST GAP: skema ERBA/ERLA tidak punya kolom komposisi/bahan, jadi tidak mengandung susu TIDAK dapat dibuktikan dari data. Yang sah: pencarian nama/merk (labeli tegas sebagai pencarian nama, bukan analisis kandungan) + nyatakan batas ini. DILARANG mengarang angka. KONTRAK closing pair: karena jawaban memuat fakta SQL, idealnya ada chart + satu export (upload_to_s3); catatan: harness belum bisa menegakkan closing pair ini secara otomatis (kandidat patch berikutnya).'

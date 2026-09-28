@@ -1,0 +1,15 @@
+name: REG_04_KOPI_PENGECUALIAN
+scenario_id: REG-04-KOPI-PENGECUALIAN
+verification_date: '2026-09-15'
+description: 'REG-04 — Kopi bubuk dan teh kering dikecualikan (Pasal 3). Definisional.'
+turns:
+- prompt: 'Kalau kopi bubuk sama teh kering, termasuk yang nggak wajib ING kan?'
+  assert_contains:
+  - 'kopi bubuk'
+  - 'teh kering'
+  assert_any_of:
+  - - 'Pasal 3'
+  - - 'dikecualikan|tidak wajib'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 02-kewajiban-pengecualian.md Pasal 3 ayat (1) daftar pengecualian: kopi bubuk, kopi instan, kopi dekafein, biji kopi, teh kering, AMDK, air soda, herba, rempah-rempah, bubuk ngohyang, bawang hitam, cuka makan, ragi, BTP. Keduanya termasuk pengecualian. Definisional, tanpa SQL/chart/export.'

@@ -1,0 +1,14 @@
+name: REG_T_12_ALAT_TAKAR
+scenario_id: REG-T-12-ALAT-TAKAR
+verification_date: '2026-09-15'
+description: 'REG-T-12 — Kewajiban alat takar (Pasal 11). Definisional.'
+turns:
+- prompt: 'Produk formula bayi wajib ada alat takarnya ya?'
+  assert_contains:
+  - 'alat takar'
+  assert_any_of:
+  - - 'Pasal 11'
+  - - 'wajib'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 03-takaran-saji-aturan.md Pasal 11 — Formula Bayi, Formula Lanjutan, MP-ASI, dan PKMK wajib dilengkapi alat takar; dikecualikan bila MP-ASI maksimal 4 sajian per kemasan atau sajian tunggal sekali konsumsi. Definisional, tanpa SQL/chart/export.'

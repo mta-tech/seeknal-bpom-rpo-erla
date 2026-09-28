@@ -1,0 +1,14 @@
+name: REG_02_WAJIB_UMUM
+scenario_id: REG-02-WAJIB-UMUM
+verification_date: '2026-09-15'
+description: 'REG-02 — Kewajiban umum mencantumkan ING (Pasal 2). Definisional.'
+turns:
+- prompt: 'Semua produk pangan olahan wajib cantumin ING ya?'
+  assert_contains:
+  - 'wajib'
+  assert_any_of:
+  - - 'Pasal 2'
+  - - 'Pelaku Usaha'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 02-kewajiban-pengecualian.md Pasal 2 — Pelaku Usaha yang memproduksi dan/atau mengedarkan Pangan Olahan WAJIB mencantumkan ING pada Label. Jawaban boleh menyebut adanya pengecualian (Pasal 3), tetapi intinya tetap wajib. Definisional, tanpa SQL/chart/export.'

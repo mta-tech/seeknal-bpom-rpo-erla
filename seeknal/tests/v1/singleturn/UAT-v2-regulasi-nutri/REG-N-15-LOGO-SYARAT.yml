@@ -1,0 +1,14 @@
+name: REG_N_15_LOGO_SYARAT
+scenario_id: REG-N-15-LOGO-SYARAT
+verification_date: '2026-09-15'
+description: 'REG-N-15 — Syarat logo pilihan lebih sehat (Pasal 26 + Lampiran IV). Definisional.'
+turns:
+- prompt: 'Supaya minuman boleh pakai logo pilihan lebih sehat, syaratnya apa?'
+  assert_contains:
+  - 'profil gizi'
+  assert_any_of:
+  - - 'Lampiran IV'
+  - - '6'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 06-pilihan-lebih-sehat.md Pasal 26 — logo pilihan lebih sehat hanya boleh bila produk memenuhi profil gizi (nutrient profile) Lampiran IV; untuk minuman siap konsumsi batas gula 6,0 g per 100 ml. Sifatnya opsional (dapat), beda dari nutri-level yang wajib untuk minuman. Definisional, tanpa SQL/chart/export.'

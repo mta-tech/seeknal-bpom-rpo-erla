@@ -1,0 +1,14 @@
+name: REG_N_01_LEVEL_B
+scenario_id: REG-N-01-LEVEL-B
+verification_date: '2026-09-15'
+description: 'REG-N-01 — Hitung nutri-level gula 3 g/100 ml -> Level B (Lampiran V). Definisional.'
+turns:
+- prompt: 'Minuman gulanya 3 g per 100 ml, itu masuk level berapa?'
+  assert_contains:
+  - 'Level B'
+  assert_any_of:
+  - - '6'
+  - - '0,5'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 05-nutri-level.md Lampiran V bagian 1 — gula lebih dari 0,5 sampai 6,0 g per 100 ml = Level B. Gula 3 g/100 ml berada di rentang itu. Lampiran V bagian 2: Level B hanya boleh BTP pemanis alami. Definisional, tanpa SQL/chart/export.'

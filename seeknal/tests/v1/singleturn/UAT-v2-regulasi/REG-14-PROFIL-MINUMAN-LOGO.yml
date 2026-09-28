@@ -1,0 +1,14 @@
+name: REG_14_PROFIL_MINUMAN_LOGO
+scenario_id: REG-14-PROFIL-MINUMAN-LOGO
+verification_date: '2026-09-15'
+description: 'REG-14 — Batas gula profil gizi minuman untuk logo pilihan lebih sehat (Lampiran IV). Definisional.'
+turns:
+- prompt: 'Biar bisa pakai logo pilihan lebih sehat, minuman maksimal gulanya berapa?'
+  assert_contains:
+  - '6'
+  assert_any_of:
+  - - '100 ml'
+  - - 'Lampiran IV'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 06-pilihan-lebih-sehat.md (Pasal 26 + Lampiran IV) — minuman siap konsumsi (ready to drink) batas maksimum gula 6,0 g per 100 ml; gula = monosakarida dan disakarida, tidak termasuk laktosa; tidak boleh memakai BTP pemanis (langsung maupun carry-over). Definisional, tanpa SQL/chart/export.'

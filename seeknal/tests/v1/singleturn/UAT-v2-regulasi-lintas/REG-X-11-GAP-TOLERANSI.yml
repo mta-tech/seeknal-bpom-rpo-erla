@@ -1,0 +1,14 @@
+name: REG_X_11_GAP_TOLERANSI
+scenario_id: REG-X-11-GAP-TOLERANSI
+verification_date: '2026-09-15'
+description: 'REG-X-11 — Honest gap: batas toleransi analisis (Pasal 21-25) belum dipecah. Definisional.'
+turns:
+- prompt: 'Batas toleransi hasil uji laboratorium gizi itu berapa persen?'
+  assert_contains:
+  - 'belum'
+  assert_any_of:
+  - - 'tersedia'
+  - - 'dipecah'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'HONEST GAP. 00-peta.md menyatakan Pasal 21-25 (batas toleransi analisis) BELUM dipecah. Jawaban benar: katakan chunk belum tersedia, jangan mengarang angka toleransi. Definisional, tanpa SQL/chart/export.'

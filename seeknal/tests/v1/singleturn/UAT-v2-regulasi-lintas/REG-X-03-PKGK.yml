@@ -1,0 +1,14 @@
+name: REG_X_03_PKGK
+scenario_id: REG-X-03-PKGK
+verification_date: '2026-09-15'
+description: 'REG-X-03 — Definisi PKGK (Pasal 1). Definisional.'
+turns:
+- prompt: 'Kalau PKGK itu beda ya sama PKMK? Artinya apa?'
+  assert_contains:
+  - 'PKGK'
+  assert_any_of:
+  - - 'gizi khusus'
+  - - 'Pasal 1'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 01-definisi.md Pasal 1 — PKGK = Pangan Olahan untuk Keperluan Gizi Khusus, diformulasi untuk kebutuhan gizi tertentu karena kondisi fisik/fisiologis/penyakit. Berbeda dari PKMK (keperluan medis khusus). Definisional, tanpa SQL/chart/export.'

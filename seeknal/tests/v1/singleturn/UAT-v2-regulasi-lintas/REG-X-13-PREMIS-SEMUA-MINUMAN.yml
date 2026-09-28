@@ -1,0 +1,16 @@
+name: REG_X_13_PREMIS_SEMUA_MINUMAN
+scenario_id: REG-X-13-PREMIS-SEMUA-MINUMAN
+verification_date: '2026-09-15'
+description: 'REG-X-13 — Salah premis: semua minuman wajib nutri-level? Definisional.'
+turns:
+- prompt: 'Semua minuman kan wajib nutri-level, iya kan?'
+  assert_contains:
+  - 'tidak'
+  assert_any_of:
+  - - 'formula'
+  - - 'PKMK'
+  - - 'dikecualikan'
+  - - 'Pasal 27'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'SALAH PREMIS — jawaban benar mengoreksi. Sumber: 05-nutri-level.md Pasal 27 ayat (1) mewajibkan nutri-level untuk minuman siap konsumsi, bubuk, dan konsentrat; TETAPI ayat (2) melarangnya pada Formula Bayi, Formula Lanjutan, Formula Pertumbuhan, dan PKMK. Jadi frasa semua minuman tidak benar. Definisional, tanpa SQL/chart/export.'

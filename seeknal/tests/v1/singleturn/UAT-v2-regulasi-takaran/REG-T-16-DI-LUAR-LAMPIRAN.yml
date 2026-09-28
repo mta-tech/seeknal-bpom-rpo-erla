@@ -1,0 +1,14 @@
+name: REG_T_16_DI_LUAR_LAMPIRAN
+scenario_id: REG-T-16-DI-LUAR-LAMPIRAN
+verification_date: '2026-09-15'
+description: 'REG-T-16 — Takaran di luar Lampiran II hanya via pengkajian (Pasal 30). Definisional.'
+turns:
+- prompt: 'Boleh nggak pakai takaran saji yang beda dari aturan Lampiran II?'
+  assert_contains:
+  - 'pengkajian|Kepala Badan'
+  assert_any_of:
+  - - 'Pasal 30'
+  - - 'persetujuan'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 03-takaran-saji-aturan.md dan 07-peralihan-pengkajian.md Pasal 30 — tata cara pencantuman tabel ING (Pasal 5) dan Takaran Saji (Pasal 8) selain yang tercantum hanya boleh dipakai setelah persetujuan tertulis Kepala Badan, diajukan via formulir Lampiran VII. Jadi pada dasarnya tidak boleh tanpa pengkajian. Definisional, tanpa SQL/chart/export.'

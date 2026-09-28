@@ -1,0 +1,17 @@
+name: REG_15_TRANSISI_24BULAN
+scenario_id: REG-15-TRANSISI-24BULAN
+verification_date: '2026-09-15'
+description: 'REG-15 — Masa peralihan 24 bulan, tanpa tanggal keras dikarang (Pasal 31-32). Definisional.'
+turns:
+- prompt: 'Produk yang udah punya izin edar dikasih waktu berapa lama buat nyesuaiin label?'
+  assert_contains:
+  - '24'
+  assert_any_of:
+  - - 'Pasal 31'
+  - - 'Pasal 32'
+  - - 'bulan'
+  assert_absent:
+  - '2028'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 07-peralihan-pengkajian.md Pasal 31-32 — penyesuaian label paling lambat 24 bulan sejak peraturan diundangkan, termasuk stok dan distribusi yang masih tersedia. Chunk memerintahkan: sampaikan sebagai rentang transisi 24 bulan, JANGAN spesifikasi di luar teks. Karena itu assert_absent: [''2028''] menutup celah lama (jawaban sebelumnya mengarang batas 9 Juni 2028 = 2026+24 bulan; itu inferensi di luar teks dan kini FAIL). Konteks Pasal 33-34: mencabut PerBPOM 9/2016, 16/2020, 26/2021; berlaku sejak diundangkan 9 Juni 2026.'

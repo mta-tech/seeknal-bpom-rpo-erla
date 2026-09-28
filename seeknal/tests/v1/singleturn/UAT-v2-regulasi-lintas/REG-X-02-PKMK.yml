@@ -1,0 +1,14 @@
+name: REG_X_02_PKMK
+scenario_id: REG-X-02-PKMK
+verification_date: '2026-09-15'
+description: 'REG-X-02 — Definisi PKMK (Pasal 1). Definisional.'
+turns:
+- prompt: 'PKMK yang sering disebut di aturan itu apa ya?'
+  assert_contains:
+  - 'PKMK'
+  assert_any_of:
+  - - 'medis'
+  - - 'Pasal 1'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 01-definisi.md Pasal 1 — PKMK = Pangan Olahan untuk Keperluan Medis Khusus, diformulasi untuk manajemen diet penyakit/gangguan tertentu. Terkait Pasal 27 ayat (2): PKMK dilarang memakai nutri-level. Definisional, tanpa SQL/chart/export.'

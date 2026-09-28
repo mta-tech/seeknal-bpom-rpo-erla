@@ -1,0 +1,15 @@
+name: REG_12_NUTRI_LARANGAN_FORMULA
+scenario_id: REG-12-NUTRI-LARANGAN-FORMULA
+verification_date: '2026-09-15'
+description: 'REG-12 — Nutri-level dilarang pada formula bayi/PKMK (Pasal 27 ayat 2). Definisional.'
+turns:
+- prompt: 'Nutri-level boleh dipakai di susu formula bayi nggak?'
+  assert_contains:
+  - 'dilarang'
+  assert_any_of:
+  - - 'Pasal 27'
+  - - 'PKMK'
+  - - 'Formula Bayi'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 05-nutri-level.md Pasal 27 ayat (2) — nutri-level DILARANG pada Formula Bayi, Formula Lanjutan, Formula Pertumbuhan, dan PKMK. Definisional, tanpa SQL/chart/export.'

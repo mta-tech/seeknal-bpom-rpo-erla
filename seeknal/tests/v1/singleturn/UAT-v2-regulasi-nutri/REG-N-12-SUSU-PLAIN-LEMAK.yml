@@ -1,0 +1,14 @@
+name: REG_N_12_SUSU_PLAIN_LEMAK
+scenario_id: REG-N-12-SUSU-PLAIN-LEMAK
+verification_date: '2026-09-15'
+description: 'REG-N-12 — Pengecualian lemak untuk susu cair plain (Lampiran V bagian 2). Definisional.'
+turns:
+- prompt: 'Susu cair plain itu kena syarat lemak nutri-level juga nggak?'
+  assert_contains:
+  - 'susu'
+  assert_any_of:
+  - - 'dikecualikan'
+  - - 'tidak'
+  assert_asked: false
+  assert_no_sql: true
+  note: 'Sumber: 05-nutri-level.md Lampiran V bagian 2 — persyaratan lemak total DIKECUALIKAN antara lain untuk susu cair plain (lemak penuh, skim sebagian, skim), dengan/tanpa penambahan vitamin dan mineral. Definisional, tanpa SQL/chart/export.'
